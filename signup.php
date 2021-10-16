@@ -14,7 +14,7 @@
 
 <body>
     <?php 
-        require_once( '../db/functions.php' );
+        require_once( 'functions.php' );
         if(array_key_exists('signup-btn', $_POST)) {
             signup($_POST['username'], $_POST['password'], $_POST["email"]);
         }

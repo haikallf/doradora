@@ -14,7 +14,7 @@
 
 <body>
     <div class="login">
-        <h1><a href="../index.php">ShopShop</a></h1>
+        <h1><a href="index.php">ShopShop</a></h1>
         <h2>LOG IN</h2>
         <div class="login-form">
             <form action="index.php" method="POST">

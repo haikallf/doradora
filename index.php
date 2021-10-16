@@ -1,5 +1,5 @@
 <?php
-    require_once( './db/functions.php' );
+    require_once( 'functions.php' );
     session_start();    
     if (isset($_POST['username'])) {
         $username_curr = $_POST['username'];
@@ -24,17 +24,17 @@
   </head>
   <body>
     <div class="header">
-        <div class="header-brand">
+        <div class="header-brand" onclick="goToHome()">
             Dorameki
         </div>
 
         <div class="header-search">
-            <input type="search" placeholder="Search books">
+            <input type="search" placeholder="Cari dorayaki disini">
             <div class="search-icon"><i class="fas fa-search"></i></div>
         </div>
 
         <div class="header-option">
-            <div class="header-cart" title="Keranjang">
+            <div class="header-cart" title="Keranjang" onclick="goToCart()">
                 <i class="fas fa-shopping-cart"></i>
             </div>
 
@@ -58,7 +58,7 @@
 
         <div class="header-user">
             <i class="fas fa-user"></i>
-            <?php if (isset($_SESSION['usename'])) {?>
+            <?php if (isset($_SESSION['username'])) {?>
                 <p><?= $_SESSION['username'] ?></p>
             <?php } else { ?>
                 <p>Guest</p>
@@ -68,8 +68,21 @@
         
         <div class="vr"></div>
 
+        <?php 
+            require_once( 'functions.php' );
+            if(array_key_exists('logout-btn', $_POST)) {
+                if (isset($_SESSION['username'])) {
+                    session_destroy();
+                    echo "<script>location.href='login.php'</script>";
+                }
+            }
+            else if(array_key_exists('login-btn', $_POST)){
+                echo "<script>location.href='login.php'</script>";
+            }
+        ?>
+
         <form method="POST">
-            <?php if (isset($_SESSION['userid'])) {?>
+            <?php if (isset($_SESSION['username'])) {?>
                     <input type='submit' name='logout-btn' style="outline: none; height: 25px; width: 75px; border-radius: 10px; border: 1px solid black;font-family: 'Poppins', sans-serif; background-color: black; color: white; cursor: pointer;transition: 0.5"
                      value="Log Out"/>
             <?php } else { ?>
@@ -78,9 +91,90 @@
             <?php } ?>
             </form>
     </div>
-    <div class="featured">
-      This is home page. Go to <a href="./pages/login.php">login page</a>
+    
+    <div class="product-container">
+        <div class="product">
+            <div class="product-card">
+                <img src="./images/dorayaki.jpg" alt="Dorayaki">
+                <p>Dorayaki Original</p>
+                <p>★★★★★</p>
+                <p>Rp5000</p>
+            </div>
+            <div class="product-card">
+                <img src="./images/dorayaki.jpg" alt="Dorayaki">
+                <p>Dorayaki Original</p>
+                <p>★★★★★</p>
+                <p>Rp5000</p>
+            </div>
+            <div class="product-card">
+                <img src="./images/dorayaki.jpg" alt="Dorayaki">
+                <p>Dorayaki Original</p>
+                <p>★★★★★</p>
+                <p>Rp5000</p>
+            </div>
+            <div class="product-card">
+                <img src="./images/dorayaki.jpg" alt="Dorayaki">
+                <p>Dorayaki Original</p>
+                <p>★★★★★</p>
+                <p>Rp5000</p>
+            </div>
+            <div class="product-card">
+                <img src="./images/dorayaki.jpg" alt="Dorayaki">
+                <p>Dorayaki Original</p>
+                <p>★★★★★</p>
+                <p>Rp5000</p>
+            </div>
+            <div class="product-card">
+                <img src="./images/dorayaki.jpg" alt="Dorayaki">
+                <p>Dorayaki Original</p>
+                <p>★★★★★</p>
+                <p>Rp5000</p>
+            </div>
+            <div class="product-card">
+                <img src="./images/dorayaki.jpg" alt="Dorayaki">
+                <p>Dorayaki Original</p>
+                <p>★★★★★</p>
+                <p>Rp5000</p>
+            </div><div class="product-card">
+                <img src="./images/dorayaki.jpg" alt="Dorayaki">
+                <p>Dorayaki Original</p>
+                <p>★★★★★</p>
+                <p>Rp5000</p>
+            </div><div class="product-card">
+                <img src="./images/dorayaki.jpg" alt="Dorayaki">
+                <p>Dorayaki Original</p>
+                <p>★★★★★</p>
+                <p>Rp5000</p>
+            </div><div class="product-card">
+                <img src="./images/dorayaki.jpg" alt="Dorayaki">
+                <p>Dorayaki Original</p>
+                <p>★★★★★</p>
+                <p>Rp5000</p>
+            </div><div class="product-card">
+                <img src="./images/dorayaki.jpg" alt="Dorayaki">
+                <p>Dorayaki Original</p>
+                <p>★★★★★</p>
+                <p>Rp5000</p>
+            </div><div class="product-card">
+                <img src="./images/dorayaki.jpg" alt="Dorayaki">
+                <p>Dorayaki Original</p>
+                <p>★★★★★</p>
+                <p>Rp5000</p>
+            </div><div class="product-card">
+                <img src="./images/dorayaki.jpg" alt="Dorayaki">
+                <p>Dorayaki Original</p>
+                <p>★★★★★</p>
+                <p>Rp5000</p>
+            </div><div class="product-card">
+                <img src="./images/dorayaki.jpg" alt="Dorayaki">
+                <p>Dorayaki Original</p>
+                <p>★★★★★</p>
+                <p>Rp5000</p>
+            </div>
+       
+        </div>
     </div>
     
+    <script src="./js/index.js"></script>
   </body>
 </html>
