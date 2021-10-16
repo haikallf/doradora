@@ -1,0 +1,129 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;700;800;900&display=swap");
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: whitesmoke;
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: white;
+  height: 60px;
+  width: 100%;
+  position: fixed;
+  z-index: 999;
+  box-shadow: 0 1px 10px -2px gray;
+}
+
+.header-brand {
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.header-brand > a {
+  text-decoration: none;
+  color: #000;
+}
+
+.header-search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-search > input {
+  outline: none;
+  height: 30px;
+  width: 1000px;
+  border: 1px solid lightgray;
+  border-radius: 5px 0 0 5px;
+  padding: 5px 10px;
+}
+
+.search-icon {
+  background-color: lightgray;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 5px 5px 0;
+  color: rgb(85, 85, 85);
+}
+
+.header-option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-cart,
+.header-wishlist,
+.header-chat {
+  margin: 0 10px;
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+}
+
+.header-cart:hover,
+.header-wishlist:hover,
+.header-chat:hover {
+  background-color: lightgray;
+  transition: all 0.3s ease;
+}
+
+.header-user,
+.header-history {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(gray 0 0) bottom / var(--d, 0) 3px no-repeat;
+  transition: 0.3s;
+  height: 100%;
+  cursor: pointer;
+}
+
+.header-user:hover,
+.header-history:hover {
+  --d: 100%;
+}
+
+.header-user > p,
+.header-history > p {
+  margin-left: 10px;
+}
+
+.header-user-icon {
+  background-color: lightgray;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.vr {
+  height: 30px;
+  width: 1px;
+  background-color: lightgray;
+}
