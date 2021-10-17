@@ -1,3 +1,14 @@
+<?php
+    session_start();
+    if (isset($_SESSION['username'])) {
+
+    }
+    else {
+        echo "<script>alert('Anda harus login untuk mengakses halaman ini');</script>";
+        echo "<script>location.href='index.php'</script>";
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
