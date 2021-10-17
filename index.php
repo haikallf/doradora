@@ -49,7 +49,7 @@
 
         <div class="vr"></div>
 
-        <div class="header-history">
+        <div class="header-history" onclick="goToOrderHistory()">
             <i class="fas fa-history"></i>
             <p>Order History</p>
         </div>

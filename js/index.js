@@ -9,3 +9,7 @@ const goToHome = () => {
 const goToCart = () => {
   location.href = "cart.php";
 };
+
+const goToOrderHistory = () => {
+  location.href = "order-history.php";
+};

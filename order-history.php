@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
     <!-- Custom StyleSheet -->
     <link rel="stylesheet" href="./css/header-user.css" />
-    <link rel="stylesheet" href="./css/cart.css" />
-    <title>Keranjang</title>
+    <link rel="stylesheet" href="./css/order-history.css" />
+    <title>Riwayat Pembelanjaan</title>
 </head>
 
 <body>
@@ -81,59 +81,21 @@
             <?php } ?>
             </form>
     </div>
-    <div class="cart-title">
-        <p>Keranjang</p>
+    <div class="order-history-title">
+        <p>Riwayat Pembelanjaan</p>
     </div>
-    <div class="cart-container">
-        <div class="cart-left">
-            <div class="cart-product">
-                <div class="cart-img-container">
+    <div class="order-history-container">
+        <div class="order-history-left">
+            <div class="order-history-product">
+                <div class="order-history-img-container">
                     <img src="./images/dorayaki.jpg" alt="foto buku" />
                 </div>
-                <div class="cart-details-container">
-                    <div class="cart-details">
+                <div class="order-history-details-container">
+                    <div class="order-history-details">
                         <p>Dorayaki Original</p>
                         <strong>Rp5000</strong>
-                        <form method="POST">
-                            <input type="hidden" name="title" value="Judul">
-                            <input id="cart-qty" type="number" name="jumlah" value="JJJ" min="1">
-                            <button id="cart-check-btn" type="submit" name="changeqty"><i class="fas fa-check"></i></button>
-                        </form>
-                    </div>
-                    <!-- <form action="" method="POST">
-                        <input type="hidden" name="title" value="asdsa">
-                        <button class="cart-del-btn" type="submit" name="delfromcart">
-                            <i class="fas fa-trash-alt fa-2x"></i>
-                        </button>
-                    </form> -->
-                    
-                </div>
-            </div>
-        </div>
-
-        <div class="cart-right">
-            <div class="cart-right-promo">
-                <input type="text" placeholder="Masukkan kode promo">
-            </div>
-            <div class="cart-right-total">
-                <h2>Ringkasan Belanja</h2>
-                <div class="subtotal">
-                    <p>Subtotal (1 barang):</p>
-                    <p>Rp5000</p>
-                </div>
-                <div class="shipping">
-                    <p>Ongkos Kirim:</p>
-                    <p>Rp0</p>
-                </div>
-                <div class="hr">
-                    <hr>
-                </div>
-                <div class="total">
-                    <p>Total:</p>
-                    <p>Rp5000</p>
-                </div>
-                <div class="checkout-btn">
-                    <button>Beli</button>
+                        <p>1 buah</p>
+                    </div>                    
                 </div>
             </div>
         </div>
