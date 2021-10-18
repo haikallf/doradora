@@ -9,12 +9,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
     <!-- Custom StyleSheet -->
     <link rel="stylesheet" href="../css/login-signup.css" />
-    <title>Login - ShopShop</title>
+    <title>Login - Doradora</title>
 </head>
 
 <body>
     <div class="login">
-        <h1><a href="index.php">ShopShop</a></h1>
+        <h1><a href="index.php">Doradora</a></h1>
         <h2>LOG IN</h2>
         <div class="login-form">
             <form action="index.php" method="POST">

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
     <!-- Custom StyleSheet -->
     <link rel="stylesheet" href="../css/login-signup.css" />
-    <title>Signup - Shopshop</title>
+    <title>Signup - Doradora</title>
 </head>
 
 <body>
@@ -20,7 +20,7 @@
         }
         ?>
     <div class="signup">
-        <h1><a href="../index.php">ShopShop</a></h1>
+        <h1><a href="../index.php">Doradora</a></h1>
         <h2>SIGN UP FORM</h2>
         <div class="signup-form">
             <form action="" method="POST">

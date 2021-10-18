@@ -41,7 +41,7 @@
     ?>
     <div class="header">
         <div class="header-brand">
-            <a href="./index.php">ShopShop</a>
+            <a href="./index.php">Doradora</a>
         </div>
 
         <div class="header-search">
