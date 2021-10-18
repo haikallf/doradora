@@ -74,7 +74,7 @@ function addStokItemAdmin($idItem,int $value, $username, $tanggal) {
 
     // $query3 = $db->query("INSERT INTO riwayat VALUES ('$username', '$namaItem', '$tanggal', '$value';");
 }
-addStokItemAdmin('id1',0,0,0);
+// addStokItemAdmin('id1',0,0,0);
 // b. Mengurangi varian dorayaki
 function reduceStokItemAdmin($idItem,int $value) {
     $db = new SQLite3($GLOBALS['db']);
@@ -96,4 +96,7 @@ function reduceStokItemAdmin($idItem,int $value) {
 // Mengurangi stok
 
 // 7. BONUS Riwayat Pembelian
+
+// $a = loadAllItem();
+// var_dump($a[0]["gambar"]);
 ?>

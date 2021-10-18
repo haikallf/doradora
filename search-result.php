@@ -94,19 +94,83 @@
     
     <div class="product-container">
         <div class="product">
-            <?php 
-                require_once('database.php');
-                $itemArray = loadAllItem();
-            ?>
-
-            <?php for($i = 0; $i < count($itemArray); $i++) {?>
-                <div class="product-card">
-                    <img src=<?= $itemArray[$i]["gambar"]?> alt="Dorayaki">
-                    <p><?= $itemArray[$i]["namaItem"]?></p>
-                    <p>★★★★★</p>
-                    <p>Rp<?= $itemArray[$i]["harga"]?></p>
-                </div>
-            <?php } ?>
+            <div class="product-card">
+                <img src="./images/dorayaki.jpg" alt="Dorayaki">
+                <p>Dorayaki Original</p>
+                <p>★★★★★</p>
+                <p>Rp5000</p>
+            </div>
+            <div class="product-card">
+                <img src="./images/dorayaki.jpg" alt="Dorayaki">
+                <p>Dorayaki Original</p>
+                <p>★★★★★</p>
+                <p>Rp5000</p>
+            </div>
+            <div class="product-card">
+                <img src="./images/dorayaki.jpg" alt="Dorayaki">
+                <p>Dorayaki Original</p>
+                <p>★★★★★</p>
+                <p>Rp5000</p>
+            </div>
+            <div class="product-card">
+                <img src="./images/dorayaki.jpg" alt="Dorayaki">
+                <p>Dorayaki Original</p>
+                <p>★★★★★</p>
+                <p>Rp5000</p>
+            </div>
+            <div class="product-card">
+                <img src="./images/dorayaki.jpg" alt="Dorayaki">
+                <p>Dorayaki Original</p>
+                <p>★★★★★</p>
+                <p>Rp5000</p>
+            </div>
+            <div class="product-card">
+                <img src="./images/dorayaki.jpg" alt="Dorayaki">
+                <p>Dorayaki Original</p>
+                <p>★★★★★</p>
+                <p>Rp5000</p>
+            </div>
+            <div class="product-card">
+                <img src="./images/dorayaki.jpg" alt="Dorayaki">
+                <p>Dorayaki Original</p>
+                <p>★★★★★</p>
+                <p>Rp5000</p>
+            </div><div class="product-card">
+                <img src="./images/dorayaki.jpg" alt="Dorayaki">
+                <p>Dorayaki Original</p>
+                <p>★★★★★</p>
+                <p>Rp5000</p>
+            </div><div class="product-card">
+                <img src="./images/dorayaki.jpg" alt="Dorayaki">
+                <p>Dorayaki Original</p>
+                <p>★★★★★</p>
+                <p>Rp5000</p>
+            </div><div class="product-card">
+                <img src="./images/dorayaki.jpg" alt="Dorayaki">
+                <p>Dorayaki Original</p>
+                <p>★★★★★</p>
+                <p>Rp5000</p>
+            </div><div class="product-card">
+                <img src="./images/dorayaki.jpg" alt="Dorayaki">
+                <p>Dorayaki Original</p>
+                <p>★★★★★</p>
+                <p>Rp5000</p>
+            </div><div class="product-card">
+                <img src="./images/dorayaki.jpg" alt="Dorayaki">
+                <p>Dorayaki Original</p>
+                <p>★★★★★</p>
+                <p>Rp5000</p>
+            </div><div class="product-card">
+                <img src="./images/dorayaki.jpg" alt="Dorayaki">
+                <p>Dorayaki Original</p>
+                <p>★★★★★</p>
+                <p>Rp5000</p>
+            </div><div class="product-card">
+                <img src="./images/dorayaki.jpg" alt="Dorayaki">
+                <p>Dorayaki Original</p>
+                <p>★★★★★</p>
+                <p>Rp5000</p>
+            </div>
         </div>
     </div>
     
