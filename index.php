@@ -25,7 +25,7 @@
   <body>
     <div class="header">
         <div class="header-brand" onclick="goToHome()">
-            Dorameki
+            Doradora
         </div>
 
         <div class="header-search">
