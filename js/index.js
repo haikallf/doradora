@@ -19,6 +19,9 @@ const goToProductDetails = () => {
   location.href = "product-details.php";
 };
 
+if (window.history.replaceState) {
+  window.history.replaceState(null, null, window.location.href);
+}
 // const renderAllItem = () => {
 //   var xhr = new XMLHttpRequest();
 

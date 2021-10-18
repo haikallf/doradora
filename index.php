@@ -99,8 +99,8 @@
                 $itemArray = loadAllItem();
             ?>
             <?php for($i = 0; $i < count($itemArray); $i++) {?>
-                <!-- <form action="product-details.php" method="GET" name="itemForm" id="itemForm"> -->
-                    <div class="product-card" onclick="javascript:document.itemForm.submit();">
+                <form action="product-details.php" method="GET" name="itemForm" id="itemForm">
+                    <div class="product-card" onclick="document.getElementById('itemForm').submit();">
                         <img src=<?= $itemArray[$i]["gambar"]?> alt="Dorayaki">
                         <p><?= $itemArray[$i]["namaItem"]?></p>
                         <p>★★★★★</p>
@@ -108,7 +108,7 @@
                         <input type="hidden" name="idItem" value=<?= $itemArray[$i]["idItem"]?>>
                         <!-- <input type="submit" name="" id="submit" value="gas"> -->
                     </div>
-                <!-- </form> -->
+                </form>
             <?php } ?>
         </div>
     </div>
