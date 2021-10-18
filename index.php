@@ -98,7 +98,6 @@
                 require_once('database.php');
                 $itemArray = loadAllItem();
             ?>
-
             <?php for($i = 0; $i < count($itemArray); $i++) {?>
                 <div class="product-card">
                     <img src=<?= $itemArray[$i]["gambar"]?> alt="Dorayaki">

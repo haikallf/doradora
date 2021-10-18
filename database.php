@@ -49,6 +49,18 @@ function filterItemByName($nama) {
     return $data;
 }
 
+function findItemByID($id) {
+    $db = new SQLite3($GLOBALS['db']);
+    $query = $db->query("SELECT * FROM item WHERE idItem = $id");
+    $data = array();
+    
+    while ($row = $query->fetchArray(SQLITE3_ASSOC)) {
+        array_push($data, $row);
+    }
+    $db->close();
+    return $data;
+}
+
 // c.Melihat detail dorayaki = ini dari loadAllItem ambil satu elemen
 
 // d.[BONUS] Mengubah informasi tentang varian dorayaki yang sudah ada.
@@ -98,5 +110,5 @@ function reduceStokItemAdmin($idItem,int $value) {
 // 7. BONUS Riwayat Pembelian
 
 // $a = loadAllItem();
-// var_dump($a[0]["gambar"]);
+// var_dump(findItemByID("10"));
 ?>
