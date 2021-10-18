@@ -45,7 +45,7 @@
         </div>
 
         <div class="header-search">
-            <input type="search" placeholder="Search books">
+            <input type="search" placeholder="Cari dorayaki disini">
             <div class="search-icon"><i class="fas fa-search"></i></div>
         </div>
 
