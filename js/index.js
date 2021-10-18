@@ -14,10 +14,14 @@ const goToOrderHistory = () => {
   location.href = "order-history.php";
 };
 
-const goToProductDetails = () => {
-  document.forms[0].submit();
-  location.href = "product-details.php";
+const submitData = (idx) => {
+  document.forms[`itemForm-${idx}`].submit();
+  return true;
 };
+// const goToProductDetails = (idx) => {
+//   document.getElementsByName("itemForm")[idx].submit();
+//   location.href = "product-details.php";
+// };
 
 if (window.history.replaceState) {
   window.history.replaceState(null, null, window.location.href);

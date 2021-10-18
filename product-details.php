@@ -35,9 +35,9 @@
         if (isset($_GET["idItem"])) {
             $item = findItemByID($_GET["idItem"]);
         }
-        else {
-             $item = findItemByID($_GET["1"]);
-        }
+        // else {
+        //      $item = findItemByID("1");
+        // }
     ?>
     <div class="header">
         <div class="header-brand">
