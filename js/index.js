@@ -14,6 +14,11 @@ const goToOrderHistory = () => {
   location.href = "order-history.php";
 };
 
+const goToProductDetails = () => {
+  document.forms[0].submit();
+  location.href = "product-details.php";
+};
+
 // const renderAllItem = () => {
 //   var xhr = new XMLHttpRequest();
 

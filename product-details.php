@@ -29,6 +29,16 @@
         }
     }    
     ?>
+
+    <?php
+        require_once( 'database.php' );
+        if (isset($_GET["idItem"])) {
+            $item = findItemByID($_GET["idItem"]);
+        }
+        else {
+             $item = findItemByID($_GET["1"]);
+        }
+    ?>
     <div class="header">
         <div class="header-brand">
             <a href="./index.php">ShopShop</a>
@@ -98,17 +108,17 @@
 
     <div class="product-details">
         <div class="product-left">
-            <img src="./images/dorayaki.jpg" alt="" />
+            <img src=<?= $item[0]["gambar"]?> alt="" />
         </div>
         <div class="product-right">
             <div class="product-right-title">
-                <h3>Dorayaki Original</h3>
+                <h3><?= $item[0]["namaItem"]?></h3>
                 <p>★★★★★</p>
-                <p>Rp5000</p>
+                <p>Rp<?= $item[0]["harga"]?></p>
             </div>
             <div class="product-right-description">
                 <h3>Deskripsi</h3>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati alias eaque sed! Velit debitis earum harum! Fugiat illo dolor, eius perferendis nam corporis ea sunt ex officia deserunt ipsam alias.</p>
+                <p><?= $item[0]["deskripsi"]?></p>
             </div>
             <div class="product-right-button">
                 <div class="product-right-button-primary">
