@@ -5,7 +5,7 @@
 // kalo admin, pagenya ada semua fungsi dibawah
 // a.Menambah varian dorayaki
 // $GLOBALS['db']
-$db = "database.db";
+$db = "./db/database.db";
 
 function addItem($idItem, $namaItem, $deskripsi,int $harga,int $stok, $gambar,int $available) {
     $db = new SQLite3($GLOBALS['db']);

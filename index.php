@@ -93,7 +93,7 @@
     <div class="product-container">
         <div class="product">
             <?php 
-                require_once('database.php');
+                require_once('./db/database.php');
                 $itemArray = loadAllItem(); // ini harus beda antara admin dan user, kalau user load yg available aja
             ?>
             <?php for($i = 0; $i < count($itemArray); $i++) {?>
