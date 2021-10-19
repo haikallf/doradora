@@ -45,20 +45,18 @@ const renderHeader = (isAdmin) => {
           <p>Order History</p>
       </div>
       `;
-  }
-
-  else {
+  } else if (isAdmin == 1) {
     headerIcon = `
-      <div class="header-history" onclick="goToOrderHistory()">
+      <div class="header-add-variant" onclick="goToOrderHistory()">
           <i class="fas fa-plus"></i>
           <p>add variant</p>
       </div>
     `;
   }
-  document.getElementById("header-user-admin").innerHTML = headerIcon;
 
-}
-  
+  document.getElementById("header-user-admin").innerHTML = headerIcon;
+};
+
 // const goToProductDetails = (idx) => {
 //   document.getElementsByName("itemForm")[idx].submit();
 //   location.href = "product-details.php";
@@ -95,4 +93,3 @@ if (window.history.replaceState) {
 
 //   xhr.send();
 // };
-

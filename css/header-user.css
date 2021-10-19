@@ -20,7 +20,6 @@ body {
 .header {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
   background-color: white;
   height: 60px;
   width: 100%;
@@ -32,6 +31,8 @@ body {
 .header-brand {
   cursor: pointer;
   font-weight: 500;
+  width: 175px;
+  text-align: center;
 }
 
 .header-brand > a {
@@ -43,12 +44,13 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
 
 .header-search > input {
   outline: none;
   height: 30px;
-  width: 1000px;
+  width: 100%;
   border: 1px solid lightgray;
   border-radius: 5px 0 0 5px;
   padding: 5px 10px;
@@ -66,10 +68,17 @@ body {
   color: rgb(85, 85, 85);
 }
 
+#header-user-admin {
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+
 .header-option {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 175px;
 }
 
 .header-cart,
@@ -93,7 +102,8 @@ body {
 }
 
 .header-user,
-.header-history {
+.header-history,
+.header-add-variant {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -101,19 +111,18 @@ body {
   transition: 0.3s;
   height: 100%;
   cursor: pointer;
-}
-
-#header-user-admin {
-  display: flex;
+  width: 150px;
 }
 
 .header-user:hover,
-.header-history:hover {
+.header-history:hover,
+.header-add-variant:hover {
   --d: 100%;
 }
 
 .header-user > p,
-.header-history > p {
+.header-history > p,
+.header-add-variant > p {
   margin-left: 10px;
 }
 
@@ -131,4 +140,26 @@ body {
   height: 30px;
   width: 1px;
   background-color: lightgray;
+  margin: 0 5px;
+}
+
+.login-logout {
+  width: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#login-btn,
+#logout-btn {
+  outline: none;
+  height: 25px;
+  width: 75px;
+  border-radius: 10px;
+  border: 1px solid black;
+  font-family: "Poppins", sans-serif;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  transition: 0.5;
 }
