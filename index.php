@@ -7,12 +7,20 @@
         $logs = login($username_curr, $password_curr);
         $_SESSION['username'] = $logs["username"];
         $_SESSION['isAdmin'] = $logs["status"];
+        $isAdmin = $_SESSION['isAdmin'];
+        
         if($_SESSION['isAdmin'] == 0) {
             echo "<script>alert('selamat datang pengunjung!');</script>";
         } else {
             echo "<script>alert('selamat datang admin!');</script>";
-        }
-        
+        }   
+    }
+
+    if (isset($_SESSION['username'])) {
+        $isAdmin = $_SESSION['isAdmin'];
+    }
+    else {
+        $isAdmin = -1;
     }
     ?>
 
@@ -30,7 +38,7 @@
     <link rel="stylesheet" href="./css/index.css" />
     <title>Home</title>
   </head>
-  <body onload="renderHeader(<?= $_SESSION['isAdmin']?>)">
+  <body onload="renderHeader(<?= $isAdmin?>)">
     <div class="header">
         <div class="header-brand" onclick="goToHome()">
             Doradora
@@ -74,15 +82,16 @@
             }
         ?>
 
-        <form method="POST">
-            <?php if (isset($_SESSION['username'])) {?>
-                    <input type='submit' name='logout-btn' style="outline: none; height: 25px; width: 75px; border-radius: 10px; border: 1px solid black;font-family: 'Poppins', sans-serif; background-color: black; color: white; cursor: pointer;transition: 0.5"
-                     value="Log Out"/>
-            <?php } else { ?>
-                    <input type='submit' name='login-btn' style="outline: none; height: 25px; width: 75px; border-radius: 10px; border: 1px solid black;font-family: 'Poppins', sans-serif; background-color: black; color: white; cursor: pointer;transition: 0.5" value="Log In" />
-                </div>
-            <?php } ?>
+        <div class="login-logout">
+            <form method="POST">
+                <?php if (isset($_SESSION['username'])) {?>
+                    <input type='submit' name='logout-btn' id='logout-btn' value="Log Out"/>
+                <?php } else { ?>
+                    <input type='submit' name='login-btn' id='login-btn' value="Log In" />
+                <?php } ?>
             </form>
+        </div>
+        
     </div>
     
     <div class="product-container">
