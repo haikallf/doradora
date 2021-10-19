@@ -4,7 +4,15 @@
     if (isset($_POST['username'])) {
         $username_curr = $_POST['username'];
         $password_curr = $_POST['password'];
-        $_SESSION['username'] = login($username_curr, $password_curr);
+        $logs = login($username_curr, $password_curr);
+        $_SESSION['username'] = $logs["username"];
+        $_SESSION['isAdmin'] = $logs["status"];
+        if($_SESSION['isAdmin'] == 0) {
+            echo "<script>alert('selamat datang pengunjung!');</script>";
+        } else {
+            echo "<script>alert('selamat datang admin!');</script>";
+        }
+        
     }
     ?>
 
@@ -22,7 +30,7 @@
     <link rel="stylesheet" href="./css/index.css" />
     <title>Home</title>
   </head>
-  <body>
+  <body onload="renderHeader(<?= $_SESSION['isAdmin']?>)">
     <div class="header">
         <div class="header-brand" onclick="goToHome()">
             Doradora
@@ -33,26 +41,11 @@
             <div class="search-icon"><i class="fas fa-search"></i></div>
         </div>
 
-        <div class="header-option">
-            <div class="header-cart" title="Keranjang" onclick="goToCart()">
-                <i class="fas fa-shopping-cart"></i>
-            </div>
-
-            <div class="header-wishlist" title="Wishlist">
-                <i class="fas fa-heart"></i>
-            </div>
-
-            <div class="header-chat" title="Obrolan">
-                <i class="fas fa-comment-dots"></i>
-            </div>
+        <div id="header-user-admin">
+            
         </div>
 
-        <div class="vr"></div>
-
-        <div class="header-history" onclick="goToOrderHistory()">
-            <i class="fas fa-history"></i>
-            <p>Order History</p>
-        </div>
+        
 
         <div class="vr"></div>
 
