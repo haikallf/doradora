@@ -49,9 +49,7 @@
             <div class="search-icon"><i class="fas fa-search"></i></div>
         </div>
 
-        <div id="header-user-admin">
-            
-        </div>
+        <div id="header-user-admin"></div>
 
         <div class="header-user">
             <i class="fas fa-user"></i>
