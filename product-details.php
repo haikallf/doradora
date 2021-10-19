@@ -173,7 +173,7 @@
                 document.getElementById("deskripsi").innerHTML = items[0]["deskripsi"];
             }
             
-            ajax.open("GET", "./db/db-product-details.php?id="+id, true);
+            ajax.open("GET", "db-product-details.php?id="+id, true);
             ajax.send();
         }
     </script>
