@@ -53,10 +53,6 @@
             
         </div>
 
-        
-
-        <div class="vr"></div>
-
         <div class="header-user">
             <i class="fas fa-user"></i>
             <?php if (isset($_SESSION['username'])) {?>

@@ -44,6 +44,8 @@ const renderHeader = (isAdmin) => {
           <i class="fas fa-history"></i>
           <p>Order History</p>
       </div>
+
+      <div class="vr"></div>
       `;
   } else if (isAdmin == 1) {
     headerIcon = `
@@ -51,6 +53,7 @@ const renderHeader = (isAdmin) => {
           <i class="fas fa-plus"></i>
           <p>add variant</p>
       </div>
+      <div class="vr"></div>
     `;
   }
 
