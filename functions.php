@@ -1,11 +1,15 @@
 <?php 
+$db = "./db/database.db";
 
 function login($username_, $password_){
-    $pdo = new PDO("sqlite:database.db");
-
-    $statement = $pdo->query("SELECT * FROM user");
-
-    $userDat = $statement->fetchAll(PDO::FETCH_ASSOC);
+    $db = new SQLite3($GLOBALS['db']);
+    $query = $db->query("SELECT * FROM user");
+    $userDat = array();
+    
+    while ($row = $query->fetchArray(SQLITE3_ASSOC)) {
+        array_push($userDat, $row);
+    }
+    $db->close();
 
     $i = 0;
     $found = false;
@@ -34,12 +38,15 @@ function login($username_, $password_){
 }
 
 function signup($username_, $password_, $email_){
-    $pdo = new PDO("sqlite:database.db");
-
-    $statement = $pdo->query("SELECT * FROM user");
-
-    $userDat = $statement->fetchAll(PDO::FETCH_ASSOC);
-
+    $db = new SQLite3($GLOBALS['db']);
+    $query = $db->query("SELECT * FROM user");
+    $userDat = array();
+    
+    while ($row = $query->fetchArray(SQLITE3_ASSOC)) {
+        array_push($userDat, $row);
+    }
+    $db->close();
+    
     $i = 0;
     $foundUsername = false;
     $foundEmail = false;
