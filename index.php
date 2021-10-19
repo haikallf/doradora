@@ -96,7 +96,7 @@
         <div class="product">
             <?php 
                 require_once('database.php');
-                $itemArray = loadAllItem();
+                $itemArray = loadAllItem(); // ini harus beda antara admin dan user, kalau user load yg available aja
             ?>
             <?php for($i = 0; $i < count($itemArray); $i++) {?>
                 <form action="product-details.php" method="GET" name="itemForm" id="itemForm-<?=$i?>" class="itemForm">

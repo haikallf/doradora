@@ -114,7 +114,8 @@
             <div class="product-right-title">
                 <h3><?= $item[0]["namaItem"]?></h3>
                 <p>★★★★★</p>
-                <p>Rp<?= $item[0]["harga"]?></p>
+                <p>Rp.<?= number_format($item[0]["harga"])?></p>
+                <p>Stok : <?= $item[0]["stok"]?></p>
             </div>
             <div class="product-right-description">
                 <h3>Deskripsi</h3>
