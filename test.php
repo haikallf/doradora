@@ -1,5 +1,5 @@
 <?php 
-    require_once("database.php");
+    require_once("./db/database.php");
     $all = json_encode(loadAllItem());
     echo $all;
 ?>
