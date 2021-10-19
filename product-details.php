@@ -30,15 +30,17 @@
     }    
     ?>
 
-    <?php
-        require_once( 'database.php' );
+    <!-- <?php
+        require_once( './db/database.php' );
         if (isset($_GET["idItem"])) {
-            $item = findItemByID($_GET["idItem"]);
+            $item = findItemByID($_GET["idItem"]); // ini nanti hapus
         }
         // else {
         //      $item = findItemByID("1");
         // }
-    ?>
+    ?> -->
+
+    
     <div class="header">
         <div class="header-brand">
             <a href="./index.php">Doradora</a>
@@ -108,14 +110,14 @@
 
     <div class="product-details">
         <div class="product-left">
-            <img src=<?= $item[0]["gambar"]?> alt="" />
+            <img id=""src="" alt="Gambar belum tersedia." />
         </div>
         <div class="product-right">
             <div class="product-right-title">
-                <h3><?= $item[0]["namaItem"]?></h3>
+                <h3 id="namaItem"><?= $item[0]["namaItem"]?></h3>
                 <p>★★★★★</p>
-                <p>Rp.<?= number_format($item[0]["harga"])?></p>
-                <p>Stok : <?= $item[0]["stok"]?></p>
+                <p id="harga">Rp.<?= number_format($item[0]["harga"])?></p>
+                <p id="stok">Stok : <?= $item[0]["stok"]?></p>
             </div>
             <div class="product-right-description">
                 <h3>Deskripsi</h3>
@@ -166,7 +168,24 @@
             </div>
         </div>
     </div>
-
+    <script>
+        var items = '<?php echo json_encode($item); ?>';
+        items = JSON.parse(items);
+        document.getElementById("gambar").src = items[0]["gambar"];
+        document.getElementById("namaItem").src = items[0]["namaItem"];
+        document.getElementById("harga").src = items[0]["harga"];
+        document.getElementById("stok").src = items[0]["stok"];
+        function loadItem() {
+            const ajax = new XMLHttpRequest();
+            ajax.onload = function () {
+                items = ajax.responseText;
+                document.getElementById("img").src = items[0]["gambar"];
+            }
+            
+            ajax.open("GET", "./db/db-product-details.php?id="+$_GET["IdItem"], true);
+            ajax.send();
+        }
+    </script>
 
     <script src="./js/index.js"></script>
 </body>
