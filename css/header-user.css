@@ -103,6 +103,10 @@ body {
   cursor: pointer;
 }
 
+#header-user-admin {
+  display: flex;
+}
+
 .header-user:hover,
 .header-history:hover {
   --d: 100%;

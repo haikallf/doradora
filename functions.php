@@ -9,7 +9,7 @@ function login($username_, $password_){
 
     $i = 0;
     $found = false;
-
+    
     while ($i < count($userDat) && !$found){
         if ($userDat[$i]["username"] == $username_){
             if($userDat[$i]["password"] == $password_){
@@ -20,7 +20,11 @@ function login($username_, $password_){
     }
 
     if ($found){
-        return $username_;
+        $logs = array(
+            "username" => $username_,
+            "status" => $userDat[$i-1]["isAdmin"],
+        );
+        return $logs;
     }
     else {
         echo "<script>alert('Username or password incorrrect!');</script>";
