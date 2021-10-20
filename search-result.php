@@ -8,8 +8,13 @@
     else {
         $isAdmin = -1;
     }
-
-    $query = $_GET['search-query']
+    
+    if (isset($_GET['search-query'])) {
+        $query = $_GET['search-query'];
+    }
+    else {
+        echo "<script>location.href='index.php'</script>";
+    }
     ?>
 
 
