@@ -16,13 +16,13 @@
     <title>Produk</title>
 </head>
     <?php
-    require_once( 'functions.php' );
-     require_once( '../check/database.php' );
+    require_once( './functions.php' );
+    require_once( '../check/database.php' );
     session_start();
     if(array_key_exists('add-to-cart', $_POST)) {
-        if (isset($_SESSION['username']) && isset($_POST["quantity"])) {
+        if (isset($_SESSION['username']) && isset($_POST["quantity-hidden"])) {
             if(isset($_POST["idItem"])){
-                addToCart($_SESSION["username"], $_POST["idItem"], $_POST["quantity"]);
+                addToCart($_SESSION["username"], $_POST["idItem"], $_POST["quantity-hidden"]);
             }
         }
         else{
@@ -128,7 +128,7 @@
                     <div class="product-right-button-primary">
                         <form method="POST">
                             <input type="hidden" name="idItem" value=<?= $id ?> />
-                            <input type="hidden" name="quantity" value="javascript:document.getElementById('quantity').value" />
+                            <input type="hidden" name="quantity-hidden" id="quantity-hidden"/>
                             <div class="add-to-cart">
                                 <button type="submit" name="add-to-cart"><i class="fas fa-shopping-cart"></i> KERANJANG</button>
                             </div>
@@ -201,10 +201,13 @@
                 document.getElementById("stok").innerHTML = "Stok : " + items[0]["stok"];
                 document.getElementById("deskripsi").innerHTML = items[0]["deskripsi"];
                 document.getElementById("quantity").setAttribute("max", items[0]["stok"]);
+                document.getElementById("quantity-hidden").value = document.getElementById("quantity").value;
             }
             
             ajax.open("GET", "../check/db-product-details.php?id="+id, true);
             ajax.send();
+
+            
         }
     </script>
 

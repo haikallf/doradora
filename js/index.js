@@ -32,6 +32,17 @@ const submitSearch = () => {
   return true;
 };
 
+const getQuantity = () => {
+  return document.getElementById("quantity").value;
+};
+
+// const getQuantity = () => {
+//   document.body.addEventListener("input", () => {
+//     document.getElementById("quantity-hidden").value =
+//       document.getElementById("quantity").value;
+//   });
+// };
+
 const renderHeader = (isAdmin) => {
   var headerIcon = "";
 

@@ -6,9 +6,12 @@
 // a.Menambah varian dorayaki
 // $GLOBALS['db']
 $db = "../db/database.db";
+$db2 = "./db/database.db";
 function addItem($idItem, $namaItem, $deskripsi,int $harga,int $stok, $gambar,int $available) {
     $db = new SQLite3($GLOBALS['db']);
     $query = $db->query("INSERT INTO item(idItem, namaItem, deskripsi, harga, stok, gambar, available) VALUES ('$idItem', '$namaItem', '$deskripsi', '$harga', '$stok', '$gambar', '$available');");
+    $db->close();
+    unset($db);
 }
 
 // b.Melihat varian dorayaki yang di-filter berdasarkan nama varian
@@ -22,6 +25,7 @@ function filterItemByName($nama) {
         array_push($data, $row);
     }
     $db->close();
+    unset($db);
     return $data;
 }
 
@@ -34,6 +38,7 @@ function findItemByID($id) {
         array_push($data, $row);
     }
     $db->close();
+    unset($db);
     return $data;
 }
 
@@ -43,11 +48,15 @@ function findItemByID($id) {
 function editItem($idItem, $columnName, $newValue) {
     $db = new SQLite3($GLOBALS['db']);
     $query = $db->query("UPDATE item SET '$columnName' = '$newValue' WHERE idItem = '$idItem';");
+    $db->close();
+    unset($db);
 }
 // e.Menghapus varian dorayaki yang sudah ada.
 function deleteItem($idItem) {
     $db = new SQLite3($GLOBALS['db']);
     $query = $db->query("UPDATE item SET available = 0 WHERE idItem = '$idItem';");
+    $db->close();
+    unset($db);
     echo "<script>alert('Dorayaki berhasil dihapus');</script>";
     echo "<script>location.href='../index.php'</script>";
 }
@@ -61,6 +70,8 @@ function addStokItemAdmin($idItem,int $value, $username, $tanggal) {
     $query2 = $db->query("SELECT namaItem FROM item WHERE idItem = '$idItem';");
     $fetch2 = $query2->fetchArray(SQLITE3_ASSOC);
     $namaItem = $fetch2['namaItem'];
+    $db->close();
+    unset($db);
 
     // $query3 = $db->query("INSERT INTO riwayat VALUES ('$username', '$namaItem', '$tanggal', '$value';");
 }
@@ -73,6 +84,8 @@ function reduceStokItemAdmin($idItem,int $value) {
     $query2 = $db->query("SELECT namaItem FROM item WHERE idItem = '$idItem';");
     $fetch2 = $query2->fetchArray(SQLITE3_ASSOC);
     $namaItem = $fetch2['namaItem'];
+    $db->close();
+    unset($db);
 
     // $query3 = $db->query("INSERT INTO riwayat VALUES ('$username', '$namaItem', '$tanggal', '$value';");
 }
@@ -92,9 +105,11 @@ function reduceStokItemAdmin($idItem,int $value) {
 
 // var_dump(count(filterItemByName("cream")));
 
-function addToCart($username, $idItem, $quanity) {
+function addToCart($username, $idItem, $quantity) {
     $db = new SQLite3($GLOBALS['db']);
-    $query = $db->query("INSERT INTO cart (username, idItem, quantity) VALUES ('$username', '$idItem', '$quanity');");
+    $query = $db->query("INSERT INTO cart (username, idItem, quantity) VALUES ('$username', '$idItem', '$quantity');");
+    $db->close();
+    unset($db);
 }
 
 
@@ -103,5 +118,4 @@ function addToCart($username, $idItem, $quanity) {
 //     $query = $db->query("INSERT INTO cart (username, idItem, quantity) VALUES ('$username', '$idItem', '$quanity')");
 // }
 
-addToCart("haikallf", "1", 1);
 ?>
