@@ -1,5 +1,5 @@
 const goToLogin = () => {
-  location.href = "login.php";
+  location.href = "./pages/login.php";
 };
 
 const goToHome = () => {
@@ -7,15 +7,15 @@ const goToHome = () => {
 };
 
 const goToCart = () => {
-  location.href = "cart.php";
+  location.href = "./pages/cart.php";
 };
 
 const goToOrderHistory = () => {
-  location.href = "order-history.php";
+  location.href = "./pages/order-history.php";
 };
 
 const goToAddVariant = () => {
-  location.href = "addvariant.php";
+  location.href = "./pages/addvariant.php";
 };
 
 const submitData = (idx) => {

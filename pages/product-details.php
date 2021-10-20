@@ -11,8 +11,8 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
     <!-- Custom StyleSheet -->
-    <link rel="stylesheet" href="./css/header-user.css" />
-    <link rel="stylesheet" href="./css/product-details.css" />
+    <link rel="stylesheet" href="../css/header-user.css" />
+    <link rel="stylesheet" href="../css/product-details.css" />
     <title>Produk</title>
 </head>
     <?php
@@ -36,7 +36,7 @@
     ?>
 
     <!-- <?php
-        require_once( './db/database.php' );
+        require_once( '../check/database.php' );
         if (isset($_GET["idItem"])) {
             $id = $_GET["idItem"];
         }
@@ -192,7 +192,7 @@
                 document.getElementById("deskripsi").innerHTML = items[0]["deskripsi"];
             }
             
-            ajax.open("GET", "db-product-details.php?id="+id, true);
+            ajax.open("GET", "../check/db-product-details.php?id="+id, true);
             ajax.send();
         }
     </script>

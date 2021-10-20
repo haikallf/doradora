@@ -4,7 +4,7 @@
 
     }
     else {
-        echo "<script>alert('Anda harus login untuk mengakses halaman ini');</script>";
+        echo "<script>alert('Anda harus menjadi admin untuk mengakses halaman ini');</script>";
         echo "<script>location.href='index.php'</script>";
     }
 
@@ -18,20 +18,19 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
     <!-- Custom StyleSheet -->
-    <link rel="stylesheet" href="./css/header-user.css" />
-    <link rel="stylesheet" href="./css/order-history.css" />
-    <title>Riwayat Pembelanjaan</title>
-</head>
-
-<body onload="renderHeader(<?= $isAdmin?>)">
-    <div class="header">
+    <link rel="stylesheet" href="../css/header-user.css" />
+    <link rel="stylesheet" href="../css/index.css" />
+    <title>Home</title>
+  </head>
+  <body onload="renderHeader(<?= $isAdmin?>)">
+        <div class="header">
         <div class="header-brand" onclick="goToHome()">
             Doradora
         </div>
@@ -80,28 +79,8 @@
             </form>
         </div>
     </div>
-    
-    <div class="order-history-title">
-        <p>Riwayat Pembelanjaan</p>
+        
     </div>
-    <div class="order-history-container">
-        <div class="order-history-left">
-            <div class="order-history-product">
-                <div class="order-history-img-container">
-                    <img src="./images/dorayaki.jpg" alt="foto buku" />
-                </div>
-                <div class="order-history-details-container">
-                    <div class="order-history-details">
-                        <p>Dorayaki Original</p>
-                        <strong>Rp5000</strong>
-                        <p>1 buah</p>
-                    </div>                    
-                </div>
-            </div>
-        </div>
-    </div>
-
+    </body>
     <script src="./js/index.js"></script>
-</body>
-
 </html>

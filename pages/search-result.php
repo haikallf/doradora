@@ -27,8 +27,8 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
     <!-- Custom StyleSheet -->
-    <link rel="stylesheet" href="./css/header-user.css" />
-    <link rel="stylesheet" href="./css/index.css" />
+    <link rel="stylesheet" href="../css/header-user.css" />
+    <link rel="stylesheet" href="../css/index.css" />
     <title>Home</title>
   </head>
   <body onload="renderHeader(<?= $isAdmin?>)">
@@ -85,7 +85,7 @@
     <div class="product-container">
         <div class="product">
             <?php 
-                require_once('./db/database.php');
+                require_once('../check/database.php');
                 $itemArray = filterItemByName($query); // ini harus beda antara admin dan user, kalau user load yg available aja
             ?>
             <?php if (count($itemArray) > 0) {?>

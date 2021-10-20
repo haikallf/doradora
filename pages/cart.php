@@ -15,8 +15,8 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
     <!-- Custom StyleSheet -->
-    <link rel="stylesheet" href="./css/header-user.css" />
-    <link rel="stylesheet" href="./css/cart.css" />
+    <link rel="stylesheet" href="../css/header-user.css" />
+    <link rel="stylesheet" href="../css/cart.css" />
     <title>Keranjang</title>
 </head>
 

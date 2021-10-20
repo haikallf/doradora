@@ -9,25 +9,36 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
     <!-- Custom StyleSheet -->
     <link rel="stylesheet" href="../css/login-signup.css" />
-    <title>Login - Doradora</title>
+    <title>Signup - Doradora</title>
 </head>
 
 <body>
-    <div class="login">
-        <h1><a href="index.php">Doradora</a></h1>
-        <h2>LOG IN</h2>
-        <div class="login-form">
-            <form action="index.php" method="POST">
+    <?php 
+        require_once( 'functions.php' );
+        if(array_key_exists('signup-btn', $_POST)) {
+            signup($_POST['username'], $_POST['password'], $_POST["email"]);
+        }
+        ?>
+    <div class="signup">
+        <h1><a href="../index.php">Doradora</a></h1>
+        <h2>SIGN UP FORM</h2>
+        <div class="signup-form">
+            <form action="" method="POST">
+                <ul id="error-info"></ul>
                 <p>Username</p>
-                <input type="text" name="username" placeholder="Type your email" />
+                <input type="text" name="username" placeholder="Type your username" />
                 <br />
                 <br />
                 <p>Password</p>
                 <input type="password" name="password" placeholder="Type your password ">
                 <br />
                 <br />
-                <div class="login-btn">
-                    <input type="submit" value="Login" name="submit">
+                <p>Email</p>
+                <input type="email" name="email" placeholder="Type your email ">
+                <br />
+                <br />
+                <div class="signup-btn">
+                    <input type="submit" name='signup-btn' value="Signup">
                 </div>
             </form>
         </div>
@@ -53,7 +64,11 @@
             </div>
         </div>
 
-        <p>Not a member? <a href="signup.php">Sign Up</a></p>
+        <p>Have an account? <a href="login.php">Log In</a> instead.</p>
     </div>
+    <script>
+
+    </script>
 </body>
+
 </html>

@@ -1,5 +1,5 @@
 <?php
-    require_once( 'functions.php' );
+    require_once( './pages/functions.php' );
     session_start();    
     if (isset($_POST['username'])) {
         $username_curr = $_POST['username'];
@@ -45,7 +45,7 @@
         </div>
 
         <div class="header-search">
-            <form action="search-result.php" id="search-form" name="search-form" method="GET">
+            <form action="./pages/search-result.php" id="search-form" name="search-form" method="GET">
                 <input type="text" name="search-query" placeholder="Cari dorayaki disini">
                 <div class="search-icon" onclick="submitSearch()"><i class="fas fa-search"></i></div>
             </form>
@@ -66,7 +66,7 @@
         <div class="vr"></div>
 
         <?php 
-            require_once( 'functions.php' );
+            require_once( './pages/functions.php' );
             if(array_key_exists('logout-btn', $_POST)) {
                 if (isset($_SESSION['username'])) {
                     session_destroy();
@@ -92,11 +92,11 @@
     <div class="product-container">
         <div class="product">
             <?php 
-                require_once('./db/database.php');
-                $itemArray = loadAllItem(); // ini harus beda antara admin dan user, kalau user load yg available aja
+                include "./check/db-index.php";
+                // $itemArray = $result; // ini harus beda antara admin dan user, kalau user load yg available aja
             ?>
             <?php for($i = 0; $i < count($itemArray); $i++) {?>
-                <form action="product-details.php" method="GET" name="itemForm" id="itemForm-<?=$i?>" class="itemForm">
+                <form action="./pages/product-details.php" method="GET" name="itemForm" id="itemForm-<?=$i?>" class="itemForm">
                     <div class="product-card" onclick="submitData(<?=$i?>)">
                         <img src=<?= $itemArray[$i]["gambar"]?> alt="Dorayaki">
                         <p><?= $itemArray[$i]["namaItem"]?></p>
