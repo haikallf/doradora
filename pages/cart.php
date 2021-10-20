@@ -76,18 +76,25 @@
     </div>
     <div class="cart-container">
         <div class="cart-left">
+
+        <?php
+            require_once( '../check/database.php' );
+            $cartItem = getCartItem();
+        ?>
+        <?php for($i = 0; $i < count($cartItem); $i++) {?>
+            <?php $item = findItemByID($cartItem[$i]["idItem"])?>
             <div class="cart-product">
                 <div class="cart-img-container">
                     <img src="./images/dorayaki.jpg" alt="foto buku" />
                 </div>
                 <div class="cart-details-container">
                     <div class="cart-details">
-                        <p>Dorayaki Original</p>
-                        <strong>Rp5000</strong>
+                        <p><?= $item[0]["namaItem"]?></p>
+                        <strong><?= $item[0]["harga"]?></strong>
                         <form method="POST">
-                            <input type="hidden" name="title" value="Judul">
-                            <input id="cart-qty" type="number" name="jumlah" value="JJJ" min="1">
-                            <button id="cart-check-btn" type="submit" name="changeqty"><i class="fas fa-check"></i></button>
+                            <input type="hidden" name="idItem" value=<?= $item[0]["namaItem"]?>>
+                            <input id="cart-qty" type="number" name="quantity" min="1">
+                            <button id="cart-quantity-check-btn" name="cart-quantity-check-btn" type="submit" name="changeqty"><i class="fas fa-check"></i></button>
                         </form>
                     </div>
                     <!-- <form action="" method="POST">
@@ -99,6 +106,7 @@
                     
                 </div>
             </div>
+            <?php } ?>
         </div>
 
         <div class="cart-right">

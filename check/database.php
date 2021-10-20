@@ -31,7 +31,7 @@ function filterItemByName($nama) {
 
 function findItemByID($id) {
     $db = new SQLite3($GLOBALS['db']);
-    $query = $db->query("SELECT * FROM item WHERE idItem = $id");
+    $query = $db->query("SELECT * FROM item WHERE idItem = '$id';");
     $data = array();
     
     while ($row = $query->fetchArray(SQLITE3_ASSOC)) {
@@ -126,10 +126,24 @@ function addToCart($username, $idItem, $quantity) {
     unset($fetch1);
 }
 
+function getCartItem() {
+    $db = new SQLite3($GLOBALS['db']);
+    $query = $db->query("SELECT * FROM cart");
+
+    $cartItem = array();
+    while ($row = $query->fetchArray(SQLITE3_ASSOC)) {
+        array_push($cartItem, $row);
+    }
+
+    $db->close();
+    unset($db);
+    return $cartItem;
+}
 
 // function buyItem($username, $idItem, $quantity) {
 //     $db = new SQLite3($GLOBALS['db']);
 //     $query = $db->query("INSERT INTO cart (username, idItem, quantity) VALUES ('$username', '$idItem', '$quanity')");
 // }
-
+// $test = findItemByID("1");
+// var_dump($test["0"]["namaItem"])
 ?>
