@@ -107,9 +107,23 @@ function reduceStokItemAdmin($idItem,int $value) {
 
 function addToCart($username, $idItem, $quantity) {
     $db = new SQLite3($GLOBALS['db']);
-    $query = $db->query("INSERT INTO cart (username, idItem, quantity) VALUES ('$username', '$idItem', '$quantity');");
+    $query1 = $db->query("SELECT * FROM cart WHERE idItem = '$idItem';");
+
+    $fetch1 = array();
+    while ($row = $query1->fetchArray(SQLITE3_ASSOC)) {
+        array_push($fetch1, $row);
+    }
+
+    if (count($fetch1) == 0) {
+        $query2 = $db->query("INSERT INTO cart (username, idItem, quantity) VALUES ('$username', '$idItem', '$quantity');");
+    }
+    else {
+        $query3 = $db->query("UPDATE cart SET quantity = quantity + '$quantity' WHERE idItem = '$idItem';");
+    }
+    
     $db->close();
     unset($db);
+    unset($fetch1);
 }
 
 
