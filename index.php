@@ -70,11 +70,11 @@
             if(array_key_exists('logout-btn', $_POST)) {
                 if (isset($_SESSION['username'])) {
                     session_destroy();
-                    echo "<script>location.href='login.php'</script>";
+                    echo "<script>location.href='./pages/login.php'</script>";
                 }
             }
             else if(array_key_exists('login-btn', $_POST)){
-                echo "<script>location.href='login.php'</script>";
+                echo "<script>location.href='./pages/login.php'</script>";
             }
         ?>
 

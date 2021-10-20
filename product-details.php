@@ -11,8 +11,8 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
     <!-- Custom StyleSheet -->
-    <link rel="stylesheet" href="../css/header-user.css" />
-    <link rel="stylesheet" href="../css/product-details.css" />
+    <link rel="stylesheet" href="./css/header-user.css" />
+    <link rel="stylesheet" href="./css/product-details.css" />
     <title>Produk</title>
 </head>
     <?php
@@ -36,7 +36,7 @@
     ?>
 
     <!-- <?php
-        require_once( '../check/database.php' );
+        require_once( './db/database.php' );
         if (isset($_GET["idItem"])) {
             $id = $_GET["idItem"];
         }
@@ -194,7 +194,7 @@
             ajax.onload = function () {
                 var items = ajax.responseText;
                 items = JSON.parse(items);
-                document.getElementById("gambar").src = '.'+items[0]["gambar"];
+                document.getElementById("gambar").src = items[0]["gambar"];
                 document.getElementById("namaItem").innerHTML = items[0]["namaItem"];
                 document.getElementById("harga").innerHTML = "Rp. " + items[0]["harga"].toLocaleString("en-US");
                 document.getElementById("stok").innerHTML = "Stok : " + items[0]["stok"];
@@ -202,9 +202,11 @@
                 document.getElementById("quantity").setAttribute("max", items[0]["stok"]);
             }
             
-            ajax.open("GET", "../check/db-product-details.php?id="+id, true);
+            ajax.open("GET", "db-product-details.php?id="+id, true);
             ajax.send();
         }
+
+        
     </script>
 
     <script src="./js/index.js"></script>

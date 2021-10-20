@@ -89,4 +89,13 @@ function reduceStokItemAdmin($idItem,int $value) {
 // var_dump(findItemByID("10"));
 
 // var_dump(count(filterItemByName("cream")));
+
+function addToCart($username, $idItem, $quanity) {
+    $db = new SQLite3($GLOBALS['db']);
+    $query = $db->query("INSERT INTO cart (username, idItem, quantity) VALUES ('$username', '$idItem', '$quanity')");
+}
+
+function buyItem($username, $idItem, $quantity) {
+    
+}
 ?>
