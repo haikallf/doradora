@@ -94,7 +94,7 @@ function reduceStokItemAdmin($idItem,int $value) {
 
 function addToCart($username, $idItem, $quanity) {
     $db = new SQLite3($GLOBALS['db']);
-    $query = $db->query("INSERT INTO cart (username, idItem, quantity) VALUES ('$username', '$idItem', '$quanity')");
+    $query = $db->query("INSERT INTO cart (username, idItem, quantity) VALUES ('$username', '$idItem', '$quanity');");
 }
 
 
@@ -103,4 +103,5 @@ function addToCart($username, $idItem, $quanity) {
 //     $query = $db->query("INSERT INTO cart (username, idItem, quantity) VALUES ('$username', '$idItem', '$quanity')");
 // }
 
+addToCart("haikallf", "1", 1);
 ?>

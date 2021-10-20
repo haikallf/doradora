@@ -3,6 +3,10 @@ const goToLogin = () => {
 };
 
 const goToHome = () => {
+  location.href = "./index.php";
+};
+
+const goToHomeFromHome = () => {
   location.href = "index.php";
 };
 

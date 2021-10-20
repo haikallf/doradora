@@ -17,10 +17,13 @@
 </head>
     <?php
     require_once( 'functions.php' );
+     require_once( '../check/database.php' );
     session_start();
-    if(array_key_exists('addtocart', $_POST)) {
-        if (isset($_SESSION['username'])) {
-            addToCart($_SESSION['username'], $_POST['title'], $_POST['harga'], $_POST['img']);
+    if(array_key_exists('add-to-cart', $_POST)) {
+        if (isset($_SESSION['username']) && isset($_POST["quantity"])) {
+            if(isset($_POST["idItem"])){
+                addToCart($_SESSION["username"], $_POST["idItem"], $_POST["quantity"]);
+            }
         }
         else{
             echo "<script>alert('Anda harus login untuk menambah item ke keranjang');</script>";
@@ -47,7 +50,7 @@
 
 <body onload="renderHeader(<?= $isAdmin?>)">
     <div class="header">
-        <div class="header-brand" onclick="goToHome()">
+        <div class="header-brand" onclick="javascript:location.href = '../index.php';">
             Doradora
         </div>
 
@@ -124,10 +127,8 @@
                 <?php if ($isAdmin == 0) {?>
                     <div class="product-right-button-primary">
                         <form method="POST">
-                            <input type="hidden" name="img" value=${foto-dorayaki} />
-                            <input type="hidden" name="title" value="${nama-dorayaki}" />
-                            <input type="hidden" name="harga" value=${harga-dorayaki} />
-                            <input type="hidden" name="quantity" value=${jumlah-dorayaki} />
+                            <input type="hidden" name="idItem" value=<?= $id ?> />
+                            <input type="hidden" name="quantity" value="javascript:document.getElementById('quantity').value" />
                             <div class="add-to-cart">
                                 <button type="submit" name="add-to-cart"><i class="fas fa-shopping-cart"></i> KERANJANG</button>
                             </div>
