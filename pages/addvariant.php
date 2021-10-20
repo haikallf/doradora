@@ -27,10 +27,12 @@
     <!-- Custom StyleSheet -->
     <link rel="stylesheet" href="../css/header-user.css" />
     <link rel="stylesheet" href="../css/index.css" />
+    <link rel="stylesheet" href="../css/addvar.css" />
+    
     <title>Home</title>
   </head>
   <body onload="renderHeader(<?= $isAdmin?>)">
-        <div class="header">
+    <div class="header">
         <div class="header-brand" onclick="goToHome()">
             Doradora
         </div>
@@ -79,7 +81,33 @@
             </form>
         </div>
     </div>
-        
+    <div class="addnew">
+        <h1><a href=""></a></h1>
+        <h2>ADD NEW VARIANT</h2>
+        <div class="add-form">
+            <form action="../index.php" method="POST">
+                <p>dorayaki name</p>
+                <input type="text" name="dorayakiName" placeholder="Type dorayaki name" />
+                <br />
+                <br />
+                <p>photos</p>
+                <input type="file" name="gambar" placeholder="Type your image directory ">
+                <input type="hidden" name="foto" value="./images/">
+                <br />
+                <br />
+                <p>description</p>
+                <input type="text" name="diskripsi" placeholder="Type description" />
+                <br />
+                <br />
+                <p>stock</p>
+                <input type="text" name="stok" placeholder="Type stock available" />
+                <br />
+                <br />
+                <div class="add-btn">
+                    <input type="submit" value="add" name="submit">
+                </div>
+            </form>
+        </div>
     </div>
     </body>
     <script src="./js/index.js"></script>
