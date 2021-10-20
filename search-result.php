@@ -1,11 +1,6 @@
 <?php
     require_once( 'functions.php' );
     session_start();    
-    if (isset($_POST['username'])) {
-        $username_curr = $_POST['username'];
-        $password_curr = $_POST['password'];
-        $_SESSION['username'] = login($username_curr, $password_curr);
-    }
 
     if (isset($_SESSION['username'])) {
         $isAdmin = $_SESSION['isAdmin'];
@@ -13,6 +8,8 @@
     else {
         $isAdmin = -1;
     }
+
+    $query = $_GET['search-query']
     ?>
 
 
@@ -81,83 +78,28 @@
     
     <div class="product-container">
         <div class="product">
-            <div class="product-card">
-                <img src="./images/dorayaki.jpg" alt="Dorayaki">
-                <p>Dorayaki Original</p>
-                <p>★★★★★</p>
-                <p>Rp5000</p>
-            </div>
-            <div class="product-card">
-                <img src="./images/dorayaki.jpg" alt="Dorayaki">
-                <p>Dorayaki Original</p>
-                <p>★★★★★</p>
-                <p>Rp5000</p>
-            </div>
-            <div class="product-card">
-                <img src="./images/dorayaki.jpg" alt="Dorayaki">
-                <p>Dorayaki Original</p>
-                <p>★★★★★</p>
-                <p>Rp5000</p>
-            </div>
-            <div class="product-card">
-                <img src="./images/dorayaki.jpg" alt="Dorayaki">
-                <p>Dorayaki Original</p>
-                <p>★★★★★</p>
-                <p>Rp5000</p>
-            </div>
-            <div class="product-card">
-                <img src="./images/dorayaki.jpg" alt="Dorayaki">
-                <p>Dorayaki Original</p>
-                <p>★★★★★</p>
-                <p>Rp5000</p>
-            </div>
-            <div class="product-card">
-                <img src="./images/dorayaki.jpg" alt="Dorayaki">
-                <p>Dorayaki Original</p>
-                <p>★★★★★</p>
-                <p>Rp5000</p>
-            </div>
-            <div class="product-card">
-                <img src="./images/dorayaki.jpg" alt="Dorayaki">
-                <p>Dorayaki Original</p>
-                <p>★★★★★</p>
-                <p>Rp5000</p>
-            </div><div class="product-card">
-                <img src="./images/dorayaki.jpg" alt="Dorayaki">
-                <p>Dorayaki Original</p>
-                <p>★★★★★</p>
-                <p>Rp5000</p>
-            </div><div class="product-card">
-                <img src="./images/dorayaki.jpg" alt="Dorayaki">
-                <p>Dorayaki Original</p>
-                <p>★★★★★</p>
-                <p>Rp5000</p>
-            </div><div class="product-card">
-                <img src="./images/dorayaki.jpg" alt="Dorayaki">
-                <p>Dorayaki Original</p>
-                <p>★★★★★</p>
-                <p>Rp5000</p>
-            </div><div class="product-card">
-                <img src="./images/dorayaki.jpg" alt="Dorayaki">
-                <p>Dorayaki Original</p>
-                <p>★★★★★</p>
-                <p>Rp5000</p>
-            </div><div class="product-card">
-                <img src="./images/dorayaki.jpg" alt="Dorayaki">
-                <p>Dorayaki Original</p>
-                <p>★★★★★</p>
-                <p>Rp5000</p>
-            </div><div class="product-card">
-                <img src="./images/dorayaki.jpg" alt="Dorayaki">
-                <p>Dorayaki Original</p>
-                <p>★★★★★</p>
-                <p>Rp5000</p>
-            </div><div class="product-card">
-                <img src="./images/dorayaki.jpg" alt="Dorayaki">
-                <p>Dorayaki Original</p>
-                <p>★★★★★</p>
-                <p>Rp5000</p>
-            </div>
+            <?php 
+                require_once('./db/database.php');
+                $itemArray = filterItemByName($query); // ini harus beda antara admin dan user, kalau user load yg available aja
+            ?>
+            <?php for($i = 0; $i < count($itemArray); $i++) {?>
+                <?php if (count($itemArray) > 0) {?>
+                    <form action="product-details.php" method="GET" name="itemForm" id="itemForm-<?=$i?>" class="itemForm">
+                        <div class="product-card" onclick="submitData(<?=$i?>)">
+                            <img src=<?= $itemArray[$i]["gambar"]?> alt="Dorayaki">
+                            <p><?= $itemArray[$i]["namaItem"]?></p>
+                            <p>★★★★★</p>
+                            <p>Rp<?= $itemArray[$i]["harga"]?></p>
+                            <input type="hidden" name="idItem" value=<?= $itemArray[$i]["idItem"]?>>
+                            <!-- <input type="submit" name="" id="submit" value="gas"> -->
+                        </div>
+                    </form>
+                <?php } else {?>
+                    <p>Tidak ada produk yang tersedia</p>
+                    <?php echo "<script>location.href='login.php'</script>"; ?>
+                <?php } ?>
+                
+            <?php } ?>
         </div>
     </div>
     
