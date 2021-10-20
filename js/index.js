@@ -23,6 +23,11 @@ const submitData = (idx) => {
   return true;
 };
 
+const submitSearch = () => {
+  document.forms["search-form"].submit();
+  return true;
+};
+
 const renderHeader = (isAdmin) => {
   var headerIcon = "";
 
