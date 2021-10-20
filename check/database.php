@@ -147,6 +147,23 @@ function getCartItem($username) {
     return $cartItem;
 }
 
+function cartItemSubtotal($username) {
+    $cartItem = getCartItem($username);
+
+    $subtotal = 0;
+    $totalItem = 0;
+
+    for($i = 0; $i < count($cartItem); $i++){
+        $item = findItemByID($cartItem[$i]["idItem"]);
+        $subtotal += $cartItem[$i]["quantity"] * $item[0]["harga"];
+        $totalItem += $cartItem[$i]["quantity"];
+    }
+
+    unset($cartItem);
+    $subtotalArray["subtotal"] = $subtotal;
+    $subtotalArray["totalItem"] = $totalItem;
+    return $subtotalArray;
+}
 // function buyItem($username, $idItem, $quantity) {
 //     $db = new SQLite3($GLOBALS['db']);
 //     $query = $db->query("INSERT INTO cart (username, idItem, quantity) VALUES ('$username', '$idItem', '$quanity')");

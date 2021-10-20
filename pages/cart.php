@@ -121,8 +121,9 @@
             <div class="cart-right-total">
                 <h2>Ringkasan Belanja</h2>
                 <div class="subtotal">
-                    <p>Subtotal (1 barang):</p>
-                    <p>Rp5000</p>
+                    <?php $subtotalArray = cartItemSubtotal($_SESSION['username']);?>
+                    <p>Subtotal (<?= $subtotalArray['totalItem'] ?> barang):</p>
+                    <p>Rp<?= $subtotalArray['subtotal'] ?></p>
                 </div>
                 <div class="shipping">
                     <p>Ongkos Kirim:</p>
@@ -133,7 +134,7 @@
                 </div>
                 <div class="total">
                     <p>Total:</p>
-                    <p>Rp5000</p>
+                    <p>Rp<?= $subtotalArray['subtotal'] ?></p>
                 </div>
                 <div class="checkout-btn">
                     <button>Beli</button>
