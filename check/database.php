@@ -48,6 +48,8 @@ function editItem($idItem, $columnName, $newValue) {
 function deleteItem($idItem) {
     $db = new SQLite3($GLOBALS['db']);
     $query = $db->query("UPDATE item SET available = 0 WHERE idItem = '$idItem';");
+    echo "<script>alert('Dorayaki berhasil dihapus');</script>";
+    echo "<script>location.href='../index.php'</script>";
 }
 
 // 3. Manajemen stok dorayaki (admin)
@@ -95,7 +97,10 @@ function addToCart($username, $idItem, $quanity) {
     $query = $db->query("INSERT INTO cart (username, idItem, quantity) VALUES ('$username', '$idItem', '$quanity')");
 }
 
-function buyItem($username, $idItem, $quantity) {
-    
-}
+
+// function buyItem($username, $idItem, $quantity) {
+//     $db = new SQLite3($GLOBALS['db']);
+//     $query = $db->query("INSERT INTO cart (username, idItem, quantity) VALUES ('$username', '$idItem', '$quanity')");
+// }
+
 ?>
