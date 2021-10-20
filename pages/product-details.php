@@ -185,7 +185,7 @@
             ajax.onload = function () {
                 var items = ajax.responseText;
                 items = JSON.parse(items);
-                document.getElementById("gambar").src = items[0]["gambar"];
+                document.getElementById("gambar").src = '.'+items[0]["gambar"];
                 document.getElementById("namaItem").innerHTML = items[0]["namaItem"];
                 document.getElementById("harga").innerHTML = "Rp. " + items[0]["harga"].toLocaleString("en-US");
                 document.getElementById("stok").innerHTML = "Stok : " + items[0]["stok"];
