@@ -160,9 +160,9 @@
         // var items = '<p echo json_encode($item); ?>';
         // items = JSON.parse(items);
         id = <?=$id ?>;
-        document.addEventListener("online",loadItem);
+        loadItem();
+        document.addEventListener("click",loadItem);
         function loadItem() {
-            console.log("jalan");
             const ajax = new XMLHttpRequest();
             ajax.onload = function () {
                 var items = ajax.responseText;
@@ -170,7 +170,7 @@
                 document.getElementById("gambar").src = items[0]["gambar"];
                 document.getElementById("namaItem").innerHTML = items[0]["namaItem"];
                 document.getElementById("harga").innerHTML = "Rp. " + items[0]["harga"].toLocaleString("en-US");
-                document.getElementById("stok").innerHTML = items[0]["stok"];
+                document.getElementById("stok").innerHTML = "Stok : " + items[0]["stok"];
                 document.getElementById("deskripsi").innerHTML = items[0]["deskripsi"];
             }
             
