@@ -5,36 +5,13 @@
 // kalo admin, pagenya ada semua fungsi dibawah
 // a.Menambah varian dorayaki
 // $GLOBALS['db']
-$db = "./db/database.db";
+$db = "../db/database.db";
 function addItem($idItem, $namaItem, $deskripsi,int $harga,int $stok, $gambar,int $available) {
     $db = new SQLite3($GLOBALS['db']);
     $query = $db->query("INSERT INTO item(idItem, namaItem, deskripsi, harga, stok, gambar, available) VALUES ('$idItem', '$namaItem', '$deskripsi', '$harga', '$stok', '$gambar', '$available');");
 }
 
 // b.Melihat varian dorayaki yang di-filter berdasarkan nama varian
-function loadAllItem() {
-    $db = new SQLite3($GLOBALS['db']);
-    $query = $db->query("SELECT * FROM item;");
-    $data = array();
-    
-    while ($row = $query->fetchArray(SQLITE3_ASSOC)) {
-        array_push($data, $row);
-    }
-    $db->close();
-    return $data;
-}
-
-function loadAllAvailableItem() {
-    $db = new SQLite3($GLOBALS['db']);
-    $query = $db->query("SELECT * FROM item WHERE available = 1;");
-    $data = array();
-    
-    while ($row = $query->fetchArray(SQLITE3_ASSOC)) {
-        array_push($data, $row);
-    }
-    $db->close();
-    return $data;
-}
 
 function filterItemByName($nama) {
     $db = new SQLite3($GLOBALS['db']);
