@@ -14,6 +14,10 @@ const goToOrderHistory = () => {
   location.href = "order-history.php";
 };
 
+const goToAddVariant = () => {
+  location.href = "addvariant.php";
+};
+
 const submitData = (idx) => {
   document.forms[`itemForm-${idx}`].submit();
   return true;
@@ -49,7 +53,7 @@ const renderHeader = (isAdmin) => {
       `;
   } else if (isAdmin == 1) {
     headerIcon = `
-      <div class="header-add-variant" onclick="goToOrderHistory()">
+      <div class="header-add-variant" onclick="goToAddVariant()">
           <i class="fas fa-plus"></i>
           <p>add variant</p>
       </div>
