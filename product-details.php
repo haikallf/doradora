@@ -112,20 +112,38 @@
                 <p id="deskripsi"></p>
             </div>
             <div class="product-right-button">
-                <div class="product-right-button-primary">
-                  <form method="POST">
-                    <input type="hidden" name="img" value=${foto-dorayaki} />
-                    <input type="hidden" name="title" value="${nama-dorayaki}" />
-                    <input type="hidden" name="harga" value=${harga-dorayaki} />
-                    <input type="hidden" name="quantity" value=${jumlah-dorayaki} />
-                    <div class="add-to-cart">
-                        <button type="submit" name="addtocart"><i class="fas fa-shopping-cart"></i> KERANJANG</button>
+                <?php if ($isAdmin == 0) {?>
+                    <div class="product-right-button-primary">
+                        <form method="POST">
+                            <input type="hidden" name="img" value=${foto-dorayaki} />
+                            <input type="hidden" name="title" value="${nama-dorayaki}" />
+                            <input type="hidden" name="harga" value=${harga-dorayaki} />
+                            <input type="hidden" name="quantity" value=${jumlah-dorayaki} />
+                            <div class="add-to-cart">
+                                <button type="submit" name="add-to-cart"><i class="fas fa-shopping-cart"></i> KERANJANG</button>
+                            </div>
+                        </form>
+                            <div class="buy-now">
+                                <button><i class="fas fa-wallet"></i> BELI SEKARANG</button>
+                            </div>
                     </div>
-                  </form>
-                    <div class="buy-now">
-                        <button><i class="fas fa-wallet"></i> BELI SEKARANG</button>
+                <?php } else {?>
+                    <div class="product-right-button-primary">
+                        <form method="POST">
+                            <input type="hidden" name="id-item" value=<?=$id ?> />
+                            <div class="delete-item">
+                                <button type="submit" name="delete-item"><i class="fas fa-backspace"></i> HAPUS DORAYAKI</button>
+                            </div>
+                        </form>
+
+                        <form action="cart.php" method="POST">
+                            <div class="edit-item">
+                                <button type="submit" name="edit-item"><i class="fas fa-pen"></i> EDIT DORAYAKI</button>
+                            </div>
+                        </form>
                     </div>
-                </div>
+                <?php } ?>
+                
                 <div class="product-right-button-secondary">
                     <div class="wishlist-button">
                         <button><i class="fas fa-heart"></i> Wishlist</button>
