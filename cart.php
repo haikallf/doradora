@@ -1,9 +1,6 @@
 <?php
     session_start();
-    if (isset($_SESSION['username'])) {
-
-    }
-    else {
+    if (!isset($_SESSION['username'])) {
         echo "<script>alert('Anda harus login untuk mengakses halaman ini');</script>";
         echo "<script>location.href='index.php'</script>";
     }
@@ -30,32 +27,13 @@
         </div>
 
         <div class="header-search">
-            <input type="search" placeholder="Cari dorayaki disini">
-            <div class="search-icon"><i class="fas fa-search"></i></div>
+            <form action="search-result.php" id="search-form" name="search-form" method="GET">
+                <input type="text" name="search-query" placeholder="Cari dorayaki disini">
+                <div class="search-icon" onclick="submitSearch()"><i class="fas fa-search"></i></div>
+            </form>
         </div>
 
-        <div class="header-option">
-            <div class="header-cart" title="Keranjang" onclick="goToCart()">
-                <i class="fas fa-shopping-cart"></i>
-            </div>
-
-            <div class="header-wishlist" title="Wishlist">
-                <i class="fas fa-heart"></i>
-            </div>
-
-            <div class="header-chat" title="Obrolan">
-                <i class="fas fa-comment-dots"></i>
-            </div>
-        </div>
-
-        <div class="vr"></div>
-
-        <div class="header-history" onclick="goToOrderHistory()">
-            <i class="fas fa-history"></i>
-            <p>Order History</p>
-        </div>
-
-        <div class="vr"></div>
+        <div id="header-user-admin"></div>
 
         <div class="header-user">
             <i class="fas fa-user"></i>
@@ -82,16 +60,17 @@
             }
         ?>
 
-        <form method="POST">
-            <?php if (isset($_SESSION['username'])) {?>
-                    <input type='submit' name='logout-btn' style="outline: none; height: 25px; width: 75px; border-radius: 10px; border: 1px solid black;font-family: 'Poppins', sans-serif; background-color: black; color: white; cursor: pointer;transition: 0.5"
-                     value="Log Out"/>
-            <?php } else { ?>
-                    <input type='submit' name='login-btn' style="outline: none; height: 25px; width: 75px; border-radius: 10px; border: 1px solid black;font-family: 'Poppins', sans-serif; background-color: black; color: white; cursor: pointer;transition: 0.5" value="Log In" />
-                </div>
-            <?php } ?>
+        <div class="login-logout">
+            <form method="POST">
+                <?php if (isset($_SESSION['username'])) {?>
+                    <input type='submit' name='logout-btn' id='logout-btn' value="Log Out"/>
+                <?php } else { ?>
+                    <input type='submit' name='login-btn' id='login-btn' value="Log In" />
+                <?php } ?>
             </form>
+        </div>
     </div>
+
     <div class="cart-title">
         <p>Keranjang</p>
     </div>

@@ -38,7 +38,7 @@ function loadAllAvailableItem() {
 
 function filterItemByName($nama) {
     $db = new SQLite3($GLOBALS['db']);
-    $query = $db->query("SELECT * FROM item WHERE available = 1 AND namaItem LIKE '%$nama%';");
+    $query = $db->query("SELECT * FROM item WHERE available = 0 AND namaItem LIKE '%$nama%';");
     $data = array();
     
     while ($row = $query->fetchArray(SQLITE3_ASSOC)) {
@@ -110,4 +110,6 @@ function reduceStokItemAdmin($idItem,int $value) {
 
 // $a = loadAllItem();
 // var_dump(findItemByID("10"));
+
+// var_dump(count(filterItemByName("cream")));
 ?>

@@ -52,8 +52,10 @@
         </div>
 
         <div class="header-search">
-            <input type="search" placeholder="Cari dorayaki disini">
-            <div class="search-icon"><i class="fas fa-search"></i></div>
+            <form action="search-result.php" id="search-form" name="search-form" method="GET">
+                <input type="text" name="search-query" placeholder="Cari dorayaki disini">
+                <div class="search-icon" onclick="submitSearch()"><i class="fas fa-search"></i></div>
+            </form>
         </div>
 
         <div id="header-user-admin"></div>
@@ -92,7 +94,6 @@
                 <?php } ?>
             </form>
         </div>
-        
     </div>
 
     <div class="product-details">

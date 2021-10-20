@@ -33,8 +33,10 @@
         </div>
 
         <div class="header-search">
-            <input type="search" placeholder="Cari dorayaki disini">
-            <div class="search-icon"><i class="fas fa-search"></i></div>
+            <form action="search-result.php" id="search-form" name="search-form" method="GET">
+                <input type="text" name="search-query" placeholder="Cari dorayaki disini">
+                <div class="search-icon" onclick="submitSearch()"><i class="fas fa-search"></i></div>
+            </form>
         </div>
 
         <div id="header-user-admin"></div>
@@ -73,7 +75,6 @@
                 <?php } ?>
             </form>
         </div>
-        
     </div>
     
     <div class="product-container">
@@ -82,8 +83,8 @@
                 require_once('./db/database.php');
                 $itemArray = filterItemByName($query); // ini harus beda antara admin dan user, kalau user load yg available aja
             ?>
-            <?php for($i = 0; $i < count($itemArray); $i++) {?>
-                <?php if (count($itemArray) > 0) {?>
+            <?php if (count($itemArray) > 0) {?>
+                <?php for($i = 0; $i < count($itemArray); $i++) {?>
                     <form action="product-details.php" method="GET" name="itemForm" id="itemForm-<?=$i?>" class="itemForm">
                         <div class="product-card" onclick="submitData(<?=$i?>)">
                             <img src=<?= $itemArray[$i]["gambar"]?> alt="Dorayaki">
@@ -94,11 +95,9 @@
                             <!-- <input type="submit" name="" id="submit" value="gas"> -->
                         </div>
                     </form>
-                <?php } else {?>
-                    <p>Tidak ada produk yang tersedia</p>
-                    <?php echo "<script>location.href='login.php'</script>"; ?>
                 <?php } ?>
-                
+            <?php } else {?>
+                    <p>Tidak ada produk yang tersedia</p>
             <?php } ?>
         </div>
     </div>

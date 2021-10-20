@@ -87,7 +87,6 @@
                 <?php } ?>
             </form>
         </div>
-        
     </div>
     
     <div class="product-container">
