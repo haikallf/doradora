@@ -20,9 +20,9 @@
     <title>Keranjang</title>
 </head>
 
-<body>
+<body onload="renderHeader(<?= $isAdmin?>)">
     <div class="header">
-        <div class="header-brand" onclick="goToHome()">
+        <div class="header-brand" onclick="javascript:location.href = '../index.php';">
             Doradora
         </div>
 
@@ -49,6 +49,7 @@
 
         <?php 
             require_once( 'functions.php' );
+            require_once( '../check/database.php' );
             if(array_key_exists('logout-btn', $_POST)) {
                 if (isset($_SESSION['username'])) {
                     session_destroy();
@@ -58,6 +59,10 @@
             else if(array_key_exists('login-btn', $_POST)){
                 echo "<script>location.href='login.php'</script>";
             }
+
+             else if(array_key_exists('cart-quantity-check-btn', $_POST)){
+                setQuantityCart($_SESSION['username'], $_POST['idItem'], $_POST['quantity']);
+             }
         ?>
 
         <div class="login-logout">
@@ -79,7 +84,7 @@
 
         <?php
             require_once( '../check/database.php' );
-            $cartItem = getCartItem();
+            $cartItem = getCartItem($_SESSION['username']);
         ?>
         <?php for($i = 0; $i < count($cartItem); $i++) {?>
             <?php $item = findItemByID($cartItem[$i]["idItem"])?>
@@ -92,9 +97,9 @@
                         <p><?= $item[0]["namaItem"]?></p>
                         <strong><?= $item[0]["harga"]?></strong>
                         <form method="POST">
-                            <input type="hidden" name="idItem" value=<?= $item[0]["namaItem"]?>>
-                            <input id="cart-qty" type="number" name="quantity" min="1">
-                            <button id="cart-quantity-check-btn" name="cart-quantity-check-btn" type="submit" name="changeqty"><i class="fas fa-check"></i></button>
+                            <input type="hidden" name="idItem" value=<?= $item[0]["idItem"]?>>
+                            <input id="cart-qty" type="number" name="quantity" min="1" value=<?= $cartItem[$i]["quantity"]?> max=<?= $item[0]["stok"]?>>
+                            <button id="cart-quantity-check-btn" name="cart-quantity-check-btn" type="submit"><i class="fas fa-check"></i></button>
                         </form>
                     </div>
                     <!-- <form action="" method="POST">

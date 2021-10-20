@@ -126,9 +126,16 @@ function addToCart($username, $idItem, $quantity) {
     unset($fetch1);
 }
 
-function getCartItem() {
+function setQuantityCart($username, $idItem, $quantity){
     $db = new SQLite3($GLOBALS['db']);
-    $query = $db->query("SELECT * FROM cart");
+    $query = $db->query("UPDATE cart SET quantity = '$quantity' WHERE idItem = '$idItem' AND username = '$username';");
+    $db->close();
+    unset($db);
+}
+
+function getCartItem($username) {
+    $db = new SQLite3($GLOBALS['db']);
+    $query = $db->query("SELECT * FROM cart WHERE username = '$username';");
 
     $cartItem = array();
     while ($row = $query->fetchArray(SQLITE3_ASSOC)) {
