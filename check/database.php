@@ -214,6 +214,25 @@ function buyItemFromCart($username, $tanggal) {
     $db->close();
     unset($db);
 }
+
+function buyItem($username, $tanggal, $idItem, $quantity) {
+    $db = new SQLite3($GLOBALS['db']);
+
+    $idPembelian = $db->query("SELECT COUNT(idPembelian) FROM pembelian;")->fetchArray(SQLITE3_ASSOC)["COUNT(idPembelian)"];
+    $idPembelian += 1;
+    echo $idPembelian;
+    $query2 = $db->query("INSERT INTO pembelian (idPembelian, username, tanggal) VALUES ('$idPembelian', '$username', '$tanggal');");
+    $item = findItemByID($idItem);
+    $idItem = $item[0]["idItem"];
+    $query = $db->query("UPDATE item SET stok = stok - '$quantity' WHERE idItem = '$idItem';");
+    $query2 = $db->query("INSERT INTO item_quantity (idPembelian, idItem, quantity) VALUES ('$idPembelian', '$idItem', '$quantity');");
+    $query3 = $db->query("DELETE FROM cart WHERE username = '$username';");
+
+    $db->close();
+    unset($db);
+}
+
+// buyItem("haikallf", "32323232", "1", 1);
 // buyItemFromCart("haikallf","1242");
 
 function addNewVar($name, $deskripsi, $harga, $stock,  $img_loc) {
@@ -225,6 +244,9 @@ function addNewVar($name, $deskripsi, $harga, $stock,  $img_loc) {
     $db->close();
     unset($db);
 }
+
+// $item = findItemByID("1");
+// var_dump($item[0]["idItem"]);
 
 function syncStockAndQuantity() {
     $db = new SQLite3($GLOBALS['db']);
