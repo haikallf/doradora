@@ -63,6 +63,9 @@
              else if(array_key_exists('cart-quantity-check-btn', $_POST)){
                 setQuantityCart($_SESSION['username'], $_POST['idItem'], $_POST['quantity']);
              }
+             else if(array_key_exists('checkout-btn', $_POST)){
+                buyItemFomCart($_SESSION['username'], "2020/22/21");
+             }
         ?>
 
         <div class="login-logout">
@@ -137,7 +140,10 @@
                     <p>Rp<?= $subtotalArray['subtotal'] ?></p>
                 </div>
                 <div class="checkout-btn">
-                    <button>Beli</button>
+                    <form method="POST">
+                        <button type="button" name="checkout-btn">Beli</button>
+                    </form>
+                    
                 </div>
             </div>
         </div>
