@@ -114,6 +114,7 @@
                 <p>★★★★★</p>
                 <p id="harga"></p>
                 <p id="stok"></p>
+                <p>Terjual: xx</p>
             </div>
             <div class="product-right-description">
                 <h3>Deskripsi</h3>
