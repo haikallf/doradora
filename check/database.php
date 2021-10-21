@@ -189,7 +189,7 @@ function cartItemSubtotal($username) {
     return $subtotalArray;
 }
 
-function buyItemFomCart($username, $tanggal) {
+function buyItemFromCart($username, $tanggal) {
     $cartItem = getCartItem($username);
     $db = new SQLite3($GLOBALS['db']);
 
@@ -200,8 +200,10 @@ function buyItemFomCart($username, $tanggal) {
     for($i = 0; $i < count($cartItem); $i++){
         $item = findItemByID($cartItem[$i]["idItem"]);
         
-        $query = $db->query("UPDATE item SET stok -= '$cartItem[$i]['quantity']' WHERE idItem = `$cartItem[$i]['idItem']`;");
-        $query2 = $db->query("INSERT INTO item_quantity (idPembelian, idItem, quantity) VALUES ('$idPembelian', `$cartItem[$i]['idItem']`, `$cartItem[$i]['quantity']`);");
+        $quantity = $cartItem[$i]['quantity'];
+        $idItem = $cartItem[$i]['idItem'];
+        $query = $db->query("UPDATE item SET stok = stok - '$quantity' WHERE idItem = '$idItem';");
+        $query2 = $db->query("INSERT INTO item_quantity (idPembelian, idItem, quantity) VALUES ('$idPembelian', '$idItem', '$quantity';");
     }
 
     $db->close();
