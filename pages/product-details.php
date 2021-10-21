@@ -130,7 +130,7 @@
                 </div>
             <?php } ?>
             <div class="product-right-button">
-                <?php if ($isAdmin == 0) {?>
+                <?php if ($isAdmin != 1) {?>
                     <div class="product-right-button-primary">
                         <form method="POST">
                             <input type="hidden" name="idItem" value=<?= $id ?> />
