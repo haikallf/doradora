@@ -1,9 +1,13 @@
 const goToLogin = () => {
+  location.href = "../login.php";
+};
+
+const goToLoginFromHome = () => {
   location.href = "./pages/login.php";
 };
 
 const goToHome = () => {
-  location.href = "./index.php";
+  location.href = "../index.php";
 };
 
 const goToHomeFromHome = () => {
@@ -11,14 +15,26 @@ const goToHomeFromHome = () => {
 };
 
 const goToCart = () => {
+  location.href = "./cart.php";
+};
+
+const goToCartFromHome = () => {
   location.href = "./pages/cart.php";
 };
 
 const goToOrderHistory = () => {
+  location.href = "./order-history.php";
+};
+
+const goToOrderHistoryFromHome = () => {
   location.href = "./pages/order-history.php";
 };
 
 const goToAddVariant = () => {
+  location.href = "./addvariant.php";
+};
+
+const goToAddVariantFromHome = () => {
   location.href = "./pages/addvariant.php";
 };
 
@@ -53,42 +69,79 @@ const getCurrentDate = () => {
 //   });
 // };
 
-const renderHeader = (isAdmin) => {
+const renderHeader = (isAdmin, isHome) => {
   var headerIcon = "";
 
-  if (isAdmin == 0) {
-    headerIcon = `
-      <div class="header-option">
-          <div class="header-cart" title="Keranjang" onclick="goToCart()">
-              <i class="fas fa-shopping-cart"></i>
-          </div>
+  if (isAdmin != 1) {
+    if (isHome == 0) {
+      headerIcon = `
+        <div class="header-option">
+            <div class="header-cart" title="Keranjang" onclick="goToCart()">
+                <i class="fas fa-shopping-cart"></i>
+            </div>
+    
+            <div class="header-wishlist" title="Wishlist">
+                <i class="fas fa-heart"></i>
+            </div>
+    
+            <div class="header-chat" title="Obrolan">
+                <i class="fas fa-comment-dots"></i>
+            </div>
+        </div>
+    
+        <div class="vr"></div>
+    
+        <div class="header-history" onclick="goToOrderHistory()">
+            <i class="fas fa-history"></i>
+            <p>Order History</p>
+        </div>
   
-          <div class="header-wishlist" title="Wishlist">
-              <i class="fas fa-heart"></i>
-          </div>
+        <div class="vr"></div>
+        `;
+    } else {
+      headerIcon = `
+        <div class="header-option">
+            <div class="header-cart" title="Keranjang" onclick="goToCartFromHome()">
+                <i class="fas fa-shopping-cart"></i>
+            </div>
+    
+            <div class="header-wishlist" title="Wishlist">
+                <i class="fas fa-heart"></i>
+            </div>
+    
+            <div class="header-chat" title="Obrolan">
+                <i class="fas fa-comment-dots"></i>
+            </div>
+        </div>
+    
+        <div class="vr"></div>
+    
+        <div class="header-history" onclick="goToOrderHistoryFromHome()">
+            <i class="fas fa-history"></i>
+            <p>Order History</p>
+        </div>
   
-          <div class="header-chat" title="Obrolan">
-              <i class="fas fa-comment-dots"></i>
-          </div>
-      </div>
-  
-      <div class="vr"></div>
-  
-      <div class="header-history" onclick="goToOrderHistory()">
-          <i class="fas fa-history"></i>
-          <p>Order History</p>
-      </div>
-
-      <div class="vr"></div>
+        <div class="vr"></div>
+        `;
+    }
+  } else {
+    if (isHome == 0) {
+      headerIcon = `
+        <div class="header-add-variant" onclick="goToAddVariant()">
+            <i class="fas fa-plus"></i>
+            <p>add variant</p>
+        </div>
+        <div class="vr"></div>
       `;
-  } else if (isAdmin == 1) {
-    headerIcon = `
-      <div class="header-add-variant" onclick="goToAddVariant()">
-          <i class="fas fa-plus"></i>
-          <p>add variant</p>
-      </div>
-      <div class="vr"></div>
-    `;
+    } else {
+      headerIcon = `
+        <div class="header-add-variant" onclick="goToAddVariantFromHome()">
+            <i class="fas fa-plus"></i>
+            <p>add variant</p>
+        </div>
+        <div class="vr"></div>
+      `;
+    }
   }
 
   document.getElementById("header-user-admin").innerHTML = headerIcon;

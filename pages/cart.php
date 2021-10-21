@@ -25,9 +25,9 @@
     <?php $isAdmin = $_SESSION['isAdmin']; ?>
 </head>
 
-<body onload="renderHeader(<?= $isAdmin?>)">
+<body onload="renderHeader(<?= $isAdmin?>, 0)">
     <div class="header">
-        <div class="header-brand" onclick="javascript:location.href = '../index.php';">
+        <div class="header-brand" onclick="goToHome()">
             Doradora
         </div>
 
@@ -226,7 +226,7 @@
             <?php } ?>    
         </div>
 
-    <script src="./js/index.js"></script>
+    <script src="../js/index.js"></script>
     <script>
         // const selectElement = document.querySelector('.edit-stok');
 

@@ -22,7 +22,7 @@
   </head>
   <body onload="renderHeader(<?= $isAdmin?>)">
     <div class="header">
-        <div class="header-brand" onclick="goToHome()">
+        <div class="header-brand" onclick="goToHomeFromHome()">
             Doradora
         </div>
 

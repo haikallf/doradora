@@ -60,9 +60,9 @@
     
     <title>Home</title>
   </head>
-  <body onload="renderHeader(<?= $isAdmin?>)">
+  <body onload="renderHeader(<?= $isAdmin?>, 0)">
     <div class="header">
-        <div class="header-brand" onclick="javascript:location.href = '../index.php';">
+        <div class="header-brand" onclick="goToHome()">
             Doradora
         </div>
 
