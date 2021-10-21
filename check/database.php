@@ -237,6 +237,14 @@ function insertToRiwayat($username, $idItem, $tanggal, $quantity) {
     $db = new SQLite3($GLOBALS['db']);
     $query = $db->query("INSERT INTO riwayat(username, idItem, tanggal, quantity) VALUES ('$username', '$idItem', '$tanggal', '$quantity');");
 }
+
+function setAvailable($idItem) {
+    $db = new SQLite3($GLOBALS['db']);
+    $query = $db->query("UPDATE item SET available = 1 WHERE idItem = '$idItem';");
+    // $query = $db->query("UPDATE item SET stok = 1 WHERE idItem = '$idItem' AND stok = 0;");
+    $db->close();
+    unset($db);
+}
 // $username = "tes"; $idItem = 1; $tanggal = '12122112'; $quantity = 10;
 // insertToRiwayat($username, $idItem, $tanggal, (-1*$quantity));
 ?>

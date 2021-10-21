@@ -44,6 +44,21 @@
             }
         }
     }
+    else if (array_key_exists('available-item', $_POST)) {
+        if (!(isset($_SESSION['username']))) {
+            echo "<script>alert('Silahkan login terlebih dahulu.');</script>";
+            header("Location: login.php");
+        }
+        else {
+            if ($_SESSION["isAdmin"]) {
+                setAvailable($_POST['idItem']);
+                echo "<script>alert('Dorayaki tersedia!');</script>";
+            }
+            else {
+                // kalau user?
+            }
+        }
+    }
     else if (array_key_exists('buy-single-item-btn', $_POST)){
         buyItem($_SESSION["username"], date("Y-m-d h:i:sa", strtotime("now")), $_POST['idItem'], $_POST["quantity-hidden"]);
     }
@@ -156,9 +171,16 @@
                     <div class="product-right-button-primary">
                         <form method="POST">
                             <input type="hidden" name="idItem" value=<?=$id ?> />
-                            <div class="delete-item">
-                                <button type="submit" name="delete-item"><i class="fas fa-backspace"></i> HAPUS DORAYAKI</button>
-                            </div>
+                            <?php $item = findItemById($id)?>
+                            <?php if ($item[0]["available"] == 1) {?>
+                                <div class="delete-item">
+                                    <button type="submit" name="delete-item"><i class="fas fa-backspace"></i> HAPUS DORAYAKI</button>
+                                </div>
+                            <?php } else { ?>
+                                <div class="available-item">
+                                    <button type="submit" name="available-item"><i class="fas fa-check"></i> BUAT TERSEDIA</button>
+                                </div>
+                            <?php }?>
                         </form>
 
                         <form action="cart.php" method="POST">
