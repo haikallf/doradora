@@ -71,7 +71,7 @@
              else if(array_key_exists('cart-quantity-check-btn', $_POST)){
                 setQuantityCart($_SESSION['username'], $_POST['idItem'], $_POST['quantity']);
              }
-             else if(array_key_exists('checkout-btn', $_POST)){
+             else if(array_key_exists('buy-btn', $_POST)){
                 buyItemFomCart($_SESSION['username'], "2020/22/21");
              }
              else if (array_key_exists('edit-check-btn', $_POST)){
@@ -207,7 +207,7 @@
                     </div>
                     <div class="checkout-btn">
                         <form method="POST">
-                            <button type="submit" name="checkout-btn">Beli</button>
+                            <button type="submit" name="buy-btn" id="buy-btn">Beli</button>
                         </form>
                         
                     </div>

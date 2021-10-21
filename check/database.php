@@ -5,7 +5,7 @@
 // kalo admin, pagenya ada semua fungsi dibawah
 // a.Menambah varian dorayaki
 // $GLOBALS['db']
-$db = "./db/database.db";
+$db = "../db/database.db";
 $db2 = "./db/database.db";
 function addItem($idItem, $namaItem, $deskripsi,int $harga,int $stok, $gambar,int $available) {
     $db = new SQLite3($GLOBALS['db']);
@@ -214,7 +214,7 @@ function buyItemFromCart($username, $tanggal) {
     $db->close();
     unset($db);
 }
-// buyItemFromCart("haikallf","1244");
+// buyItemFromCart("haikallf","1242");
 
 function addNewVar($name, $deskripsi, $harga, $stock,  $img_loc) {
     $db = new SQLite3($GLOBALS['db']);
