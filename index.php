@@ -104,6 +104,9 @@
     </div>
 
     <div class="container" id="container"></div>
+    <div class="pagination">
+        <ul></ul>
+    </div>
     <script src="./js/index.js"></script>
   </body>
 </html>

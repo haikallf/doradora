@@ -60,7 +60,7 @@
         }
     }
     else if (array_key_exists('buy-single-item-btn', $_POST)){
-        buyItem($_SESSION["username"], date("Y-m-d h:i:sa", strtotime("now")), $_POST['idItem'], $_POST["quantity-hidden"]);
+        buyItem($_SESSION["username"], date("Y-m-d h:i:sa", strtotime("now")), $_POST['idItem'], (int) $_POST["quantity-hidden"]);
     }
 
     $isAdmin = isset($_SESSION['username']) ? $_SESSION['isAdmin'] : -1;
@@ -241,8 +241,10 @@
                 document.getElementById("terjual").innerHTML = "Terjual : "+terjual;
                 document.getElementById("status").innerHTML = (items[0]["available"] == 1) ? "Status : Tersedia" : "Status : Kosong";
                 document.getElementById("quantity").setAttribute("max", items[0]["stok"]);
-                document.getElementById("quantity-hidden").value = document.getElementById("quantity").value;
-                
+                +document.getElementById("quantity-hidden").setAttribute("value", +document.getElementById("quantity").value);
+                // document.getElementById("quantity-hidden").setAttribute("value", document.getElementById("quantity-hidden").value.replace("/", ""));
+                // document.getElementById("quantity-hidden").setAttribute("value", Number(document.getElementById("quantity-hidden").value, 10))
+                console.log(document.getElementById("quantity-hidden").value);
             }
             
             ajax.open("GET", "../check/db-product-details.php?id="+id, true);
