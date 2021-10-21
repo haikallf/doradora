@@ -225,6 +225,10 @@ function addNewVar($name, $deskripsi, $harga, $stock,  $img_loc) {
     unset($db);
 }
 
+function syncStockAndQuantity() {
+    $db = new SQLite3($GLOBALS['db']);
+    $query = $db->query("UPDATE item SET available = 0 WHERE stok = 0;");
+}
 // function buyItem($username, $idItem, $quantity) {
 //     $db = new SQLite3($GLOBALS['db']);
 //     $query = $db->query("INSERT INTO cart (username, idItem, quantity) VALUES ('$username', '$idItem', '$quanity')");
