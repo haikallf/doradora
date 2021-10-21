@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="./css/index.css" />
     <title>Home</title>
   </head>
-  <body onload="renderHeader(<?= $isAdmin?>)">
+  <body onload="renderHeader(<?= $isAdmin?>, 1)">
     <div class="header">
         <div class="header-brand" onclick="goToHomeFromHome()">
             Doradora
