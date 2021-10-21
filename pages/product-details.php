@@ -16,7 +16,6 @@
     <title>Produk</title>
 </head>
     <?php
-    require_once( './functions.php' );
     require_once( '../check/database.php' );
     session_start();
     if(array_key_exists('add-to-cart', $_POST)) {
@@ -25,33 +24,29 @@
                 addToCart($_SESSION["username"], $_POST["idItem"], $_POST["quantity-hidden"]);
             }
         }
-        else{
-            echo "<script>alert('Anda harus login untuk menambah item ke keranjang');</script>";
+        else { //pindah ke halaman login
+            header("Location: login.php");
         }
     }
 
-    else if (array_key_exists('delete-item', $_POST)){
-        deleteItem($_POST['idItem']);
-        echo "<script>alert('Penghapusan dorayaki berhasil!');</script>";
+    else if (array_key_exists('delete-item', $_POST)) {
+        if (!(isset($_SESSION['username']))) {
+            echo "<script>alert('Silahkan login terlebih dahulu.');</script>";
+            header("Location: login.php");
+        }
+        else {
+            if ($_SESSION["isAdmin"]) {
+                deleteItem($_POST['idItem']);
+                echo "<script>alert('Penghapusan dorayaki berhasil!');</script>";
+            }
+            else {
+                // kalau user?
+            }
+        }
     }
-    
-    if (isset($_SESSION['username'])) {
-        $isAdmin = $_SESSION['isAdmin'];
-    }
-    else {
-        $isAdmin = -1;
-    }
+    $isAdmin = isset($_SESSION['username']) ? $_SESSION['isAdmin'] : -1;
+    $id = isset($_GET["idItem"]) ? $_GET["idItem"] : -1;
     ?>
-
-    <!-- <?php
-        require_once( '../check/database.php' );
-        if (isset($_GET["idItem"])) {
-            $id = $_GET["idItem"];
-        }
-        // else {
-        //      $item = findItemByID("1");
-        // }
-    ?> -->
 
 <body onload="renderHeader(<?= $isAdmin?>)">
     <div class="header">
@@ -81,15 +76,18 @@
         <div class="vr"></div>
 
         <?php 
-            require_once( 'functions.php' );
             if(array_key_exists('logout-btn', $_POST)) {
                 if (isset($_SESSION['username'])) {
+                    $_SESSION = [];
+                    session_unset();
                     session_destroy();
-                    echo "<script>location.href='login.php'</script>";
+                    header("Location: ../index.php");
+                    exit;
                 }
             }
             else if(array_key_exists('login-btn', $_POST)){
-                echo "<script>location.href='login.php'</script>";
+                header("Location: login.php");
+                exit;
             }
         ?>
 
@@ -192,8 +190,6 @@
         </div>
     </div>
     <script>
-        // var items = '<p echo json_encode($item); ?>';
-        // items = JSON.parse(items);
         id = <?=$id ?>;
         loadItem();
         document.addEventListener("click",loadItem);

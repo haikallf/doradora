@@ -1,7 +1,11 @@
 <?php
-    require_once( './pages/functions.php' );
-    session_start();    
-    $isAdmin = $_SESSION['isAdmin'];
+    session_start();  
+    if (isset($_SESSION['isAdmin'])) { 
+        $isAdmin = $_SESSION['isAdmin'];
+    } else {
+        $isAdmin = -1;
+    }
+    print_r($_SESSION);
     ?>
 
 
@@ -52,12 +56,13 @@
                     $_SESSION = [];
                     session_unset();
                     session_destroy();
-                    header("Location: ./pages/login.php");
+                    header("Location: index.php");
                     exit;
                 }
             }
-            else if(array_key_exists('login-btn', $_POST)){
-                echo "<script>location.href='./pages/login.php'</script>";
+            else if(array_key_exists('login-btn', $_POST)) {
+                header("Location: ./pages/login.php");
+                exit;
             }
         ?>
 

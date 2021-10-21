@@ -83,16 +83,19 @@
         <div class="vr"></div>
 
         <?php 
-            require_once( 'functions.php' );
             require_once( '../check/database.php' );
             if(array_key_exists('logout-btn', $_POST)) {
                 if (isset($_SESSION['username'])) {
+                    $_SESSION = [];
+                    session_unset();
                     session_destroy();
-                    echo "<script>location.href='login.php'</script>";
+                    header("Location: ../index.php");
+                    exit;
                 }
             }
             else if(array_key_exists('login-btn', $_POST)){
-                echo "<script>location.href='login.php'</script>";
+                header("Location: login.php");
+                exit;
             }
         ?>
 
