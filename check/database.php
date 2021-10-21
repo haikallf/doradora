@@ -196,14 +196,29 @@ function buyItemFromCart($username, $tanggal) {
     $idPembelian = $db->query("SELECT COUNT(idPembelian) FROM pembelian;")->fetchArray(SQLITE3_ASSOC)["COUNT(idPembelian)"];
     $idPembelian += 1;
     $query2 = $db->query("INSERT INTO pembelian (idPembelian, username, tanggal) VALUES ('$idPembelian', '$username', '$tanggal');");
-
-    for($i = 0; $i < count($cartItem); $i++){
-        $item = findItemByID($cartItem[$i]["idItem"]);
+    
+    $exceed = 0;
+    for($i = 0; $i < count($cartItem); $i++) {
         $quantity = $cartItem[$i]['quantity'];
         $idItem = $cartItem[$i]['idItem'];
-        $query = $db->query("UPDATE item SET stok = stok - '$quantity' WHERE idItem = '$idItem';");
-        $query2 = $db->query("INSERT INTO item_quantity (idPembelian, idItem, quantity) VALUES ('$idPembelian', '$idItem', '$quantity');");
-        $query3 = $db->query("DELETE FROM cart WHERE username = '$username';");
+        $numStock = $db->query("SELECT stok FROM item WHERE idItem = '$idItem';")->fetchArray(SQLITE3_ASSOC)["stok"];
+        if ($numStock < $quantity) {
+            $exceed = 1;
+            break;
+        }
+    }
+
+    if ($exceed == 0 ) {
+        for($i = 0; $i < count($cartItem); $i++){
+            $item = findItemByID($cartItem[$i]["idItem"]);
+            $quantity = $cartItem[$i]['quantity'];
+            $idItem = $cartItem[$i]['idItem'];
+            $query = $db->query("UPDATE item SET stok = stok - '$quantity' WHERE idItem = '$idItem';");
+            $query2 = $db->query("INSERT INTO item_quantity (idPembelian, idItem, quantity) VALUES ('$idPembelian', '$idItem', '$quantity');");
+            $query3 = $db->query("DELETE FROM cart WHERE username = '$username';");
+        }
+    } else {
+        echo "<script>alert('quantity input melebihi stock tersedia')</script>";
     }
 
     $db->close();
@@ -212,14 +227,18 @@ function buyItemFromCart($username, $tanggal) {
 
 function buyItem($username, $tanggal, $idItem, $quantity) {
     $db = new SQLite3($GLOBALS['db']);
-    $idPembelian = $db->query("SELECT COUNT(idPembelian) FROM pembelian;")->fetchArray(SQLITE3_ASSOC)["COUNT(idPembelian)"];
-    $idPembelian += 1;
-    $query2 = $db->query("INSERT INTO pembelian (idPembelian, username, tanggal) VALUES ('$idPembelian', '$username', '$tanggal');");
-    $item = findItemByID($idItem);
-    $idItem = $item[0]["idItem"];
-    $query = $db->query("UPDATE item SET stok = stok - '$quantity' WHERE idItem = '$idItem';");
-    $query2 = $db->query("INSERT INTO item_quantity (idPembelian, idItem, quantity) VALUES ('$idPembelian', '$idItem', '$quantity');");
-    $query3 = $db->query("DELETE FROM cart WHERE username = '$username';");
+    $numStock = $db->query("SELECT stok FROM item WHERE idItem = '$idItem';")->fetchArray(SQLITE3_ASSOC)["stok"];
+    if ($numStock >= $quantity){
+        $idPembelian = $db->query("SELECT COUNT(idPembelian) FROM pembelian;")->fetchArray(SQLITE3_ASSOC)["COUNT(idPembelian)"];
+        $idPembelian += 1;
+        $query2 = $db->query("INSERT INTO pembelian (idPembelian, username, tanggal) VALUES ('$idPembelian', '$username', '$tanggal');");
+        $item = findItemByID($idItem);
+        $idItem = $item[0]["idItem"];
+        $query = $db->query("UPDATE item SET stok = stok - '$quantity' WHERE idItem = '$idItem';");
+        $query2 = $db->query("INSERT INTO item_quantity (idPembelian, idItem, quantity) VALUES ('$idPembelian', '$idItem', '$quantity');");
+    } else {
+        echo "<script>alert('quantity dari barang yang dibeli melebihi jumlah stok yang tersedia')</script>";
+    }
 
     $db->close();
     unset($db);
