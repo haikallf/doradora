@@ -161,6 +161,7 @@ function buyItemFromCart($username, $tanggal) {
             $query = $db->query("UPDATE item SET stok = stok - '$quantity' WHERE idItem = '$idItem';");
             $query2 = $db->query("INSERT INTO item_quantity (idPembelian, idItem, quantity) VALUES ('$idPembelian', '$idItem', '$quantity');");
             $query3 = $db->query("DELETE FROM cart WHERE username = '$username';");
+            insertToRiwayat($username,$idItem,$tanggal,(-1*$quantity));
         }
     } else {
         echo "<script>alert('quantity input melebihi stock tersedia')</script>";
@@ -181,6 +182,7 @@ function buyItem($username, $tanggal, $idItem, $quantity) {
         $idItem = $item[0]["idItem"];
         $query = $db->query("UPDATE item SET stok = stok - '$quantity' WHERE idItem = '$idItem';");
         $query2 = $db->query("INSERT INTO item_quantity (idPembelian, idItem, quantity) VALUES ('$idPembelian', '$idItem', '$quantity');");
+        insertToRiwayat($username,$idItem,$tanggal,(-1*$quantity));
     } else {
         echo "<script>alert('quantity dari barang yang dibeli melebihi jumlah stok yang tersedia')</script>";
     }
@@ -219,4 +221,10 @@ function countSoldItem($id) {
     return $res;
 }
 
+function insertToRiwayat($username, $idItem, $tanggal, $quantity) {
+    $db = new SQLite3($GLOBALS['db']);
+    $query = $db->query("INSERT INTO riwayat(username, idItem, tanggal, quantity) VALUES ('$username', '$idItem', '$tanggal', '$quantity');");
+}
+// $username = "tes"; $idItem = 1; $tanggal = '12122112'; $quantity = 10;
+// insertToRiwayat($username, $idItem, $tanggal, (-1*$quantity));
 ?>
