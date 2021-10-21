@@ -199,6 +199,7 @@ function buyItemFomCart($username, $tanggal) {
 
     for($i = 0; $i < count($cartItem); $i++){
         $item = findItemByID($cartItem[$i]["idItem"]);
+        
         $query = $db->query("UPDATE item SET stok -= '$cartItem[$i]['quantity']' WHERE idItem = `$cartItem[$i]['idItem']`;");
         $query2 = $db->query("INSERT INTO item_quantity (idPembelian, idItem, quantity) VALUES ('$idPembelian', `$cartItem[$i]['idItem']`, `$cartItem[$i]['quantity']`);");
     }
