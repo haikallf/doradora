@@ -17,7 +17,11 @@
     <!-- Custom StyleSheet -->
     <link rel="stylesheet" href="../css/header-user.css" />
     <link rel="stylesheet" href="../css/cart.css" />
-    <title>Keranjang</title>
+    <?php if ($_SESSION['isAdmin'] == 1) {?>
+        <title>Edit Dorayaki</title>
+    <?php } else { ?>
+        <title>Keranjang</title>
+    <?php } ?>
 </head>
 
 <body onload="renderHeader(<?= $isAdmin?>)">
@@ -89,7 +93,11 @@
     </div>
 
     <div class="cart-title">
+    <?php if ($_SESSION['isAdmin'] == 1) {?>
+        <p>Edit Dorayaki</p>
+    <?php } else { ?>
         <p>Keranjang</p>
+    <?php } ?>
     </div>
     <div class="cart-container">
         <div class="cart-left">
@@ -194,7 +202,7 @@
                     </div>
                     <div class="total">
                         <p>Total:</p>
-                        <p>Rp<?= number_format($subtotalArray['subtotal']) ?></p>
+                        <p>Rp. <?= number_format($subtotalArray['subtotal']) ?></p>
                     </div>
                     <div class="checkout-btn">
                         <form method="POST">
