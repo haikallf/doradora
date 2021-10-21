@@ -78,8 +78,8 @@
     <div class="product-container">
         <div class="product">
             <?php 
-                include "./check/db-index.php";
-                syncStockAndQuantity();
+                require_once("./check/db-index.php");
+                // syncStockAndQuantity();
                 if ($isAdmin == 1) {
                     $itemArray = loadAllItem();
                 }
