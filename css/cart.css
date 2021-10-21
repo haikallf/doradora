@@ -132,7 +132,7 @@ body {
   width: 100%;
 }
 
-.checkout-btn > button {
+.checkout-btn > form > button {
   height: 50px;
   width: 150px;
   border: 1px solid black;
@@ -145,6 +145,6 @@ body {
   cursor: pointer;
 }
 
-.checkout-btn > button:hover {
+.checkout-btn > form > button:hover {
   background-color: rgb(94, 94, 94);
 }

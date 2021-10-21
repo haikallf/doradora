@@ -93,7 +93,7 @@
             <?php $item = findItemByID($cartItem[$i]["idItem"])?>
             <div class="cart-product">
                 <div class="cart-img-container">
-                    <img src="./images/dorayaki.jpg" alt="foto buku" />
+                    <img src=<?= ".".$item[0]["gambar"]?> alt="foto dorayaki" />
                 </div>
                 <div class="cart-details-container">
                     <div class="cart-details">

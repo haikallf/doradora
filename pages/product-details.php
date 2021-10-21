@@ -29,6 +29,11 @@
             echo "<script>alert('Anda harus login untuk menambah item ke keranjang');</script>";
         }
     }
+
+    else if (array_key_exists('delete-item', $_POST)){
+        deleteItem($_POST['idItem']);
+        echo "<script>alert('Penghapusan dorayaki berhasil!');</script>";
+    }
     
     if (isset($_SESSION['username'])) {
         $isAdmin = $_SESSION['isAdmin'];
@@ -114,15 +119,16 @@
                 <h3>Deskripsi</h3>
                 <p id="deskripsi"></p>
             </div>
-
-            <div class="product-right-quantity">
-                <h4>Jumlah: </h4>
-                <form method="POST">
-                    <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepDown()"><i class="fas fa-minus fa-sm"></i></button>
-                    <input type="number" id="quantity" name="quantity" min=1 value=1>
-                    <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepUp()"><i class="fas fa-plus fa-sm"></i></button>
-                </form>
-            </div>
+            <?php if ($isAdmin == 0) {?>
+                <div class="product-right-quantity">
+                    <h4>Jumlah: </h4>
+                    <form method="POST">
+                        <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepDown()"><i class="fas fa-minus fa-sm"></i></button>
+                        <input type="number" id="quantity" name="quantity" min=1 value=1>
+                        <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepUp()"><i class="fas fa-plus fa-sm"></i></button>
+                    </form>
+                </div>
+            <?php } ?>
             <div class="product-right-button">
                 <?php if ($isAdmin == 0) {?>
                     <div class="product-right-button-primary">
@@ -140,7 +146,7 @@
                 <?php } else {?>
                     <div class="product-right-button-primary">
                         <form method="POST">
-                            <input type="hidden" name="id-item" value=<?=$id ?> />
+                            <input type="hidden" name="idItem" value=<?=$id ?> />
                             <div class="delete-item">
                                 <button type="submit" name="delete-item"><i class="fas fa-backspace"></i> HAPUS DORAYAKI</button>
                             </div>

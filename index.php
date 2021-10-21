@@ -93,6 +93,12 @@
         <div class="product">
             <?php 
                 include "./check/db-index.php";
+                if ($isAdmin == 1) {
+                    $itemArray = loadAllItem();
+                }
+                else{
+                    $itemArray = loadAllAvailableItem();
+                }
                 // $itemArray = $result; // ini harus beda antara admin dan user, kalau user load yg available aja
             ?>
             <?php for($i = 0; $i < count($itemArray); $i++) {?>
