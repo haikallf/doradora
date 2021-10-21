@@ -122,6 +122,6 @@
     </div>
     
     <div class="container" id="container"></div>
-    <script src="./js/index.js"></script>
+    <script src="../js/index.js"></script>
   </body>
 </html>
