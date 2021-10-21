@@ -75,10 +75,10 @@
                 buyItemFromCart($_SESSION['username'], date("Y-m-d h:i:sa", strtotime("now")));
              }
              else if (array_key_exists('edit-check-btn', $_POST)){
-                editItem($_POST['edit-idItem'], "namaItem", $_POST["edit-namaItem"]);
-                editItem($_POST['edit-idItem'], "harga", $_POST["edit-harga"]);
-                editItem($_POST['edit-idItem'], "stok", $_POST["edit-stok"]);
-                editItem($_POST['edit-idItem'], "deskripsi", $_POST["edit-deskripsi"]);
+                editItem($_SESSION['username'], $_POST['edit-idItem'], "namaItem", $_POST["edit-namaItem"]);
+                editItem($_SESSION['username'], $_POST['edit-idItem'], "harga", $_POST["edit-harga"]);
+                editItem($_SESSION['username'], $_POST['edit-idItem'], "stok", $_POST["edit-stok"]);
+                editItem($_SESSION['username'], $_POST['edit-idItem'], "deskripsi", $_POST["edit-deskripsi"]);
              }
              else if (array_key_exists('del-from-cart-btn', $_POST)){
                  delFromCart($_SESSION['username'], $_POST['del-cart-idItem']);

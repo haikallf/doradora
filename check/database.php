@@ -1,5 +1,5 @@
 <?php 
-$db = "../db/database.db";
+$db = "./db/database.db";
 $db2 = "./db/database.db";
 function addItem($idItem, $namaItem, $deskripsi,int $harga,int $stok, $gambar,int $available) {
     $db = new SQLite3($GLOBALS['db']);
@@ -58,9 +58,21 @@ function findItemByID($id) {
     return $data;
 }
 
-function editItem($idItem, $columnName, $newValue) {
+function editItem($username, $idItem, $columnName, $newValue) {
     $db = new SQLite3($GLOBALS['db']);
+
+    // khusus stok
+    if ($columnName == 'stok') {
+        // ambil stok saat ini
+        $current = $db->query("SELECT stok from item WHERE idItem = '$idItem'")->fetchArray(SQLITE3_ASSOC);
+        $cur = $current['stok'];
+        print_r($cur);
+        $selisih = $newValue - $cur;
+        $tanggal = date("Y-m-d h:i:sa", strtotime("now"));
+        insertToRiwayat($username, $idItem, $tanggal, $selisih);
+    }
     $query = $db->query("UPDATE item SET '$columnName' = '$newValue' WHERE idItem = '$idItem';");
+    
     $db->close();
     unset($db);
 }
