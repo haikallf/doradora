@@ -193,7 +193,7 @@ function buyItemFromCart($username, $tanggal) {
     $cartItem = getCartItem($username);
     $db = new SQLite3($GLOBALS['db']);
 
-    $idPembelian = $db->query("SELECT COUNT(idPembelian) FROM pembelian;")->fetchArray(SQLITE3_ASSOC)["COUNT(idItem)"];
+    $idPembelian = $db->query("SELECT COUNT(idPembelian) FROM pembelian;")->fetchArray(SQLITE3_ASSOC)["COUNT(idPembelian)"];
     $idPembelian += 1;
     $query2 = $db->query("INSERT INTO pembelian (idPembelian, username, tanggal) VALUES ('$idPembelian', '$username', '$tanggal');");
 
@@ -210,7 +210,14 @@ function buyItemFromCart($username, $tanggal) {
     unset($db);
 }
 
-
+function addNewVar($name, $deskripsi, $harga, $stock,  $img_loc) {
+    $db = new SQLite3($GLOBALS['db']);
+    $idItem = $db->query("SELECT COUNT(idItem) FROM item;")->fetchArray(SQLITE3_ASSOC)["COUNT(idItem)"];
+    $idItem += 1;
+    $query = $db->query("INSERT INTO item (idItem, namaItem, deskripsi, harga, stok, gambar) VALUES ('$idItem', '$name', '$deskripsi', '$harga', '$stock',  '$img_loc');");
+    $db->close();
+    unset($db);
+}
 
 // function buyItem($username, $idItem, $quantity) {
 //     $db = new SQLite3($GLOBALS['db']);

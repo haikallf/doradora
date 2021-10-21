@@ -1,5 +1,6 @@
 <?php
     session_start();
+    require_once( '../check/database.php' );
     if (isset($_SESSION['username'])) {
 
     }
@@ -15,20 +16,29 @@
         $isAdmin = -1;
     }
 
-    if (isset($_POST['submit'])) {
+    if (isset($_POST['submitnew'])) {
     // Where the file is going to be stored
-        $target_dir = "../images/";
+        $target_dir = "./images/";
         $file = $_FILES['gambar']['name'];
         $path = pathinfo($file);
         $filename = $path['filename'];
         $ext = $path['extension'];
         $temp_name = $_FILES['gambar']['tmp_name'];
         $path_filename_ext = $target_dir.$filename.".".$ext;
+        $path_filename_ext1 = ".".$target_dir.$filename.".".$ext;
+        $name = $_POST['dorayakiName'];
+        $deskripsi = $_POST['deskripsi'];
+        $harga = $_POST['harga'];
+        $stock = $_POST['stok'];
+        addNewVar($name, $deskripsi, $harga, $stock,  $path_filename_ext);
+        echo "<script>alert('Dorayaki varian baru berhasil ditambahkan!')</script>";
+        
+
     
     // Check if file already exists
     if (file_exists($path_filename_ext)) {
         }else{
-        move_uploaded_file($temp_name,$path_filename_ext);
+        move_uploaded_file($temp_name,$path_filename_ext1);
         }
         
     }
@@ -109,24 +119,27 @@
         <div class="add-form">
             <form action="" method="POST" enctype="multipart/form-data">
                 <p>dorayaki name</p>
-                <input type="text" name="dorayakiName" placeholder="Type dorayaki name" />
-                <br />
-                <br />
-                <p>photos</p>
-                <input type="file" name="gambar" placeholder="Type your image directory ">
-                <input type="hidden" name="foto" value="./images/">
+                <input type="text" name="dorayakiName" placeholder="input dorayaki name" />
                 <br />
                 <br />
                 <p>description</p>
-                <input type="text" name="diskripsi" placeholder="Type description" />
+                <input type="text" name="deskripsi" placeholder="input description" />
+                <br />
+                <br />
+                <p>price</p>
+                <input type="text" name="harga" placeholder="input price" />
                 <br />
                 <br />
                 <p>stock</p>
-                <input type="text" name="stok" placeholder="Type stock available" />
+                <input type="text" name="stok" placeholder="input stock available" />
+                <br />
+                <br />
+                <p>photos</p>
+                <input type="file" name="gambar" placeholder="">
                 <br />
                 <br />
                 <div class="add-btn">
-                    <input type="submit" value="add" name="submit">
+                    <input type="submit" value="add" name="submitnew">
                 </div>
             </form>
         </div>
