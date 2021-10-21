@@ -1,4 +1,5 @@
 <?php 
+session_start();
 $db = "../db/database.db";
 // regex email dan username dan cek username unik
 $username = isset($_POST['u']) ? $_POST['u'] : ''; 
@@ -41,6 +42,15 @@ if ($ok) {
         $hashed = password_hash($password, PASSWORD_DEFAULT);
         $query_insert = $db->query("INSERT INTO user (username, email, password) VALUES ('$username', '$email', '$hashed');");
         // $message[] = "Akun berhasil mendaftar. Selamat berbelanja!";
+        // session
+        $_SESSION['username'] = $username;
+        $_SESSION['password'] = $hashed;
+        $_SESSION['isAdmin'] = 0;
+        // cookies
+        $time = time() + (3600);
+        setcookie("username",$username,$time,'/');
+        setcookie("password",$hashed,$time);
+        setcookie("isAdmin",0,$time);
 
 
     }

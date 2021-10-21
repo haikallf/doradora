@@ -13,12 +13,7 @@
 </head>
 
 <body>
-    <?php 
-        require_once( 'functions.php' );
-        if(array_key_exists('signup-btn', $_POST)) {
-            signup($_POST['username'], $_POST['password'], $_POST["email"]);
-        }
-        ?>
+
     <div class="signup">
         <h1><a href="../index.php">Doradora</a></h1>
         <h2>SIGN UP FORM</h2>
@@ -81,7 +76,6 @@
                 items = JSON.parse(items);
                 if (items.ok) {
                     location.href = '../index.php';
-                    // set cookies
                 }
                 else {
                     var list = document.getElementById("form-messages");
