@@ -23,22 +23,22 @@
         <h1><a href="../index.php">Doradora</a></h1>
         <h2>SIGN UP FORM</h2>
         <div class="signup-form">
-            <form action="" method="POST">
-                <ul id="error-info"></ul>
+            <form action="" method="POST" onkeydown="javascript:return event.key != 'Enter';">
+                <ul id="form-messages"></ul>
                 <p>Username</p>
-                <input type="text" name="username" placeholder="Type your username" />
+                <input type="text" id="username" name="username" placeholder="Type your username" style="text-transform: lowercase"/>
                 <br />
                 <br />
                 <p>Password</p>
-                <input type="password" name="password" placeholder="Type your password ">
+                <input type="password" id="password" name="password" placeholder="Type your password ">
                 <br />
                 <br />
                 <p>Email</p>
-                <input type="email" name="email" placeholder="Type your email ">
+                <input type="email" id="email" name="email" placeholder="Type your email ">
                 <br />
                 <br />
-                <div class="signup-btn">
-                    <input type="submit" name='signup-btn' value="Signup">
+                <div id="signup-btn" class="signup-btn">
+                    <input type="button" name='signup-btn' value="Signup">
                 </div>
             </form>
         </div>
@@ -67,7 +67,43 @@
         <p>Have an account? <a href="login.php">Log In</a> instead.</p>
     </div>
     <script>
+        const form = {
+        u: document.getElementById('username'),
+        p: document.getElementById('password'),
+        e: document.getElementById('email')
+        }
+        document.getElementById('signup-btn').addEventListener('click', validasiData);
+        
+        function validasiData() {
+            const ajax = new XMLHttpRequest();
+            ajax.onload = function () {
+                var items = ajax.responseText;
+                items = JSON.parse(items);
+                if (items.ok) {
+                    location.href = '../index.php';
+                    // set cookies
+                }
+                else {
+                    var list = document.getElementById("form-messages");
+                    while (list.hasChildNodes()) {
+                        list.removeChild(list.firstChild);
+                    }
+                    items.pesan.forEach((message) => {
+                        const li = document.createElement('li');
+                        li.textContent = message;
+                        list.appendChild(li);
+                    });
+                    list.style.display = "block";
+                }
+            }
 
+            const data = "u="+form.u.value+"&p="+form.p.value+"&e="+form.e.value;
+            ajax.open("POST", "../check/check-signup.php", true);
+            ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            ajax.send(data);
+        }
+
+        
     </script>
 </body>
 
