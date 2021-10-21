@@ -210,6 +210,7 @@
                 response = JSON.parse(response);
                 const items = response.all;
                 const terjual = (response.sold != null) ? response.sold : 0;
+                console.log(terjual);
                 document.getElementById("gambar").src = '.'+items[0]["gambar"];
                 document.getElementById("namaItem").innerHTML = items[0]["namaItem"];
                 document.getElementById("harga").innerHTML = "Rp. " + items[0]["harga"].toLocaleString("en-US");
