@@ -22,6 +22,7 @@
     <?php } else { ?>
         <title>Keranjang</title>
     <?php } ?>
+    <?php $isAdmin = $_SESSION['isAdmin']; ?>
 </head>
 
 <body onload="renderHeader(<?= $isAdmin?>)">
@@ -206,7 +207,7 @@
                     </div>
                     <div class="checkout-btn">
                         <form method="POST">
-                            <button type="button" name="checkout-btn">Beli</button>
+                            <button type="submit" name="checkout-btn">Beli</button>
                         </form>
                         
                     </div>
@@ -224,11 +225,11 @@
         // result.textContent = `You like ${event.target.value}`;
         // });
 
-        const stok = document.getElementById('edit-stok');
-        const inputHandler = function(e) {
-            console.log(e.target.value);
-        }
-        stok.addEventListener('change', inputHandler);
+        // const stok = document.getElementById('edit-stok');
+        // const inputHandler = function(e) {
+        //     console.log(e.target.value);
+        // }
+        // stok.addEventListener('change', inputHandler);
 
     </script>
 </body>

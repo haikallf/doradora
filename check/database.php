@@ -208,6 +208,7 @@ function buyItemFromCart($username, $tanggal) {
         echo $idItem;
         $query = $db->query("UPDATE item SET stok = stok - '$quantity' WHERE idItem = '$idItem';");
         $query2 = $db->query("INSERT INTO item_quantity (idPembelian, idItem, quantity) VALUES ('$idPembelian', '$idItem', '$quantity');");
+        $query3 = $db->query("DELETE FROM cart WHERE username = '$username';");
     }
 
     $db->close();
@@ -219,6 +220,7 @@ function addNewVar($name, $deskripsi, $harga, $stock,  $img_loc) {
     $idItem = $db->query("SELECT COUNT(idItem) FROM item;")->fetchArray(SQLITE3_ASSOC)["COUNT(idItem)"];
     $idItem += 1;
     $query = $db->query("INSERT INTO item (idItem, namaItem, deskripsi, harga, stok, gambar) VALUES ('$idItem', '$name', '$deskripsi', '$harga', '$stock',  '$img_loc');");
+
     $db->close();
     unset($db);
 }
