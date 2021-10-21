@@ -63,12 +63,17 @@
                 header("Location: login.php");
                 exit;
             }
-
              else if(array_key_exists('cart-quantity-check-btn', $_POST)){
                 setQuantityCart($_SESSION['username'], $_POST['idItem'], $_POST['quantity']);
              }
              else if(array_key_exists('checkout-btn', $_POST)){
                 buyItemFomCart($_SESSION['username'], "2020/22/21");
+             }
+             else if (array_key_exists('edit-check-btn', $_POST)){
+                editItem($_POST['edit-idItem'], "namaItem", $_POST["edit-namaItem"]);
+                editItem($_POST['edit-idItem'], "harga", $_POST["edit-harga"]);
+                editItem($_POST['edit-idItem'], "stok", $_POST["edit-stok"]);
+                editItem($_POST['edit-idItem'], "deskripsi", $_POST["edit-deskripsi"]);
              }
         ?>
 
@@ -88,7 +93,7 @@
     </div>
     <div class="cart-container">
         <div class="cart-left">
-        <?php if($_SESSION['isAdmin'] != -1) {?>
+        <?php if($_SESSION['isAdmin'] != 1) {?>
 
         <?php
             require_once( '../check/database.php' );
@@ -142,13 +147,13 @@
                             
                             <div class="edit-details-right">
                                 <p>Stok:</p>
-                                <input type="number" name="edit-stok" id="edit-stok" value=<?= $allItem[$i]["stok"]?>>
+                                <input type="number" name="edit-stok" id="edit-stok" value=<?= $allItem[$i]["stok"]?> >
                                 <p class="bottom-label">Deskripsi:</p>
                                 <input type="text" name="edit-deskripsi" id="edit-deskripsi" value='<?= $allItem[$i]["deskripsi"]?>'>
                             </div>
                             
                             <div class="edit-check-btn">
-                                <input type="hidden" name="idItem" value=<?= $allItem[$i]["idItem"]?>>
+                                <input type="hidden" name="edit-idItem" value=<?= $allItem[$i]["idItem"]?>>
                                 <button id="edit-check-btn" name="edit-check-btn" type="submit"><i class="fas fa-check"></i></button>
                             </div>
                             
@@ -203,6 +208,21 @@
         </div>
 
     <script src="./js/index.js"></script>
+    <script>
+        // const selectElement = document.querySelector('.edit-stok');
+
+        // selectElement.addEventListener('change', (event) => {
+        // const result = document.querySelector('.result');
+        // result.textContent = `You like ${event.target.value}`;
+        // });
+
+        const stok = document.getElementById('edit-stok');
+        const inputHandler = function(e) {
+            console.log(e.target.value);
+        }
+        stok.addEventListener('change', inputHandler);
+
+    </script>
 </body>
 
 </html>
