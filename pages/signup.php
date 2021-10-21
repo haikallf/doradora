@@ -23,7 +23,7 @@
         <h1><a href="../index.php">Doradora</a></h1>
         <h2>SIGN UP FORM</h2>
         <div class="signup-form">
-            <form action="" method="POST" onkeydown="javascript:return event.key != 'Enter';">
+            <form action="" method="POST">
                 <ul id="form-messages"></ul>
                 <p>Username</p>
                 <input type="text" id="username" name="username" placeholder="Type your username" style="text-transform: lowercase"/>
@@ -88,7 +88,7 @@
                     while (list.hasChildNodes()) {
                         list.removeChild(list.firstChild);
                     }
-                    items.pesan.forEach((message) => {
+                    items.message.forEach((message) => {
                         const li = document.createElement('li');
                         li.textContent = message;
                         list.appendChild(li);

@@ -31,8 +31,6 @@ function login($username_, $password_){
         return $logs;
     }
     else {
-        echo "<script>alert('Username or password incorrrect!');</script>";
-        echo "<script>location.href='login.php'</script>";
         return null;
     }   
 }

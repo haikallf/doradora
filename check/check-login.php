@@ -1,45 +1,34 @@
 <?php 
 
 $db = "../db/database.db";
+$username = isset($_POST['u']) ? $_POST['u'] : '';
+$password = isset($_POST['p']) ? $_POST['p'] : '';
 
-$username = isset($_REQUEST['username']) ? $_REQUEST['username'] : '';
-$password = isset($_REQUEST['password']) ? $_REQUEST['password'] : '';
-
-$ada = true;
+$ok = true;
 $message = array();
 
-if (!isset($username) || empty($username)) {
-    $ada = false;
-    $message[] = "Username cannot be empty!";
+if (!isset($username) || empty($username) || !isset($password) || empty($password)) {
+    $ok = false;
+    $message[] = "Username dan password tidak boleh kosong.";
 }
 
-if (!isset($password) || empty($password)) {
-    $ada = false;
-    $message[] = "Username cannot be empty!";
-}
-
-if ($ada) {
+if ($ok) {
     // cari username di database
-    console.log("ada");
     $db = new SQLite3($GLOBALS['db']);
     $query = $db->query("SELECT * FROM user WHERE username = '$username'");
     $data = $query->fetchArray(SQLITE3_ASSOC);
 
     if (empty($data)) {
-        $message[] = "Wrong username or password!";
+        $ok = false;
+        $message[] = "Username/password salah.";
     } else {
-        // $hashedPwd = $data["password"];
-        // cek password
-        // $status = password_verify($password, $hashedPwd);
-        if ($password == $data["password"]) {
-            $status = 1;
-        } else {
-            $status = 0;
-        }
-        if ($status == 0) {
-            $message[] = "Wrong username or password!";
-        } else {
-            $message[] = "Selamat datang "+$data["username"];
+        $hashedPwd = $data["password"];
+        if (!(password_verify($password, $hashedPwd))) {
+            $ok = false;
+            $message[] = "Username/password salah";
+        } 
+        else {
+            $message[] = "Selamat datang!";
             // cookies
             // setcookie("username",$username);
             // setcookie("isAdmin",$isAdmin);
@@ -49,8 +38,9 @@ if ($ada) {
 
 echo json_encode(
     array(
-        'ok' => $ada,
+        'ok' => $ok,
         'message' => $message
     )
 )
+
 ?>
