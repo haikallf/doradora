@@ -44,10 +44,6 @@
             }
         }
     }
-
-    else if (array_key_exists('buy-single-item-btn', $_POST)){
-        buyItem($_SESSION["username"], date("Y-m-d h:i:sa", strtotime("now")), $_POST['idItem'], $_POST["quantity-hidden"]);
-    }
     $isAdmin = isset($_SESSION['username']) ? $_SESSION['isAdmin'] : -1;
     $id = isset($_GET["idItem"]) ? $_GET["idItem"] : -1;
     ?>
@@ -116,7 +112,7 @@
                 <p>★★★★★</p>
                 <p id="harga"></p>
                 <p id="stok"></p>
-                <p>Terjual: xx</p>
+                <p id="terjual"></p>
                 <p id="status"></p>
             </div>
             <div class="product-right-description">
@@ -128,7 +124,7 @@
                     <h4>Jumlah: </h4>
                     <form method="POST">
                         <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepDown()"><i class="fas fa-minus fa-sm"></i></button>
-                        <input type="number" id="quantity" name="quantity" min=1 value=1 >
+                        <input type="number" id="quantity" name="quantity" min=1 value=1>
                         <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepUp()"><i class="fas fa-plus fa-sm"></i></button>
                     </form>
                 </div>
@@ -143,14 +139,9 @@
                                 <button type="submit" name="add-to-cart"><i class="fas fa-shopping-cart"></i> +KERANJANG</button>
                             </div>
                         </form>
-                        <form action="" method="POST">
                             <div class="buy-now">
-                                <input type="hidden" name="idItem" value=<?= $id ?> />
-                                <input type="hidden" name="quantity-hidden" id="quantity-hidden" value=1/>
-                                <button type="submit" name="buy-single-item-btn" id="buy-single-item-btn"><i class="fas fa-wallet"></i> BELI SEKARANG</button>
+                                <button><i class="fas fa-wallet"></i> BELI SEKARANG</button>
                             </div>
-                        </form>
-                            
                     </div>
                 <?php } else {?>
                     <div class="product-right-button-primary">
@@ -192,7 +183,7 @@
                 </div>
                 <div class="product-right-delivery-cost">
                     <i class="fas fa-truck"></i>
-                    <p>Ongkir Reguler Rp19000</p>
+                    <p>Ongkir Reguler Rp. 19,000</p>
                 </div>
                 <p>Estimasi tiba 1 September 2021</p>
                 <a href="#">Lihat pilihan kurir</a>
@@ -206,8 +197,10 @@
         function loadItem() {
             const ajax = new XMLHttpRequest();
             ajax.onload = function () {
-                var items = ajax.responseText;
-                items = JSON.parse(items);
+                var response = ajax.responseText;
+                response = JSON.parse(response);
+                const items = response.all;
+                const terjual = (response.sold != null) ? response.sold : 0;
                 document.getElementById("gambar").src = '.'+items[0]["gambar"];
                 document.getElementById("namaItem").innerHTML = items[0]["namaItem"];
                 document.getElementById("harga").innerHTML = "Rp. " + items[0]["harga"].toLocaleString("en-US");
@@ -216,6 +209,7 @@
                 document.getElementById("status").innerHTML = (items[0]["available"] == 1) ? "Status : Tersedia" : "Status : Kosong";
                 document.getElementById("quantity").setAttribute("max", items[0]["stok"]);
                 document.getElementById("quantity-hidden").value = document.getElementById("quantity").value;
+                document.getElementById("terjual").innerHTML = "Terjual : "+terjual;
             }
             
             ajax.open("GET", "../check/db-product-details.php?id="+id, true);
@@ -225,7 +219,7 @@
         }
     </script>
 
-    <script src="./js/index.js"></script>
+    <script src="../js/index.js"></script>
 </body>
 
 </html>

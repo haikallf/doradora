@@ -245,21 +245,10 @@ function syncStockAndQuantity() {
     $db = new SQLite3($GLOBALS['db']);
     $query = $db->query("UPDATE item SET available = 0 WHERE stok = 0;");
 }
-// function buyItem($username, $idItem, $quantity) {
-//     $db = new SQLite3($GLOBALS['db']);
-//     $query = $db->query("INSERT INTO cart (username, idItem, quantity) VALUES ('$username', '$idItem', '$quanity')");
-// }
-// $test = findItemByID("1");
-// var_dump($test["0"]["namaItem"])
-// $db = new SQLite3($GLOBALS['db2']);
-// $query = $db->query("DELETE FROM pembelian;");
+function countSoldItem($id) {
+    $db = new SQLite3($GLOBALS['db']);
+    $res = $db->query("SELECT SUM(quantity) FROM item_quantity WHERE idItem = '$id';")->fetchArray(SQLITE3_ASSOC)["SUM(quantity)"];
+    return $res;
+}
 
-// date_default_timezone_set("Asia/Jakarta");
-
-// $d=strtotime("now");
-// echo date("Y-m-d h:i:sa", strtotime("now"))
-
-// $db = new SQLite3($GLOBALS['db2']);
-// $query = $db->query("SELECT * FROM pembelian;")->fetchArray(SQLITE3_ASSOC);
-// echo print_r($query);
 ?>
