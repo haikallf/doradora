@@ -1,27 +1,7 @@
 <?php
     require_once( './pages/functions.php' );
     session_start();    
-    if (isset($_POST['username'])) {
-        $username_curr = $_POST['username'];
-        $password_curr = $_POST['password'];
-        $logs = login($username_curr, $password_curr);
-        $_SESSION['username'] = $logs["username"];
-        $_SESSION['isAdmin'] = $logs["status"];
-        $isAdmin = $_SESSION['isAdmin'];
-        
-        if($_SESSION['isAdmin'] == 0) {
-            echo "<script>alert('selamat datang pengunjung!');</script>";
-        } else {
-            echo "<script>alert('selamat datang admin!');</script>";
-        }   
-    }
-
-    if (isset($_SESSION['username'])) {
-        $isAdmin = $_SESSION['isAdmin'];
-    }
-    else {
-        $isAdmin = -1;
-    }
+    $isAdmin = $_SESSION['isAdmin'];
     ?>
 
 
@@ -66,11 +46,14 @@
         <div class="vr"></div>
 
         <?php 
-            require_once( './pages/functions.php' );
+
             if(array_key_exists('logout-btn', $_POST)) {
                 if (isset($_SESSION['username'])) {
+                    $_SESSION = [];
+                    session_unset();
                     session_destroy();
-                    echo "<script>location.href='./pages/login.php'</script>";
+                    header("Location: ./pages/login.php");
+                    exit;
                 }
             }
             else if(array_key_exists('login-btn', $_POST)){
@@ -99,7 +82,7 @@
                 else{
                     $itemArray = loadAllAvailableItem();
                 }
-                // $itemArray = $result; // ini harus beda antara admin dan user, kalau user load yg available aja
+            
             ?>
             <?php for($i = 0; $i < count($itemArray); $i++) {?>
                 <form action="./pages/product-details.php" method="GET" name="itemForm" id="itemForm-<?=$i?>" class="itemForm">

@@ -1,4 +1,5 @@
 <?php 
+session_start();
 
 $db = "../db/database.db";
 $username = isset($_POST['u']) ? $_POST['u'] : '';
@@ -29,9 +30,15 @@ if ($ok) {
         } 
         else {
             $message[] = "Selamat datang!";
+            // session
+            $_SESSION['username'] = $username;
+            $_SESSION['password'] = $hashedPwd;
+            $_SESSION['isAdmin'] = $data['isAdmin'];
             // cookies
-            // setcookie("username",$username);
-            // setcookie("isAdmin",$isAdmin);
+            $time = time() + (3600);
+            setcookie("username",$username,$time,'/');
+            setcookie("password",$hashedPwd,$time);
+            setcookie("isAdmin",$data['isAdmin'],$time);
         }
     }
 }
