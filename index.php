@@ -90,10 +90,10 @@
             <?php for($i = 0; $i < count($itemArray); $i++) {?>
                 <form action="./pages/product-details.php" method="GET" name="itemForm" id="itemForm-<?=$i?>" class="itemForm">
                     <div class="product-card" onclick="submitData(<?=$i?>)">
-                        <img src=<?= $itemArray[$i]["gambar"]?> alt="Dorayaki">
+                        <img src=<?= $itemArray[$i]["gambar"]?> alt="Gambar tidak tersedia.">
                         <p><?= $itemArray[$i]["namaItem"]?></p>
                         <p>★★★★★</p>
-                        <p>Rp<?= $itemArray[$i]["harga"]?></p>
+                        <p>Rp. <?= number_format($itemArray[$i]["harga"])?></p>
                         <input type="hidden" name="idItem" value=<?= $itemArray[$i]["idItem"]?>>
                         <!-- <input type="submit" name="" id="submit" value="gas"> -->
                     </div>

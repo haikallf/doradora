@@ -28,9 +28,21 @@ function loadAllItem() {
 
 // b.Melihat varian dorayaki yang di-filter berdasarkan nama varian
 
-function filterItemByName($nama) {
+function filterAllItemByName($nama) {
     $db = new SQLite3($GLOBALS['db']);
-    $query = $db->query("SELECT * FROM item WHERE available = 0 AND namaItem LIKE '%$nama%';");
+    $query = $db->query("SELECT * FROM item WHERE namaItem LIKE '%$nama%';");
+    $data = array();
+    
+    while ($row = $query->fetchArray(SQLITE3_ASSOC)) {
+        array_push($data, $row);
+    }
+    $db->close();
+    unset($db);
+    return $data;
+}
+function filterAvailableItemByName($nama) {
+    $db = new SQLite3($GLOBALS['db']);
+    $query = $db->query("SELECT * FROM item WHERE available = 1 AND namaItem LIKE '%$nama%';");
     $data = array();
     
     while ($row = $query->fetchArray(SQLITE3_ASSOC)) {

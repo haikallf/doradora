@@ -8,10 +8,17 @@
     }
     
     if (isset($_GET['search-query'])) {
-        $query = $_GET['search-query'];
+        if (!(empty($_GET['search-query']))) {
+            $query = $_GET['search-query'];
+        }
+        else {
+            header("Location: ../index.php");
+            exit;
+        }
     }
     else {
         header("Location: ../index.php");
+        exit;
     }
     ?>
 
@@ -31,7 +38,7 @@
   </head>
   <body onload="renderHeader(<?= $isAdmin?>)">
     <div class="header">
-        <div class="header-brand" onclick="goToHome()">
+        <div class="header-brand" onclick="javascript:location.href = '../index.php'">
             Doradora
         </div>
 
@@ -87,16 +94,22 @@
         <div class="product">
             <?php 
                 require_once('../check/database.php');
-                $itemArray = filterItemByName($query); // ini harus beda antara admin dan user, kalau user load yg available aja
+                if ($isAdmin == 1) {
+                    $itemArray = filterAllItemByName($query); // ini harus beda antara admin dan user, kalau user load yg available aja
+                }
+                else {
+                    $itemArray = filterAvailableItemByName($query);
+                }
+                print_r($itemArray);
             ?>
             <?php if (count($itemArray) > 0) {?>
                 <?php for($i = 0; $i < count($itemArray); $i++) {?>
                     <form action="product-details.php" method="GET" name="itemForm" id="itemForm-<?=$i?>" class="itemForm">
                         <div class="product-card" onclick="submitData(<?=$i?>)">
-                            <img src=<?= $itemArray[$i]["gambar"]?> alt="Dorayaki">
+                            <img src=<?= '.'.$itemArray[$i]["gambar"]?> alt="Gambar tidak tersedia.">
                             <p><?= $itemArray[$i]["namaItem"]?></p>
                             <p>★★★★★</p>
-                            <p>Rp<?= $itemArray[$i]["harga"]?></p>
+                            <p>Rp. <?= number_format($itemArray[$i]["harga"])?></p>
                             <input type="hidden" name="idItem" value=<?= $itemArray[$i]["idItem"]?>>
                             <!-- <input type="submit" name="" id="submit" value="gas"> -->
                         </div>
