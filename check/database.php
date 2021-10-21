@@ -191,21 +191,16 @@ function cartItemSubtotal($username) {
 
 function buyItemFromCart($username, $tanggal) {
     $cartItem = getCartItem($username);
-    print_r($cartItem);
     $db = new SQLite3($GLOBALS['db']);
 
     $idPembelian = $db->query("SELECT COUNT(idPembelian) FROM pembelian;")->fetchArray(SQLITE3_ASSOC)["COUNT(idPembelian)"];
     $idPembelian += 1;
-    echo $idPembelian;
     $query2 = $db->query("INSERT INTO pembelian (idPembelian, username, tanggal) VALUES ('$idPembelian', '$username', '$tanggal');");
 
     for($i = 0; $i < count($cartItem); $i++){
         $item = findItemByID($cartItem[$i]["idItem"]);
-        
         $quantity = $cartItem[$i]['quantity'];
-        echo $quantity;
         $idItem = $cartItem[$i]['idItem'];
-        echo $idItem;
         $query = $db->query("UPDATE item SET stok = stok - '$quantity' WHERE idItem = '$idItem';");
         $query2 = $db->query("INSERT INTO item_quantity (idPembelian, idItem, quantity) VALUES ('$idPembelian', '$idItem', '$quantity');");
         $query3 = $db->query("DELETE FROM cart WHERE username = '$username';");
@@ -217,10 +212,8 @@ function buyItemFromCart($username, $tanggal) {
 
 function buyItem($username, $tanggal, $idItem, $quantity) {
     $db = new SQLite3($GLOBALS['db']);
-
     $idPembelian = $db->query("SELECT COUNT(idPembelian) FROM pembelian;")->fetchArray(SQLITE3_ASSOC)["COUNT(idPembelian)"];
     $idPembelian += 1;
-    echo $idPembelian;
     $query2 = $db->query("INSERT INTO pembelian (idPembelian, username, tanggal) VALUES ('$idPembelian', '$username', '$tanggal');");
     $item = findItemByID($idItem);
     $idItem = $item[0]["idItem"];

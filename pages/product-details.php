@@ -44,6 +44,10 @@
             }
         }
     }
+
+    else if (array_key_exists('buy-single-item-btn', $_POST)){
+        buyItem($_SESSION["username"], date("Y-m-d h:i:sa", strtotime("now")), $_POST['idItem'], $_POST["quantity-hidden"]);
+    }
     $isAdmin = isset($_SESSION['username']) ? $_SESSION['isAdmin'] : -1;
     $id = isset($_GET["idItem"]) ? $_GET["idItem"] : -1;
     ?>
@@ -124,7 +128,7 @@
                     <h4>Jumlah: </h4>
                     <form method="POST">
                         <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepDown()"><i class="fas fa-minus fa-sm"></i></button>
-                        <input type="number" id="quantity" name="quantity" min=1 value=1>
+                        <input type="number" id="quantity" name="quantity" min=1 value=1 >
                         <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepUp()"><i class="fas fa-plus fa-sm"></i></button>
                     </form>
                 </div>
@@ -139,9 +143,14 @@
                                 <button type="submit" name="add-to-cart"><i class="fas fa-shopping-cart"></i> +KERANJANG</button>
                             </div>
                         </form>
+                        <form action="" method="POST">
                             <div class="buy-now">
-                                <button><i class="fas fa-wallet"></i> BELI SEKARANG</button>
+                                <input type="hidden" name="idItem" value=<?= $id ?> />
+                                <input type="hidden" name="quantity-hidden" id="quantity-hidden" value=1/>
+                                <button type="submit" name="buy-single-item-btn" id="buy-single-item-btn"><i class="fas fa-wallet"></i> BELI SEKARANG</button>
                             </div>
+                        </form>
+                            
                     </div>
                 <?php } else {?>
                     <div class="product-right-button-primary">
