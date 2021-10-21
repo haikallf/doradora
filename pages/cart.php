@@ -72,7 +72,8 @@
                 setQuantityCart($_SESSION['username'], $_POST['idItem'], $_POST['quantity']);
              }
              else if(array_key_exists('buy-btn', $_POST)){
-                buyItemFomCart($_SESSION['username'], "2020/22/21");
+                buyItemFromCart($_SESSION['username'], date("Y-m-d h:i:sa", strtotime("now")));
+                header("Location: ../index.php");
              }
              else if (array_key_exists('edit-check-btn', $_POST)){
                 editItem($_POST['edit-idItem'], "namaItem", $_POST["edit-namaItem"]);

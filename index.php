@@ -79,6 +79,7 @@
         <div class="product">
             <?php 
                 include "./check/db-index.php";
+                syncStockAndQuantity();
                 if ($isAdmin == 1) {
                     $itemArray = loadAllItem();
                 }

@@ -24,5 +24,10 @@ function loadAllAvailableItem() {
     return $data;
 }
 
+function syncStockAndQuantity() {
+    $db = new SQLite3($GLOBALS['db']);
+    $query = $db->query("UPDATE item SET available = 0 WHERE stok = 0;");
+}
+
 $itemArray = loadAllItem();
 ?>

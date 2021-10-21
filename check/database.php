@@ -236,4 +236,15 @@ function syncStockAndQuantity() {
 // }
 // $test = findItemByID("1");
 // var_dump($test["0"]["namaItem"])
+// $db = new SQLite3($GLOBALS['db2']);
+// $query = $db->query("DELETE FROM pembelian;");
+
+// date_default_timezone_set("Asia/Jakarta");
+
+// $d=strtotime("now");
+// echo date("Y-m-d h:i:sa", strtotime("now"))
+
+// $db = new SQLite3($GLOBALS['db2']);
+// $query = $db->query("SELECT * FROM pembelian;")->fetchArray(SQLITE3_ASSOC);
+// echo print_r($query);
 ?>
