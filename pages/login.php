@@ -17,17 +17,18 @@
         <h1><a href="../index.php">Doradora</a></h1>
         <h2>LOG IN</h2>
         <div class="login-form">
-            <form action="../index.php" method="POST">
+            <form action="" method="POST">
+                <ul id="form-messages"></ul>
                 <p>Username</p>
-                <input type="text" name="username" placeholder="Type your email" />
+                <input id="username" type="text" name="username" placeholder="Type your email" />
                 <br />
                 <br />
                 <p>Password</p>
-                <input type="password" name="password" placeholder="Type your password ">
+                <input id="password" type="password" name="password" placeholder="Type your password ">
                 <br />
                 <br />
-                <div class="login-btn">
-                    <input type="submit" value="Login" name="submit">
+                <div class="login-btn" id="submit">
+                    <input type="button" value="Login" name="submit">
                 </div>
             </form>
         </div>
@@ -55,5 +56,41 @@
 
         <p>Not a member? <a href="signup.php">Sign Up</a></p>
     </div>
+    <script>
+        const form = {
+        u: document.getElementById('username'),
+        p: document.getElementById('password'),
+        }
+        document.getElementById('submit').addEventListener('click', validasiData);
+
+        function validasiData() {
+            const ajax = new XMLHttpRequest();
+            ajax.onload = function () {
+                var items = ajax.responseText;
+                items = JSON.parse(items);
+                console.log(items);
+                if (items.ok) {
+                    location.href = '../index.php';
+                    // set cookies
+                }
+                else {
+                    var list = document.getElementById("form-messages");
+                    while (list.hasChildNodes()) {
+                        list.removeChild(list.firstChild);
+                    }
+                    items.message.forEach((message) => {
+                        const li = document.createElement('li');
+                        li.textContent = message;
+                        list.appendChild(li);
+                    });
+                    list.style.display = "block";
+                }
+            }
+            const data = "u="+form.u.value+"&p="+form.p.value;
+            ajax.open("POST", "../check/check-login.php", true);
+            ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            ajax.send(data);
+        }
+    </script>
 </body>
 </html>
