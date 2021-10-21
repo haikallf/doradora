@@ -84,6 +84,7 @@
     </div>
     <div class="cart-container">
         <div class="cart-left">
+        <?php if($_SESSION['isAdmin'] != -1) {?>
 
         <?php
             require_once( '../check/database.php' );
@@ -115,39 +116,87 @@
                 </div>
             </div>
             <?php } ?>
-        </div>
-
-        <div class="cart-right">
-            <div class="cart-right-promo">
-                <input type="text" placeholder="Masukkan kode promo">
-            </div>
-            <div class="cart-right-total">
-                <h2>Ringkasan Belanja</h2>
-                <div class="subtotal">
-                    <?php $subtotalArray = cartItemSubtotal($_SESSION['username']);?>
-                    <p>Subtotal (<?= $subtotalArray['totalItem'] ?> barang):</p>
-                    <p>Rp<?= $subtotalArray['subtotal'] ?></p>
+        <?php } else {?>
+        <?php
+            require_once( '../check/database.php' );
+            $allItem = loadAllItem($_SESSION['username']);
+        ?>
+        <?php for($i = 0; $i < count($allItem); $i++) {?>
+            <div class="edit-product">
+                <div class="edit-img-container">
+                    <img src=<?= ".".$allItem[$i]["gambar"]?> alt="foto dorayaki" />
                 </div>
-                <div class="shipping">
-                    <p>Ongkos Kirim:</p>
-                    <p>Rp0</p>
-                </div>
-                <div class="hr">
-                    <hr>
-                </div>
-                <div class="total">
-                    <p>Total:</p>
-                    <p>Rp<?= $subtotalArray['subtotal'] ?></p>
-                </div>
-                <div class="checkout-btn">
-                    <form method="POST">
-                        <button type="button" name="checkout-btn">Beli</button>
-                    </form>
+                <div class="edit-details-container">
+                    <div class="edit-details">
+                        <form method="POST">
+                            <div class="edit-details-left">
+                                <p>Nama Dorayaki:</p>
+                                <input type="text" name="edit-namaItem" id="edit-namaItem" value='<?= $allItem[$i]["namaItem"]?>'>
+                                <p class="bottom-label">Harga:</p>
+                                <input type="number" name="edit-harga" id="edit-harga" value=<?= $allItem[$i]["harga"]?>>
+                            </div>
+                            
+                            <div class="edit-details-right">
+                                <p>Stok:</p>
+                                <input type="number" name="edit-stok" id="edit-stok" value=<?= $allItem[$i]["stok"]?>>
+                                <p class="bottom-label">Deskripsi:</p>
+                                <input type="text" name="edit-deskripsi" id="edit-deskripsi" value='<?= $allItem[$i]["deskripsi"]?>'>
+                            </div>
+                            
+                            <div class="edit-check-btn">
+                                <input type="hidden" name="idItem" value=<?= $allItem[$i]["idItem"]?>>
+                                <button id="edit-check-btn" name="edit-check-btn" type="submit"><i class="fas fa-check"></i></button>
+                            </div>
+                            
+                        </form>
+                    </div>
+                    <!-- <form action="" method="POST">
+                        <input type="hidden" name="title" value="asdsa">
+                        <button class="cart-del-btn" type="submit" name="delfromcart">
+                            <i class="fas fa-trash-alt fa-2x"></i>
+                        </button>
+                    </form> -->
                     
                 </div>
             </div>
+        <?php } ?>
+        <?php } ?>
         </div>
-    </div>
+
+
+        <?php if ($_SESSION['isAdmin'] != 1) {?>
+            <div class="cart-right">
+                <div class="cart-right-promo">
+                    <input type="text" placeholder="Masukkan kode promo">
+                </div>
+                <div class="cart-right-total">
+                    <h2>Ringkasan Belanja</h2>
+                    <div class="subtotal">
+                        <?php $subtotalArray = cartItemSubtotal($_SESSION['username']);?>
+                        <p>Subtotal (<?= $subtotalArray['totalItem'] ?> barang):</p>
+                        <p>Rp<?= $subtotalArray['subtotal'] ?></p>
+                    </div>
+                    <div class="shipping">
+                        <p>Ongkos Kirim:</p>
+                        <p>Rp0</p>
+                    </div>
+                    <div class="hr">
+                        <hr>
+                    </div>
+                    <div class="total">
+                        <p>Total:</p>
+                        <p>Rp<?= $subtotalArray['subtotal'] ?></p>
+                    </div>
+                    <div class="checkout-btn">
+                        <form method="POST">
+                            <button type="button" name="checkout-btn">Beli</button>
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>
+            <?php } ?>    
+        </div>
 
     <script src="./js/index.js"></script>
 </body>
