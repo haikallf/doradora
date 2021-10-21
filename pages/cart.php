@@ -73,7 +73,6 @@
              }
              else if(array_key_exists('buy-btn', $_POST)){
                 buyItemFromCart($_SESSION['username'], date("Y-m-d h:i:sa", strtotime("now")));
-                header("Location: ../index.php");
              }
              else if (array_key_exists('edit-check-btn', $_POST)){
                 editItem($_POST['edit-idItem'], "namaItem", $_POST["edit-namaItem"]);
