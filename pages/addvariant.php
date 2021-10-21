@@ -18,18 +18,18 @@
 
     if (isset($_POST['submitnew'])) {
     // Where the file is going to be stored
-        $target_dir = "./images/";
-        $file = $_FILES['gambar']['name'];
-        $path = pathinfo($file);
-        $filename = $path['filename'];
-        $ext = $path['extension'];
-        $temp_name = $_FILES['gambar']['tmp_name'];
-        $path_filename_ext = $target_dir.$filename.".".$ext;
-        $path_filename_ext1 = ".".$target_dir.$filename.".".$ext;
         $name = $_POST['dorayakiName'];
         $deskripsi = $_POST['deskripsi'];
         $harga = $_POST['harga'];
         $stock = $_POST['stok'];
+        $target_dir = "./images/";
+        $file = $_FILES['gambar']['name'];
+        $path = pathinfo($file);
+        $filename = $path['filename']."-".$name;
+        $ext = $path['extension'];
+        $temp_name = $_FILES['gambar']['tmp_name'];
+        $path_filename_ext = $target_dir.$filename.".".$ext;
+        $path_filename_ext1 = ".".$target_dir.$filename.".".$ext;
         addNewVar($name, $deskripsi, $harga, $stock,  $path_filename_ext);
         echo "<script>alert('Dorayaki varian baru berhasil ditambahkan!')</script>";
         
@@ -38,7 +38,7 @@
     // Check if file already exists
     if (file_exists($path_filename_ext)) {
         }else{
-        move_uploaded_file($temp_name,$path_filename_ext1);
+        move_uploaded_file($temp_name, $path_filename_ext1);
         }
         
     }
