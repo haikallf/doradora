@@ -1,10 +1,4 @@
 <?php 
-// 1. Autentikasi pengguna (admin, user)
-
-// 2. Pengelolaan varian dorayaki (admin)
-// kalo admin, pagenya ada semua fungsi dibawah
-// a.Menambah varian dorayaki
-// $GLOBALS['db']
 $db = "../db/database.db";
 $db2 = "./db/database.db";
 function addItem($idItem, $namaItem, $deskripsi,int $harga,int $stok, $gambar,int $available) {
@@ -25,8 +19,6 @@ function loadAllItem() {
     $db->close();
     return $data;
 }
-
-// b.Melihat varian dorayaki yang di-filter berdasarkan nama varian
 
 function filterAllItemByName($nama) {
     $db = new SQLite3($GLOBALS['db']);
@@ -66,16 +58,13 @@ function findItemByID($id) {
     return $data;
 }
 
-// c.Melihat detail dorayaki = ini dari loadAllItem ambil satu elemen
-
-// d.[BONUS] Mengubah informasi tentang varian dorayaki yang sudah ada.
 function editItem($idItem, $columnName, $newValue) {
     $db = new SQLite3($GLOBALS['db']);
     $query = $db->query("UPDATE item SET '$columnName' = '$newValue' WHERE idItem = '$idItem';");
     $db->close();
     unset($db);
 }
-// e.Menghapus varian dorayaki yang sudah ada.
+
 function deleteItem($idItem) {
     $db = new SQLite3($GLOBALS['db']);
     $query = $db->query("UPDATE item SET available = 0 WHERE idItem = '$idItem';");
@@ -84,50 +73,6 @@ function deleteItem($idItem) {
     echo "<script>alert('Dorayaki berhasil dihapus');</script>";
     echo "<script>location.href='../index.php'</script>";
 }
-
-// 3. Manajemen stok dorayaki (admin)
-// a. Menambah stok varian dorayaki
-function addStokItemAdmin($idItem,int $value, $username, $tanggal) {
-    $db = new SQLite3($GLOBALS['db']);
-    $query = $db->query("UPDATE item SET stok = stok + '$value' WHERE idItem = '$idItem';");
-    // cari nama varian
-    $query2 = $db->query("SELECT namaItem FROM item WHERE idItem = '$idItem';");
-    $fetch2 = $query2->fetchArray(SQLITE3_ASSOC);
-    $namaItem = $fetch2['namaItem'];
-    $db->close();
-    unset($db);
-
-    // $query3 = $db->query("INSERT INTO riwayat VALUES ('$username', '$namaItem', '$tanggal', '$value';");
-}
-// addStokItemAdmin('id1',0,0,0);
-// b. Mengurangi varian dorayaki
-function reduceStokItemAdmin($idItem,int $value) {
-    $db = new SQLite3($GLOBALS['db']);
-    $query = $db->query("UPDATE item SET stok = stok - '$value' WHERE idItem = '$idItem';");
-    // cari nama varian
-    $query2 = $db->query("SELECT namaItem FROM item WHERE idItem = '$idItem';");
-    $fetch2 = $query2->fetchArray(SQLITE3_ASSOC);
-    $namaItem = $fetch2['namaItem'];
-    $db->close();
-    unset($db);
-
-    // $query3 = $db->query("INSERT INTO riwayat VALUES ('$username', '$namaItem', '$tanggal', '$value';");
-}
-
-// 4. Melihat Daftar Varian Dorayaki (user)
-// a. sama kaya 2b
-// b. sama kaya 2c
-
-// 5. BONUS Riwayat perubahan stok
-// 6. Pembelian dorayaki
-// Mengurangi stok
-
-// 7. BONUS Riwayat Pembelian
-
-// $a = loadAllItem();
-// var_dump(findItemByID("10"));
-
-// var_dump(count(filterItemByName("cream")));
 
 function addToCart($username, $idItem, $quantity) {
     $db = new SQLite3($GLOBALS['db']);
@@ -216,6 +161,7 @@ function buyItemFromCart($username, $tanggal) {
             $query = $db->query("UPDATE item SET stok = stok - '$quantity' WHERE idItem = '$idItem';");
             $query2 = $db->query("INSERT INTO item_quantity (idPembelian, idItem, quantity) VALUES ('$idPembelian', '$idItem', '$quantity');");
             $query3 = $db->query("DELETE FROM cart WHERE username = '$username';");
+            insertToRiwayat($username,$idItem,$tanggal,(-1*$quantity));
         }
     } else {
         echo "<script>alert('quantity input melebihi stock tersedia')</script>";
@@ -236,6 +182,7 @@ function buyItem($username, $tanggal, $idItem, $quantity) {
         $idItem = $item[0]["idItem"];
         $query = $db->query("UPDATE item SET stok = stok - '$quantity' WHERE idItem = '$idItem';");
         $query2 = $db->query("INSERT INTO item_quantity (idPembelian, idItem, quantity) VALUES ('$idPembelian', '$idItem', '$quantity');");
+        insertToRiwayat($username,$idItem,$tanggal,(-1*$quantity));
     } else {
         echo "<script>alert('quantity dari barang yang dibeli melebihi jumlah stok yang tersedia')</script>";
     }
@@ -251,11 +198,6 @@ function delFromCart($username, $idItem){
     // unset($db);
 }
 
-// delFromCart("haikallf", "6");
-
-// buyItem("haikallf", "32323232", "1", 1);
-// buyItemFromCart("haikallf","1242");
-
 function addNewVar($name, $deskripsi, $harga, $stock,  $img_loc) {
     $db = new SQLite3($GLOBALS['db']);
     $idItem = $db->query("SELECT COUNT(idItem) FROM item;")->fetchArray(SQLITE3_ASSOC)["COUNT(idItem)"];
@@ -266,13 +208,11 @@ function addNewVar($name, $deskripsi, $harga, $stock,  $img_loc) {
     unset($db);
 }
 
-// $item = findItemByID("1");
-// var_dump($item[0]["idItem"]);
-
 function syncStockAndQuantity() {
     $db = new SQLite3($GLOBALS['db']);
     $query = $db->query("UPDATE item SET available = 0 WHERE stok = 0;");
 }
+
 function countSoldItem($id) {
     $db = new SQLite3($GLOBALS['db']);
     $res = $db->query("SELECT SUM(quantity) FROM item_quantity WHERE idItem = '$id';")->fetchArray(SQLITE3_ASSOC)["SUM(quantity)"];
@@ -281,4 +221,10 @@ function countSoldItem($id) {
     return $res;
 }
 
+function insertToRiwayat($username, $idItem, $tanggal, $quantity) {
+    $db = new SQLite3($GLOBALS['db']);
+    $query = $db->query("INSERT INTO riwayat(username, idItem, tanggal, quantity) VALUES ('$username', '$idItem', '$tanggal', '$quantity');");
+}
+// $username = "tes"; $idItem = 1; $tanggal = '12122112'; $quantity = 10;
+// insertToRiwayat($username, $idItem, $tanggal, (-1*$quantity));
 ?>

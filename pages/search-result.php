@@ -100,7 +100,6 @@
                 else {
                     $itemArray = filterAvailableItemByName($query);
                 }
-                print_r($itemArray);
             ?>
             <?php if (count($itemArray) > 0) {?>
                 <?php for($i = 0; $i < count($itemArray); $i++) {?>
