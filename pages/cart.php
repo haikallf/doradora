@@ -103,7 +103,7 @@
                 <div class="cart-details-container">
                     <div class="cart-details">
                         <p><?= $item[0]["namaItem"]?></p>
-                        <strong><?= $item[0]["harga"]?></strong>
+                        <strong>Rp. <?= number_format($item[0]["harga"])?></strong>
                         <form method="POST">
                             <input type="hidden" name="idItem" value=<?= $item[0]["idItem"]?>>
                             <input id="cart-qty" type="number" name="quantity" min="1" value=<?= $cartItem[$i]["quantity"]?> max=<?= $item[0]["stok"]?>>
@@ -178,7 +178,7 @@
                     <div class="subtotal">
                         <?php $subtotalArray = cartItemSubtotal($_SESSION['username']);?>
                         <p>Subtotal (<?= $subtotalArray['totalItem'] ?> barang):</p>
-                        <p>Rp<?= $subtotalArray['subtotal'] ?></p>
+                        <p>Rp. <?= number_format($subtotalArray['subtotal']) ?></p>
                     </div>
                     <div class="shipping">
                         <p>Ongkos Kirim:</p>
@@ -189,7 +189,7 @@
                     </div>
                     <div class="total">
                         <p>Total:</p>
-                        <p>Rp<?= $subtotalArray['subtotal'] ?></p>
+                        <p>Rp<?= number_format($subtotalArray['subtotal']) ?></p>
                     </div>
                     <div class="checkout-btn">
                         <form method="POST">

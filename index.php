@@ -5,9 +5,7 @@
     } else {
         $isAdmin = -1;
     }
-    print_r($_SESSION);
     ?>
-
 
 <!DOCTYPE html>
 <html lang="en">

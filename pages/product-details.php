@@ -113,6 +113,7 @@
                 <p id="harga"></p>
                 <p id="stok"></p>
                 <p>Terjual: xx</p>
+                <p id="status"></p>
             </div>
             <div class="product-right-description">
                 <h3>Deskripsi</h3>
@@ -203,6 +204,7 @@
                 document.getElementById("harga").innerHTML = "Rp. " + items[0]["harga"].toLocaleString("en-US");
                 document.getElementById("stok").innerHTML = "Stok : " + items[0]["stok"];
                 document.getElementById("deskripsi").innerHTML = items[0]["deskripsi"];
+                document.getElementById("status").innerHTML = (items[0]["available"] == 1) ? "Status : Tersedia" : "Status : Kosong";
                 document.getElementById("quantity").setAttribute("max", items[0]["stok"]);
                 document.getElementById("quantity-hidden").value = document.getElementById("quantity").value;
             }

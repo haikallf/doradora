@@ -36,13 +36,12 @@ if ($ok) {
             $_SESSION['isAdmin'] = $data['isAdmin'];
             // cookies
             $time = time() + (3600);
-            setcookie("username",$username,$time,'/');
+            setcookie("username",$username,$time);
             setcookie("password",$hashedPwd,$time);
             setcookie("isAdmin",$data['isAdmin'],$time);
         }
     }
 }
-
 echo json_encode(
     array(
         'ok' => $ok,

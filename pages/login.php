@@ -72,6 +72,7 @@
                 if (items.ok) {
                     location.href = '../index.php';
                     // set cookies
+                    document.cookie =  `u=${form.u.value};path='/'`;
                 }
                 else {
                     var list = document.getElementById("form-messages");
@@ -89,6 +90,7 @@
             const data = "u="+form.u.value+"&p="+form.p.value;
             ajax.open("POST", "../check/check-login.php", true);
             ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            ajax.withCredentials = true;
             ajax.send(data);
         }
     </script>
