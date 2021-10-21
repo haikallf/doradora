@@ -224,8 +224,15 @@
             ajax.open("GET", "../check/db-product-details.php?id="+id, true);
             ajax.send();
 
-            document.getElementById("quantity-hidden").setAttibute('value', document.getElementById("quantity").value);
-            console.log(document.getElementById("quantity-hidden").value);
+            const input = document.querySelector('input');
+            const log = document.getElementById('quantity-hidden');
+
+            input.addEventListener('input[name="quantity"]', updateValue);
+
+            function updateValue(e) {
+                log.updateValue = e.target.value;
+                console.log(log)
+            }
         }
     </script>
 
