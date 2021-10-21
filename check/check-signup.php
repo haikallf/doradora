@@ -15,7 +15,7 @@ if ($ok) {
     $regex = "/^[a-zA-Z0-9._]+$/";
     if (!preg_match($regex, $username)) {
         $ok = false;
-        $message[] = "Username tidak valid.";
+        $message[] = "Username kosong/tidak valid.";
     }   
     // periksa username dan email sudah ada atau belum di db
     $db = new SQLite3($GLOBALS['db']);
@@ -31,7 +31,7 @@ if ($ok) {
     // periksa email
     if(!(filter_var($email, FILTER_VALIDATE_EMAIL))) {
         $ok = false;
-        $message[] = "Email tidak valid.";
+        $message[] = "Email kosong/tidak valid.";
     }
     else {
         $message[] = "Username & email tersedia.";
