@@ -104,7 +104,30 @@ function buyItemFomCart($username, $tanggal) {
     unset($db);
 }
 
-buyItemFomCart("haikallf", "sad");
+function editItem($idItem, $columnName, $newValue) {
+    $db = new SQLite3($GLOBALS['db']);
+    $query = $db->query("UPDATE item SET '$columnName' = '$newValue' WHERE idItem = '$idItem';");
+    $db->close();
+    unset($db);
+}
+
+function loadAllItem() {
+    $db = new SQLite3($GLOBALS['db']);
+    $query = $db->query("SELECT * FROM item;");
+    $data = array();
+    
+    while ($row = $query->fetchArray(SQLITE3_ASSOC)) {
+        array_push($data, $row);
+    }
+    $db->close();
+    return $data;
+}
+
+// $ada = loadAllItem();
+
+// var_dump($ada[0]["namaItem"]);
+
+// buyItemFomCart("haikallf", "sad");
 
 // $cartItem = getCartItem("haikallf");
 // var_dump($cartItem[0]['quantity']);

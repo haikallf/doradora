@@ -14,6 +14,18 @@ function addItem($idItem, $namaItem, $deskripsi,int $harga,int $stok, $gambar,in
     unset($db);
 }
 
+function loadAllItem() {
+    $db = new SQLite3($GLOBALS['db']);
+    $query = $db->query("SELECT * FROM item;");
+    $data = array();
+    
+    while ($row = $query->fetchArray(SQLITE3_ASSOC)) {
+        array_push($data, $row);
+    }
+    $db->close();
+    return $data;
+}
+
 // b.Melihat varian dorayaki yang di-filter berdasarkan nama varian
 
 function filterItemByName($nama) {
@@ -182,6 +194,8 @@ function buyItemFomCart($username, $tanggal) {
     $db->close();
     unset($db);
 }
+
+
 
 // function buyItem($username, $idItem, $quantity) {
 //     $db = new SQLite3($GLOBALS['db']);

@@ -148,3 +148,88 @@ body {
 .checkout-btn > form > button:hover {
   background-color: rgb(94, 94, 94);
 }
+
+/* EDIT DORAYAKI */
+.edit-product {
+  display: flex;
+  border-bottom: 2px solid rgb(172, 172, 172);
+  width: 800px;
+  height: 250px;
+  padding: 20px;
+}
+
+.edit-product:hover {
+  transition: all 0.8s ease;
+  border-bottom: 2px solid black;
+}
+
+.edit-img-container {
+  width: 120px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 20px;
+}
+
+.edit-img-container > img {
+  width: 140px;
+  height: 180px;
+}
+
+.edit-details-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.edit-details > form {
+  display: flex;
+  justify-content: center;
+  height: inherit;
+  margin-left: 50px;
+}
+
+.edit-details-left {
+  margin-right: 50px;
+}
+
+.edit-details-left > input,
+.edit-details-right > input {
+  font-family: "Poppins", sans-serif;
+  outline: none;
+  border: none;
+  border-bottom: 2px solid rgb(172, 172, 172);
+  background-color: transparent;
+}
+
+.edit-details-left > input:focus,
+.edit-details-right > input:focus {
+  border-bottom: 2px solid black;
+  font-family: "Poppins", sans-serif;
+  transition: all 0.8s ease;
+}
+
+#edit-deskripsi {
+  width: 300px;
+}
+
+.bottom-label {
+  margin-top: 20px;
+}
+
+.edit-check-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#edit-check-btn {
+  height: 50px;
+  width: 50px;
+  margin-left: 50px;
+  cursor: pointer;
+  border-radius: 15px;
+  border: 1px solid gray;
+}
