@@ -14,6 +14,25 @@
     else {
         $isAdmin = -1;
     }
+
+    if (isset($_POST['submit'])) {
+    // Where the file is going to be stored
+        $target_dir = "../images/";
+        $file = $_FILES['gambar']['name'];
+        $path = pathinfo($file);
+        $filename = $path['filename'];
+        $ext = $path['extension'];
+        $temp_name = $_FILES['gambar']['tmp_name'];
+        $path_filename_ext = $target_dir.$filename.".".$ext;
+    
+    // Check if file already exists
+    if (file_exists($path_filename_ext)) {
+        }else{
+        move_uploaded_file($temp_name,$path_filename_ext);
+        }
+        
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +52,7 @@
   </head>
   <body onload="renderHeader(<?= $isAdmin?>)">
     <div class="header">
-        <div class="header-brand" onclick="goToHome()">
+        <div class="header-brand" onclick="javascript:location.href = '../index.php';">
             Doradora
         </div>
 
@@ -88,7 +107,7 @@
         <h1><a href=""></a></h1>
         <h2>ADD NEW VARIANT</h2>
         <div class="add-form">
-            <form action="../index.php" method="POST">
+            <form action="" method="POST" enctype="multipart/form-data">
                 <p>dorayaki name</p>
                 <input type="text" name="dorayakiName" placeholder="Type dorayaki name" />
                 <br />

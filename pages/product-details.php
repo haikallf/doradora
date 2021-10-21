@@ -136,7 +136,7 @@
                             <input type="hidden" name="idItem" value=<?= $id ?> />
                             <input type="hidden" name="quantity-hidden" id="quantity-hidden"/>
                             <div class="add-to-cart">
-                                <button type="submit" name="add-to-cart"><i class="fas fa-shopping-cart"></i> KERANJANG</button>
+                                <button type="submit" name="add-to-cart"><i class="fas fa-shopping-cart"></i> +KERANJANG</button>
                             </div>
                         </form>
                             <div class="buy-now">

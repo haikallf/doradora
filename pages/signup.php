@@ -20,16 +20,16 @@
         <div class="signup-form">
             <form action="" method="POST">
                 <ul id="form-messages"></ul>
+                <p>Email</p>
+                <input type="email" id="email" name="email" placeholder="Type your email ">
+                <br />
+                <br />
                 <p>Username</p>
                 <input type="text" id="username" name="username" placeholder="Type your username" style="text-transform: lowercase"/>
                 <br />
                 <br />
                 <p>Password</p>
                 <input type="password" id="password" name="password" placeholder="Type your password ">
-                <br />
-                <br />
-                <p>Email</p>
-                <input type="email" id="email" name="email" placeholder="Type your email ">
                 <br />
                 <br />
                 <div id="signup-btn" class="signup-btn">
@@ -67,12 +67,42 @@
         p: document.getElementById('password'),
         e: document.getElementById('email')
         }
-        document.getElementById('signup-btn').addEventListener('click', validasiData);
-        
+        var valid = false;
+        form.e.addEventListener('change', validasiData);
+        form.u.addEventListener('change', validasiData);
+
         function validasiData() {
-            const ajax = new XMLHttpRequest();
-            ajax.onload = function () {
-                var items = ajax.responseText;
+            const ajax1 = new XMLHttpRequest();
+            ajax1.onload = function () {
+                var items = ajax1.responseText;
+                items = JSON.parse(items);
+
+                var list = document.getElementById("form-messages");
+                    while (list.hasChildNodes()) {
+                        list.removeChild(list.firstChild);
+                    }
+                    items.message.forEach((message) => {
+                        const li = document.createElement('li');
+                        li.textContent = message;
+                        list.appendChild(li);
+                    });
+                    list.style.display = "block";
+                if (items.ok) {
+                    document.getElementById("signup-btn").addEventListener('click', insertData);
+                    console.log(items);
+                }
+            }
+
+            const data = "u="+form.u.value+"&p="+form.p.value+"&e="+form.e.value;
+            ajax1.open("POST", "../check/check-signup.php", true);
+            ajax1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            ajax1.send(data);
+        }
+        
+        function insertData() {
+            const ajax1 = new XMLHttpRequest();
+            ajax1.onload = function () {
+                var items = ajax1.responseText;
                 items = JSON.parse(items);
                 if (items.ok) {
                     location.href = '../index.php';
@@ -92,9 +122,9 @@
             }
 
             const data = "u="+form.u.value+"&p="+form.p.value+"&e="+form.e.value;
-            ajax.open("POST", "../check/check-signup.php", true);
-            ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            ajax.send(data);
+            ajax1.open("POST", "../check/db-signup.php", true);
+            ajax1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            ajax1.send(data);
         }
 
         
