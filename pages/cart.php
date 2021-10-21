@@ -80,6 +80,9 @@
                 editItem($_POST['edit-idItem'], "stok", $_POST["edit-stok"]);
                 editItem($_POST['edit-idItem'], "deskripsi", $_POST["edit-deskripsi"]);
              }
+             else if (array_key_exists('del-from-cart-btn', $_POST)){
+                 delFromCart($_SESSION['username'], $_POST['del-cart-idItem']);
+             }
         ?>
 
         <div class="login-logout">
@@ -108,31 +111,38 @@
             require_once( '../check/database.php' );
             $cartItem = getCartItem($_SESSION['username']);
         ?>
-        <?php for($i = 0; $i < count($cartItem); $i++) {?>
-            <?php $item = findItemByID($cartItem[$i]["idItem"])?>
-            <div class="cart-product">
-                <div class="cart-img-container">
-                    <img src=<?= ".".$item[0]["gambar"]?> alt="foto dorayaki" />
-                </div>
-                <div class="cart-details-container">
-                    <div class="cart-details">
-                        <p><?= $item[0]["namaItem"]?></p>
-                        <strong>Rp. <?= number_format($item[0]["harga"])?></strong>
-                        <form method="POST">
-                            <input type="hidden" name="idItem" value=<?= $item[0]["idItem"]?>>
-                            <input id="cart-qty" type="number" name="quantity" min="1" value=<?= $cartItem[$i]["quantity"]?> max=<?= $item[0]["stok"]?>>
-                            <button id="cart-quantity-check-btn" name="cart-quantity-check-btn" type="submit"><i class="fas fa-check"></i></button>
-                        </form>
+        <?php if (count($cartItem) == 0) {?>
+        <div class="cart-product">
+            <p>Keranjang kosong</p>
+        </div>
+        <?php } else {?>
+            <?php for($i = 0; $i < count($cartItem); $i++) {?>
+                <?php $item = findItemByID($cartItem[$i]["idItem"])?>
+                <div class="cart-product">
+                    <div class="cart-img-container">
+                        <img src=<?= ".".$item[0]["gambar"]?> alt="foto dorayaki" />
                     </div>
-                    <!-- <form action="" method="POST">
-                        <input type="hidden" name="title" value="asdsa">
-                        <button class="cart-del-btn" type="submit" name="delfromcart">
-                            <i class="fas fa-trash-alt fa-2x"></i>
-                        </button>
-                    </form> -->
-                    
+                    <div class="cart-details-container">
+                        <div class="cart-details">
+                            <p><?= $item[0]["namaItem"]?></p>
+                            <strong>Rp. <?= number_format($item[0]["harga"])?></strong>
+                            <p>Stok: <?= $item[0]["stok"] ?></p>
+                            <form method="POST">
+                                <input type="hidden" name="idItem" value=<?= $item[0]["idItem"]?>>
+                                <input id="cart-qty" type="number" name="quantity" min="1" value=<?= $cartItem[$i]["quantity"]?> max=<?= $item[0]["stok"]?>>
+                                <button id="cart-quantity-check-btn" name="cart-quantity-check-btn" type="submit"><i class="fas fa-check"></i></button>
+                            </form>
+                        </div>
+                        <form action="" method="POST">
+                            <input type="hidden" name="del-cart-idItem" value=<?= $item[0]["idItem"]?>>
+                            <button class="cart-del-btn" type="submit" name="del-from-cart-btn">
+                                <i class="fas fa-trash-alt fa-2x"></i>
+                            </button>
+                        </form>
+                        
+                    </div>
                 </div>
-            </div>
+                <?php } ?>
             <?php } ?>
         <?php } else {?>
         <?php

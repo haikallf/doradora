@@ -244,6 +244,15 @@ function buyItem($username, $tanggal, $idItem, $quantity) {
     unset($db);
 }
 
+function delFromCart($username, $idItem){
+    $db = new SQLite3($GLOBALS['db']);
+    $query3 = $db->query("DELETE FROM cart WHERE username = '$username' AND idItem = '$idItem';");
+    // $db->close();
+    // unset($db);
+}
+
+// delFromCart("haikallf", "6");
+
 // buyItem("haikallf", "32323232", "1", 1);
 // buyItemFromCart("haikallf","1242");
 
@@ -267,6 +276,8 @@ function syncStockAndQuantity() {
 function countSoldItem($id) {
     $db = new SQLite3($GLOBALS['db']);
     $res = $db->query("SELECT SUM(quantity) FROM item_quantity WHERE idItem = '$id';")->fetchArray(SQLITE3_ASSOC)["SUM(quantity)"];
+    $db->close();
+    unset($db);
     return $res;
 }
 
