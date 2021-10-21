@@ -1,4 +1,4 @@
-<?php
+ recuired <?php
     session_start();
     require_once( '../check/database.php' );
     if (isset($_SESSION['username'])) {
@@ -119,23 +119,23 @@
         <div class="add-form">
             <form action="" method="POST" enctype="multipart/form-data">
                 <p>dorayaki name</p>
-                <input type="text" name="dorayakiName" placeholder="input dorayaki name" />
+                <input type="text" name="dorayakiName" placeholder="input dorayaki name"  recuired />
                 <br />
                 <br />
                 <p>description</p>
-                <input type="text" name="deskripsi" placeholder="input description" />
+                <input type="text" name="deskripsi" placeholder="input description"  recuired />
                 <br />
                 <br />
                 <p>price</p>
-                <input type="text" name="harga" placeholder="input price" />
+                <input type="text" name="harga" placeholder="input price"  recuired />
                 <br />
                 <br />
                 <p>stock</p>
-                <input type="text" name="stok" placeholder="input stock available" />
+                <input type="text" name="stok" placeholder="input stock available"  recuired />
                 <br />
                 <br />
                 <p>photos</p>
-                <input type="file" name="gambar" placeholder="">
+                <input type="file" name="gambar" placeholder="" recuired />
                 <br />
                 <br />
                 <div class="add-btn">
