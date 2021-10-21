@@ -216,10 +216,11 @@
                 document.getElementById("harga").innerHTML = "Rp. " + items[0]["harga"].toLocaleString("en-US");
                 document.getElementById("stok").innerHTML = "Stok : " + items[0]["stok"];
                 document.getElementById("deskripsi").innerHTML = items[0]["deskripsi"];
+                document.getElementById("terjual").innerHTML = "Terjual : "+terjual;
                 document.getElementById("status").innerHTML = (items[0]["available"] == 1) ? "Status : Tersedia" : "Status : Kosong";
                 document.getElementById("quantity").setAttribute("max", items[0]["stok"]);
                 document.getElementById("quantity-hidden").value = document.getElementById("quantity").value;
-                document.getElementById("terjual").innerHTML = "Terjual : "+terjual;
+                
             }
             
             ajax.open("GET", "../check/db-product-details.php?id="+id, true);
