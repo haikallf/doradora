@@ -101,7 +101,7 @@
                     $pages = ceil($total/$perPage);
                 }
                 else{
-                    $itemArray = loadAllAvailableItem();
+                    $itemArray_ = loadAllAvailableItem();
                     $itemArray = loadAllAvailableItemPagination($start, $perPage);
                     $total = count($itemArray_);
                     $pages = ceil($total/$perPage);
