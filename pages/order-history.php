@@ -91,34 +91,29 @@
         require_once('../check/db-history.php');
         $itemArray = historyByUser($_SESSION['username']);
     ?>
-    <?php for($i = 0; $i < count($itemArray); $i++) {?>
-                <form action="./pages/product-details.php" method="GET" name="itemForm" id="itemForm-<?=$i?>" class="itemForm">
-                    <div class="product-card" onclick="submitData(<?=$i?>)">
-                        <p><?= "Waktu : ".$itemArray[$i]["tanggal"]?></p>
-                        <p><?= "Nama item : ".findItemName($itemArray[$i]["idItem"])?></p>
-                        <p><?= "Jumlah : ".(-1*$itemArray[$i]["quantity"])?></p>
-                        <input type="hidden" name="idItem" value=<?= $itemArray[$i]["idItem"]?>>
-                        <!-- <input type="submit" name="" id="submit" value="gas"> -->
-                    </div>
-                </form>
-            <?php } ?>
-
-    <!-- <div class="order-history-container">
+    <div class="order-history-container">
         <div class="order-history-left">
             <div class="order-history-product">
-                <div class="order-history-img-container">
+                <!-- <div class="order-history-img-container">
                     <img src="./images/dorayaki.jpg" alt="foto buku" />
-                </div>
+                </div> -->
                 <div class="order-history-details-container">
                     <div class="order-history-details">
-                        <p>Dorayaki Original</p>
-                        <strong>Rp5000</strong>
-                        <p>1 buah</p>
-                    </div>                    
+                        <?php for($i = 0; $i < count($itemArray); $i++) {?>
+                            <form action="./pages/product-details.php" method="GET" name="itemForm" id="itemForm-<?=$i?>" class="itemForm">
+                                <div class="order-history-details" onclick="submitData(<?=$i?>)">
+                                    <p><?= "Waktu : ".$itemArray[$i]["tanggal"]?></p>
+                                    <p><?= "Nama item : ".findItemName($itemArray[$i]["idItem"])?></p>
+                                    <p><?= "Jumlah : ".(-1*$itemArray[$i]["quantity"])?></p>
+                                    <input type="hidden" name="idItem" value=<?= $itemArray[$i]["idItem"]?>>
+                                </div>
+                            </form>
+                        <?php } ?>
+                    </div>                  
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
 
     <script src="./js/index.js"></script>
 </body>
