@@ -91,8 +91,16 @@ function loadAllAvailableItemPagination($start, $perPage) {
         array_push($data, $row);
     }
 
+    $paginationData = array();
+    for ($i = $start; $i < $start + $perPage; $i++){
+        if($i < count($data)){
+            array_push($paginationData, $data[$i]);
+        }
+        
+    }
+
     $db->close();
-    return $data;
+    return $paginationData;
 }
 
 // function loadAllItem() {
