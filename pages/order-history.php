@@ -85,9 +85,25 @@
     </div>
     
     <div class="order-history-title">
-        <p>Riwayat Pembelanjaan</p>
+        <p>Riwayat Pembelian</p>
     </div>
-    <div class="order-history-container">
+    <?php 
+        require_once('../check/db-history.php');
+        $itemArray = historyByUser($_SESSION['username']);
+    ?>
+    <?php for($i = 0; $i < count($itemArray); $i++) {?>
+                <form action="./pages/product-details.php" method="GET" name="itemForm" id="itemForm-<?=$i?>" class="itemForm">
+                    <div class="product-card" onclick="submitData(<?=$i?>)">
+                        <p><?= "Waktu : ".$itemArray[$i]["tanggal"]?></p>
+                        <p><?= "Nama item : ".findItemName($itemArray[$i]["idItem"])?></p>
+                        <p><?= "Jumlah : ".$itemArray[$i]["quantity"]?></p>
+                        <input type="hidden" name="idItem" value=<?= $itemArray[$i]["idItem"]?>>
+                        <!-- <input type="submit" name="" id="submit" value="gas"> -->
+                    </div>
+                </form>
+            <?php } ?>
+
+    <!-- <div class="order-history-container">
         <div class="order-history-left">
             <div class="order-history-product">
                 <div class="order-history-img-container">
@@ -102,7 +118,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <script src="./js/index.js"></script>
 </body>
