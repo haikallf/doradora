@@ -1,5 +1,5 @@
 <?php 
-$db = "../db/database.db";
+$db = "./db/database.db";
 
 // admin
 function historyOneItem($idItem) {
@@ -29,6 +29,12 @@ function historyByUser($username) {
 function findItemName($idItem) {
     $db = new SQLite3($GLOBALS['db']);
     $query = $db->query("SELECT namaItem FROM item WHERE idItem = '$idItem';")->fetchArray(SQLITE3_ASSOC)["namaItem"];
+    return $query;
+}
+
+function findItemImg($idItem) {
+    $db = new SQLite3($GLOBALS['db']);
+    $query = $db->query("SELECT gambar FROM item WHERE idItem = '$idItem';")->fetchArray(SQLITE3_ASSOC)["gambar"];
     return $query;
 }
 ?>
