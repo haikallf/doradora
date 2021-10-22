@@ -96,7 +96,7 @@
                     <div class="product-card" onclick="submitData(<?=$i?>)">
                         <p><?= "Waktu : ".$itemArray[$i]["tanggal"]?></p>
                         <p><?= "Nama item : ".findItemName($itemArray[$i]["idItem"])?></p>
-                        <p><?= "Jumlah : ".$itemArray[$i]["quantity"]?></p>
+                        <p><?= "Jumlah : ".(-1*$itemArray[$i]["quantity"])?></p>
                         <input type="hidden" name="idItem" value=<?= $itemArray[$i]["idItem"]?>>
                         <!-- <input type="submit" name="" id="submit" value="gas"> -->
                     </div>
