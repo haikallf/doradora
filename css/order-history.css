@@ -27,6 +27,12 @@ body {
   box-shadow: 0 1px 10px -2px gray;
 }
 
+.order-history-details > form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .order-history-product {
   display: flex;
   border-bottom: 2px solid rgb(172, 172, 172);

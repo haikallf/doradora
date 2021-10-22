@@ -1,5 +1,5 @@
 <?php 
-$db = "./db/database.db";
+$db = "../db/database.db";
 
 // admin
 function historyOneItem($idItem) {

@@ -94,9 +94,7 @@
     <div class="order-history-container">
         <div class="order-history-left">
             
-                <!-- <div class="order-history-img-container">
-                    <img src="./images/dorayaki.jpg" alt="foto buku" />
-                </div> -->
+                
                 
                     
             <?php for($i = 0; $i < count($itemArray); $i++) {?>
@@ -104,6 +102,9 @@
                 <div class="order-history-details-container">
                     <div class="order-history-details">
                         <form action="./product-details.php" method="GET" name="itemForm" id="itemForm-<?=$i?>" class="itemForm">
+                        <div class="order-history-img-container">
+                            <img src=<?= ".".findItemImg($itemArray[$i]["idItem"])?> alt="foto dorayaki" />
+                        </div>
                             <div class="order-history-details" onclick="submitData(<?=$i?>)">
                                 <p><?= "Waktu : ".$itemArray[$i]["tanggal"]?></p>
                                 <p><?= "Nama item : ".findItemName($itemArray[$i]["idItem"])?></p>
