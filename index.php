@@ -1,5 +1,14 @@
 <?php
-    session_start();  
+    session_start();
+    require_once("./check/db-index.php");
+    if (isset($_COOKIE["TKN"])) {
+        // set session
+        $data = cekhashedToken($_COOKIE["TKN"]);
+        if ($data != 0) {
+            $_SESSION['username'] = $data['username'];
+            $_SESSION['isAdmin'] = $data['isAdmin'];
+        }
+    } 
     if (isset($_SESSION['isAdmin'])) { 
         $isAdmin = $_SESSION['isAdmin'];
     } else {
@@ -54,6 +63,7 @@
                     $_SESSION = [];
                     session_unset();
                     session_destroy();
+                    setcookie('TKN','',time() - 3600,'/');
                     header("Location: index.php");
                     exit;
                 }
@@ -78,7 +88,7 @@
     <div class="product-container">
         <div class="product">
             <?php 
-                require_once("./check/db-index.php");
+                
                 // syncStockAndQuantity();
                 if ($isAdmin == 1) {
                     $itemArray = loadAllItem();

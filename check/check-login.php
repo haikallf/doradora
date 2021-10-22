@@ -32,13 +32,13 @@ if ($ok) {
             $message[] = "Selamat datang!";
             // session
             $_SESSION['username'] = $username;
-            $_SESSION['password'] = $hashedPwd;
             $_SESSION['isAdmin'] = $data['isAdmin'];
             // cookies
             $time = time() + (3600);
-            setcookie("username",$username,$time);
-            setcookie("password",$hashedPwd,$time);
-            setcookie("isAdmin",$data['isAdmin'],$time);
+            setcookie("login","login",0,'../');
+            // hash token
+            $hashUsername = hash('sha256', $username);
+            setcookie("TKN",$hashUsername,$time,'/');
         }
     }
 }

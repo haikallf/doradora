@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,8 +30,8 @@
                 <input id="password" type="password" name="password" placeholder="Type your password ">
                 <br />
                 <br />
-                <div class="login-btn" id="submit">
-                    <input type="button" value="Login" name="submit">
+                <div class="login-btn">
+                    <input type="submit" value="Login" id="submit" name="submit">
                 </div>
             </form>
         </div>
@@ -56,6 +59,13 @@
 
         <p>Not a member? <a href="signup.php">Sign Up</a></p>
     </div>
+    <!-- <?php 
+        if (array_key_exists("submit",$_POST)) {
+            if (isset($_POST["username"]) && isset($_POST["password"]) && (!(empty($_POST["username"]))) && (!(empty($_POST["password"])))) {
+               
+            }
+        }
+    ?> -->
     <script>
         const form = {
         u: document.getElementById('username'),
@@ -71,8 +81,6 @@
                 console.log(items);
                 if (items.ok) {
                     location.href = '../index.php';
-                    // set cookies
-                    document.cookie =  `u=${form.u.value};path='/'`;
                 }
                 else {
                     var list = document.getElementById("form-messages");
