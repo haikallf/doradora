@@ -18,6 +18,7 @@
     <?php
     require_once( '../check/database.php' );
     session_start();
+    syncStockAndQuantity();
     if(array_key_exists('add-to-cart', $_POST)) {
         if (isset($_SESSION['username']) && isset($_POST["quantity-hidden"])) {
             if(isset($_POST["idItem"])){
