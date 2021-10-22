@@ -8,12 +8,16 @@
             $_SESSION['username'] = $data['username'];
             $_SESSION['isAdmin'] = $data['isAdmin'];
         }
-    } 
+    }
     if (isset($_SESSION['isAdmin'])) { 
         $isAdmin = $_SESSION['isAdmin'];
     } else {
         $isAdmin = -1;
     }
+    
+    $perPage = 10;
+    $page = isset($_GET["halaman"]) ? (int)$_GET['halaman'] : 1;
+    $start = ($page > 1) ? ($page * $perPage) - $perPage : 0;
     ?>
 
 <!DOCTYPE html>
@@ -88,10 +92,13 @@
     <div class="product-container">
         <div class="product">
             <?php 
-                
+                require_once("./check/db-index.php");
                 // syncStockAndQuantity();
                 if ($isAdmin == 1) {
-                    $itemArray = loadAllItem();
+                    $itemArray_ = loadAllItem();
+                    $itemArray = loadAllItemPagination($start, $perPage);
+                    $total = count($itemArray_);
+                    $pages = ceil($total/$perPage);
                 }
                 else{
                     $itemArray = loadAllAvailableItem();
@@ -113,9 +120,18 @@
         </div>
     </div>
 
-    <div class="container" id="container"></div>
+    <!-- <div class="container" id="container"></div> -->
     <div class="pagination">
-        <ul></ul>
+        <?php 
+            
+        ?>
+         <?php for($i = 1; $i <= $pages; $i++) {?>
+            <form method="GET">
+                <input type="hidden" name="halaman" value=<?= $i ?>>
+                <button type="submit" name="page-btn"><?= $i ?></button>
+            </form>
+
+            <?php }?>
     </div>
     <script src="./js/index.js"></script>
   </body>
