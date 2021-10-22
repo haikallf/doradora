@@ -100,6 +100,7 @@
                     $_SESSION = [];
                     session_unset();
                     session_destroy();
+                    setcookie('TKN','',time() - 3600,'/');
                     header("Location: ../index.php");
                     exit;
                 }

@@ -1,8 +1,8 @@
 <?php
     session_start();
     if (!isset($_SESSION['username'])) {
-        echo "<script>alert('Anda harus login untuk mengakses halaman ini');</script>";
-        echo "<script>location.href='../index.php'</script>";
+
+        echo "<script>location.href='login.php'</script>";
     }
 ?>
 
@@ -60,6 +60,7 @@
                     $_SESSION = [];
                     session_unset();
                     session_destroy();
+                    setcookie('TKN','',time() - 3600,'/');
                     header("Location: ../index.php");
                     exit;
                 }
