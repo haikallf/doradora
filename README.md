@@ -44,7 +44,7 @@ localhost:5000
 homepage not signed
 ![Homepagenotsigned](./SS/Homepagenotsigned.png)
 homepage admin
-![Homepageadmin](./SS/adminhomepage.png)
+![Homepageadmin](./SS/Adminhomepage.png)
 homepage user
 ![Homepageauser](./SS/homepageuser.png)
 3. Product details
