@@ -61,7 +61,12 @@
         }
     }
     else if (array_key_exists('buy-single-item-btn', $_POST)){
+        if (isset($_SESSION["username"])) {
         buyItem($_SESSION["username"], date("Y-m-d h:i:sa", strtotime("now")), $_POST['idItem'], (int) $_POST["quantity-hidden"]);
+        }
+        else {
+            echo "<script>location.href='login.php'</script>";
+        }
     }
 
     $isAdmin = isset($_SESSION['username']) ? $_SESSION['isAdmin'] : -1;
