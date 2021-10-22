@@ -69,7 +69,6 @@ const getCurrentDate = () => {
 //   });
 // };
 
-
 const renderHeader = (isAdmin, isHome) => {
   var headerIcon = "";
 
@@ -128,6 +127,11 @@ const renderHeader = (isAdmin, isHome) => {
   } else {
     if (isHome == 0) {
       headerIcon = `
+      <div class="header-history" onclick="goToOrderHistory()">
+            <i class="fas fa-history"></i>
+            <p>Order History</p>
+        </div>
+        <div class="vr"></div>
         <div class="header-add-variant" onclick="goToAddVariant()">
             <i class="fas fa-plus"></i>
             <p>add variant</p>
@@ -136,6 +140,11 @@ const renderHeader = (isAdmin, isHome) => {
       `;
     } else {
       headerIcon = `
+      <div class="header-history" onclick="goToOrderHistoryFromHome()">
+            <i class="fas fa-history"></i>
+            <p>Order History</p>
+        </div>
+        <div class="vr"></div>
         <div class="header-add-variant" onclick="goToAddVariantFromHome()">
             <i class="fas fa-plus"></i>
             <p>add variant</p>

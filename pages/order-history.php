@@ -29,7 +29,7 @@
     <title>Riwayat Pembelanjaan</title>
 </head>
 
-<body onload="renderHeader(<?= $isAdmin?>)">
+<body onload="renderHeader(<?= $isAdmin?>, 0)">
     <div class="header">
         <div class="header-brand" onclick="goToHome()">
             Doradora
@@ -93,29 +93,36 @@
     ?>
     <div class="order-history-container">
         <div class="order-history-left">
-            <div class="order-history-product">
+            
                 <!-- <div class="order-history-img-container">
                     <img src="./images/dorayaki.jpg" alt="foto buku" />
                 </div> -->
+                
+                    
+            <?php for($i = 0; $i < count($itemArray); $i++) {?>
+            <div class="order-history-product">
                 <div class="order-history-details-container">
                     <div class="order-history-details">
-                        <?php for($i = 0; $i < count($itemArray); $i++) {?>
-                            <form action="./pages/product-details.php" method="GET" name="itemForm" id="itemForm-<?=$i?>" class="itemForm">
-                                <div class="order-history-details" onclick="submitData(<?=$i?>)">
-                                    <p><?= "Waktu : ".$itemArray[$i]["tanggal"]?></p>
-                                    <p><?= "Nama item : ".findItemName($itemArray[$i]["idItem"])?></p>
-                                    <p><?= "Jumlah : ".(-1*$itemArray[$i]["quantity"])?></p>
-                                    <input type="hidden" name="idItem" value=<?= $itemArray[$i]["idItem"]?>>
-                                </div>
-                            </form>
-                        <?php } ?>
-                    </div>                  
+                        <form action="./product-details.php" method="GET" name="itemForm" id="itemForm-<?=$i?>" class="itemForm">
+                            <div class="order-history-details" onclick="submitData(<?=$i?>)">
+                                <p><?= "Waktu : ".$itemArray[$i]["tanggal"]?></p>
+                                <p><?= "Nama item : ".findItemName($itemArray[$i]["idItem"])?></p>
+                                <?php if ($_SESSION['isAdmin'] == 1) {?>
+                                <p><?= "Jumlah : ". ($itemArray[$i]["quantity"])?></p>
+                                <?php } else { ?>
+                                    <p><?= "Jumlah : ". abs(($itemArray[$i]["quantity"]))?></p>
+                                <?php } ?>
+                                <input type="hidden" name="idItem" value=<?= $itemArray[$i]["idItem"]?>>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
+                        <?php } ?>
         </div>
     </div>
 
-    <script src="./js/index.js"></script>
+    <script src="../js/index.js"></script>
 </body>
 
 </html>
