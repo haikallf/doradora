@@ -31,7 +31,7 @@ session_start();
                 <br />
                 <br />
                 <div class="login-btn">
-                    <input type="submit" value="Login" id="submit" name="submit">
+                    <input type="button" value="Login" id="submit" name="submit">
                 </div>
             </form>
         </div>
