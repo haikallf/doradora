@@ -1,7 +1,7 @@
 # Doradora
 Doradora merupakan sebuah web e-commerce yang bergerak dalam penjualan berbagai varian dorayaki terbesar se pulau jawa. Dengan Doradora, pecinta dorayaki dapat mencari dan membeli berbagai varian dorayaki dari mulai pisang, oreo, nutella, dan masih banyak lagi.
 
-##Table of contents
+## Table of contents
 * [Daftar requirement](#Daftar-requirement)
 * [Cara instalasi](#Cara-instalasi)
 * [Cara menjalankan server](#Cara-menjalankan-server)
