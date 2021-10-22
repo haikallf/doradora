@@ -74,6 +74,27 @@ function loadAllAvailableItem() {
     return $data;
 }
 
+function loadAllAvailableItemPagination($start, $perPage) {
+    // udah di sort
+    $db = new SQLite3($GLOBALS['db']);
+    $query = $db->query("SELECT * FROM item a NATURAL JOIN (SELECT idItem FROM item_quantity GROUP BY idItem ORDER BY SUM(quantity) DESC) b WHERE available = 1;");
+    $data = array();
+    
+    // yang udah dibeli
+    while ($row = $query->fetchArray(SQLITE3_ASSOC)) {
+        array_push($data, $row);
+    }
+
+    // yang belum pernah dibeli
+    $query2 = $db->query("SELECT * FROM item a WHERE available = 1 AND idItem NOT IN (SELECT idItem FROM item_quantity);");
+    while ($row = $query2->fetchArray(SQLITE3_ASSOC)) {
+        array_push($data, $row);
+    }
+
+    $db->close();
+    return $data;
+}
+
 // function loadAllItem() {
 //     $db = new SQLite3($GLOBALS['db']);
 //     $query = $db->query("SELECT * FROM item;");

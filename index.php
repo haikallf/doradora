@@ -102,6 +102,9 @@
                 }
                 else{
                     $itemArray = loadAllAvailableItem();
+                    $itemArray = loadAllAvailableItemPagination($start, $perPage);
+                    $total = count($itemArray_);
+                    $pages = ceil($total/$perPage);
                 }
             
             ?>
