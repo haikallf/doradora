@@ -38,7 +38,7 @@
   </head>
   <body onload="renderHeader(<?= $isAdmin?>, 0)">
     <div class="header">
-        <div class="header-brand" onclick="goToHome()'">
+        <div class="header-brand" onclick="goToHome()">
             Doradora
         </div>
 
@@ -92,7 +92,7 @@
     </div>
     
     <div class="product-container">
-        <div class="product">
+        <div class="product" style="padding-top: 80px;">
             <?php 
                 require_once('../check/database.php');
                 if ($isAdmin == 1) {
