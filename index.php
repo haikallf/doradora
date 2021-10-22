@@ -106,8 +106,20 @@
                     $total = count($itemArray_);
                     $pages = ceil($total/$perPage);
                 }
+                
+                ?>
+                <div class="pagination">
+                    <?php 
+                        
+                    ?>
+                     <?php for($i = 1; $i <= $pages; $i++) {?>
+                        <form method="GET">
+                            <input type="hidden" name="halaman" value=<?= $i ?>>
+                            <button type="submit" name="page-btn"><?= $i ?></button>
+                        </form>
             
-            ?>
+                        <?php }?>
+                </div>
             <?php for($i = 0; $i < count($itemArray); $i++) {?>
                 <form action="./pages/product-details.php" method="GET" name="itemForm" id="itemForm-<?=$i?>" class="itemForm">
                     <div class="product-card" onclick="submitData(<?=$i?>)">
@@ -124,18 +136,6 @@
     </div>
 
     <!-- <div class="container" id="container"></div> -->
-    <div class="pagination">
-        <?php 
-            
-        ?>
-         <?php for($i = 1; $i <= $pages; $i++) {?>
-            <form method="GET">
-                <input type="hidden" name="halaman" value=<?= $i ?>>
-                <button type="submit" name="page-btn"><?= $i ?></button>
-            </form>
-
-            <?php }?>
-    </div>
     <script src="./js/index.js"></script>
   </body>
 </html>

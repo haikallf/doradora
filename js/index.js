@@ -69,7 +69,6 @@ const getCurrentDate = () => {
 //   });
 // };
 
-const 
 
 const renderHeader = (isAdmin, isHome) => {
   var headerIcon = "";

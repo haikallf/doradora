@@ -8,8 +8,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  padding: 80px 400px 40px;
-  height: 700px;
+  padding: 0px 400px 40px 400px;
 }
 
 .product-card {
@@ -41,6 +40,6 @@ body {
 .pagination {
   width: 100%;
   display: flex;
-  align-items: center;
   justify-content: center;
+  padding-top: 80px;
 }
