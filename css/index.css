@@ -4,11 +4,15 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
+.blank {
+  padding-top: 80px;
+}
+
 .product {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-
+  height: 700px;
   padding: 0px 400px 40px 400px;
 }
 
@@ -42,5 +46,20 @@ body {
   width: 100%;
   display: flex;
   justify-content: center;
-  padding-top: 80px;
+}
+
+.pagination-btn {
+  margin: 0 5px;
+  height: 30px;
+  width: 30px;
+  background-color: white;
+  border: 1px solid gray;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.pagination-btn:active {
+  background-color: gray;
+  color: whitesmoke;
+  transition: background-color 0.2s ease;
 }
